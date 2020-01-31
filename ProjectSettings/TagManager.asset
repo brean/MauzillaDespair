@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - building
+  - mauzilla
+  - artisan
   layers:
   - Default
   - TransparentFX
