@@ -24,7 +24,7 @@ SuperNintendo / Xbox / Benennung
 ```
     <X>     |     <Y>     |       Up       
 <Y>     <A> | <X>     <B> | Left      Right
-    <B>     |     <A>     |      Down
+    <B>     |     <A>     |      Down      
 ```
 
 Die Buttons über:
