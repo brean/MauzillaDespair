@@ -37,6 +37,13 @@ public class InputControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        System.Array values = System.Enum.GetValues(typeof(KeyCode));
+        foreach (KeyCode code in values)
+        {
+            if (Input.GetKeyDown(code)) { Debug.Log("butts: " + System.Enum.GetName(typeof(KeyCode), code)); }
+        }
+        */
         movePlayer(player.inputName());
         player.controlAbility();
     }
@@ -59,7 +66,9 @@ public class InputControl : MonoBehaviour
 
     }
 
-    private void Flip(float moveHorizontal)
+
+
+        private void Flip(float moveHorizontal)
     {
         if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
         {
