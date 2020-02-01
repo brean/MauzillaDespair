@@ -13,6 +13,7 @@ public class Building : MonoBehaviour {
 
     public Sprite[] sprites = new Sprite[3];
     public Sprite[] infoBubbleSprites = new Sprite[3];
+    public Sprite[] materialSprites = new Sprite[3];
     GameObject healthbar;
     GameObject infoBubble;
     Mauzilla mauzilla;
@@ -24,8 +25,13 @@ public class Building : MonoBehaviour {
         sprites[0] = this.GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
         mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
 
-        infoBubble = this.transform.GetChild(1).gameObject; // Get Infobubble and hide
+        // Get Infobubble and Materials and hide them
+        infoBubble = this.transform.GetChild(1).gameObject; 
+        firstMaterial = infoBubble.transform.GetChild(0).gameObject;
+        secondMaterial = infoBubble.transform.GetChild(1).gameObject;
+        thirdMaterial = infoBubble.transform.GetChild(2).gameObject;
         infoBubble.SetActive(false);
+        
 
         state = 0; // Building starts in state normal
 
@@ -46,6 +52,7 @@ public class Building : MonoBehaviour {
             ChangeState(0);
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
             ChangeState(1);
+            populateInfobubble();
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
             ChangeState(2);
@@ -55,16 +62,68 @@ public class Building : MonoBehaviour {
     void populateInfobubble() {
         switch (materialCount) {
             case 1:
+                firstMaterial.name = "Material 1/1";
+
+                firstMaterial.SetActive(true);
+                secondMaterial.SetActive(false);
+                thirdMaterial.SetActive(false);
+
+                firstMaterial.GetComponent<SpriteRenderer>().sprite =
+                    materials[0] ? materialSprites[0] : (materials[1] ? materialSprites[1] : materialSprites[2]);
                 break;
             case 2:
+                firstMaterial.name = "Material 1/2";
+                secondMaterial.name = "Material 2/2";
+
+                firstMaterial.SetActive(true);
+                secondMaterial.SetActive(true);
+                thirdMaterial.SetActive(false);
+
+                SetXPos(firstMaterial, -0.15f);
+                SetXPos(secondMaterial, 0.15f);
+
+                int taken = 9; //random
+                for (int i = 0; i < materials.Length; i++) {
+                    Debug.Log("MC = " + materialCount + ". Selecting Material 1/2");
+                    if (materials[i]) {
+                        firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
+                        taken = i;
+                        Debug.Log("Selected Material 1/2: " + i);
+                        break;
+                    }
+                }
+                for (int i = 0; i < materials.Length; i++) {
+                    Debug.Log("MC = " + materialCount + ". Selecting Material 2/2");
+                    if (materials[i] && taken != i) {
+                        secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
+                        Debug.Log("Selected Material 2/2: " + i);
+                    }
+                }
                 break;
             case 3:
+                firstMaterial.name = "Material 1/3";
+                secondMaterial.name = "Material 2/3";
+                thirdMaterial.name = "Material 3/3";
+
+                firstMaterial.SetActive(true);
+                secondMaterial.SetActive(true);
+                thirdMaterial.SetActive(true);
+
+                firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[0];
+                secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[1];
+                thirdMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[2];
                 break;
             default:
                 print("ERROR: Incorrect number of materialCount!");
                 break;
 
         }
+    }
+
+    void SetXPos (GameObject go, float newX) {
+        Vector3 tempPos = go.transform.localPosition;
+        tempPos.x = newX;
+        go.transform.localPosition = tempPos;
     }
 
     public void ChangeState(int newState) {
