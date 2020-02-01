@@ -27,6 +27,7 @@ public class Player
 
     public float abilityCooldown = 5;
     public float abilityActive = -1;
+    public bool usesLaser = false;
 
     public KeyCode ActionKey()
     {
@@ -165,6 +166,7 @@ public class Player
             Debug.Log("abilities");
             abilityCooldown = 5;
             abilityActive = 3;
+            usesLaser = true;
         }
         else
         {
@@ -180,8 +182,11 @@ public class Player
             if (Input.GetKeyUp(this.AbilityKey()))
             {
                 abilityActive = -1;
-            } 
+            }
 
+            if (abilityActive <= -1) {
+                usesLaser = false;
+            }
         }
     }
 }
