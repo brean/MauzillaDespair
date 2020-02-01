@@ -24,7 +24,9 @@ public class Building : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //sprites[0] = GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
-        mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
+        if (GameObject.FindGameObjectsWithTag("mauzilla").Length > 0) {
+            mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
+        }
         storeyManager = GetComponent<StoreyManager>();
 
         // Get Infobubble and Materials and hide them

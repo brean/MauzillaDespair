@@ -24,7 +24,7 @@ public class StoreyManager : MonoBehaviour
 
     void Start()
     {
-        
+        buildingManager = GameObject.Find("Grid - Level").GetComponent<BuildingManager>();
     }
 
     // Update is called once per frame
