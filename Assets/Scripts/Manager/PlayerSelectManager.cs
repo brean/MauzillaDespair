@@ -16,7 +16,7 @@ public class PlayerSelectManager : MonoBehaviour
 
     public Color[] colors = new Color[]{ Color.red, Color.blue, Color.green, Color.yellow };
 
-    public List<Character> remainingCharacter = new List<Character>(new[] { Character.mauzilla, Character.schneider, Character.steinmetz, Character.tischler });
+    public List<Character> remainingCharacter = new List<Character>(new[] { Character.mauzilla, Character.schneider, Character.maurer, Character.tischler });
 
     private void Awake()
     {

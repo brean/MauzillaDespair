@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 2124872630}
   - component: {fileID: 2124872631}
   m_Layer: 0
-  m_Name: Steinmetz
+  m_Name: Maurer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
