@@ -106,9 +106,29 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(true);
         Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, rb2d.transform.position.z);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 0);
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        RaycastHit2D[] hits;
+
+        var heading = endPoint.position - rb2d.transform.position;
+        var distance = heading.magnitude;
+        var direction = heading / distance;
+
+        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, 100.0F);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit2D hit = hits[i];
+            Debug.Log(hit.collider.gameObject.tag);
+
+            if (hit.collider.gameObject.tag == "building")
+            {
+                hit.collider.gameObject.GetComponent<Building>().adjustHealth(-1);
+            }
+        }
+
+
+            laserLine.SetPosition(0, rb2d.transform.position);
         laserLine.SetPosition(1, endPoint.position);
     }
 
@@ -119,7 +139,7 @@ public class InputControl : MonoBehaviour
         }
     }
 
-        private void Flip(float moveHorizontal)
+    public void Flip(float moveHorizontal)
     {
         if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
         {
