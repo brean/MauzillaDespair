@@ -35,6 +35,29 @@ public class BuildingManager : MonoBehaviour
         return tiles;
     }
 
+    public void DestroyBuilding(Vector3Int tilePosition) {
+        foreach (Tilemap tm in tileMaps) 
+        {
+            if (ignoreMaps.Contains(tm)) {
+                continue;
+            }
+            tm.SetTile(tilePosition, null);
+        }
+    }
+
+    public void SetBuilding(Vector3Int tilePosition, List<TileBase> storeys) {
+        int i = 0; // counter for storey tiles
+        foreach (Tilemap tm in tileMaps) {
+            if (ignoreMaps.Contains(tm)) {
+                continue;
+            }
+            tm.SetTile(tilePosition, storeys[i++]);
+            if (i == storeys.Count) {
+                return;
+            }
+        };
+    }
+
     // Update is called once per frame
     void Update()
     {
