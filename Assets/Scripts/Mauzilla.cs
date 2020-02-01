@@ -34,7 +34,7 @@ public class Mauzilla : MonoBehaviour {
             float newHealthbarPercentage = (float)health / (float)(maxHealth - 0);
             healthbar.fillAmount = newHealthbarPercentage;
         } else if (health == 10) {
-            Debug.Log("Mauzilla retreats! Artisans win!");
+            Debug.Log("Mauzilla retreats!");
         }
     }
 
