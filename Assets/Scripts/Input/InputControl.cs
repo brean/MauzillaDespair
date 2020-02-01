@@ -13,7 +13,7 @@ public class InputControl : MonoBehaviour
 
     public Rigidbody2D rb2d;
 
-    Animator animator;
+    public Animator animator;
 
     private bool facingRight;
     private Vector3 initialScale;
@@ -97,8 +97,8 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
-        // Flip(moveHorizontal);
-        // FrontBack(moveVertical);
+        Flip(movement.x);
+        FrontBack(movement.y);
         rb2d.MovePosition(newPlayerPosition);
     }
 
@@ -126,7 +126,7 @@ public class InputControl : MonoBehaviour
     {
         if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
             facingRight = moveHorizontal < -0.1;
             animator.SetInteger("Direction", 2);
             Vector3 theScale = transform.localScale;
@@ -149,15 +149,15 @@ public class InputControl : MonoBehaviour
     {
         if (moveVertical > 0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
-            transform.localScale = initialScale;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
+           //transform.localScale = initialScale;
             animator.SetInteger("Direction", 1);
         }
 
         if (moveVertical < -0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
-            transform.localScale = initialScale;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
+            //transform.localScale = initialScale;
             animator.SetInteger("Direction", 3);
         }
     }
