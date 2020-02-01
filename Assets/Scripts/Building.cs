@@ -137,7 +137,13 @@ public class Building : MonoBehaviour {
 
     // Building sprite is updated according to state
     public void UpdateSprite() {
-        this.GetComponent<SpriteRenderer>().sprite = sprites[state];
+        // this.GetComponent<SpriteRenderer>().sprite = sprites[state];
+        switch (state) {
+            case 0:
+            case 1:
+            case 2:
+                break;
+        }
     }
 
     // Store all Artisans near the Building in Array
