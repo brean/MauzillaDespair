@@ -163,7 +163,7 @@ MonoBehaviour:
     team: 0
     ready: 1
     active: 1
-  speed: 0.01
+  speed: 0.04
 --- !u!102 &333851397
 TextMesh:
   serializedVersion: 3
@@ -233,7 +233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333851395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8848, y: 1.66, z: -2.5989738}
+  m_LocalPosition: {x: -2.8848, y: 1.66, z: 1}
   m_LocalScale: {x: 0.84261966, y: 0.84261966, z: 0.84261966}
   m_Children: []
   m_Father: {fileID: 0}
@@ -377,7 +377,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1218679459}
   - component: {fileID: 1218679458}
-  - component: {fileID: 1218679457}
   - component: {fileID: 1218679460}
   - component: {fileID: 1218679461}
   - component: {fileID: 1218679462}
@@ -389,28 +388,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!102 &1218679457
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218679456}
-  m_Text: mau
-  m_OffsetZ: 0
-  m_CharacterSize: 1
-  m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
-  m_TabSize: 4
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
 --- !u!23 &1218679458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -458,9 +435,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218679456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8848, y: 0.49925, z: -2.5989738}
+  m_LocalPosition: {x: -2.8848, y: 0.49925, z: 2}
   m_LocalScale: {x: 0.84261966, y: 0.84261966, z: 0.84261966}
-  m_Children: []
+  m_Children:
+  - {fileID: 2023610076}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -484,7 +462,7 @@ MonoBehaviour:
     team: 0
     ready: 1
     active: 1
-  speed: 0.01
+  speed: 0.04
 --- !u!114 &1218679461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +554,7 @@ MonoBehaviour:
     team: 0
     ready: 1
     active: 1
-  speed: 0.01
+  speed: 0.04
 --- !u!102 &1492624854
 TextMesh:
   serializedVersion: 3
@@ -646,7 +624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492624852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8848, y: 3.24, z: -2.5989738}
+  m_LocalPosition: {x: -2.8848, y: 3.24, z: 1}
   m_LocalScale: {x: 0.84261966, y: 0.84261966, z: 0.84261966}
   m_Children: []
   m_Father: {fileID: 0}
@@ -769,6 +747,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2023610075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023610076}
+  - component: {fileID: 2023610077}
+  m_Layer: 0
+  m_Name: mozi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2023610076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023610075}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.4236088, y: -0.59249747, z: -1.1867751}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.1}
+  m_Children: []
+  m_Father: {fileID: 1218679459}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2023610077
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023610075}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 3046dbe3d1ef00f46ac96ab6bf283be3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 12, y: 10.54}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2124872624
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +844,7 @@ GameObject:
   - component: {fileID: 2124872630}
   - component: {fileID: 2124872631}
   m_Layer: 0
-  m_Name: Steinmetz
+  m_Name: Maurer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -811,7 +870,7 @@ MonoBehaviour:
     team: 0
     ready: 1
     active: 1
-  speed: 0.01
+  speed: 0.04
 --- !u!102 &2124872626
 TextMesh:
   serializedVersion: 3
@@ -881,7 +940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124872624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8848, y: -0.83, z: -2.5989738}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.84261966, y: 0.84261966, z: 0.84261966}
   m_Children: []
   m_Father: {fileID: 0}
