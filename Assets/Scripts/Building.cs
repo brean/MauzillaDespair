@@ -14,6 +14,7 @@ public class Building : MonoBehaviour {
     public Sprite[] sprites = new Sprite[3];
     public Sprite[] infoBubbleSprites = new Sprite[3];
     public Sprite[] materialSprites = new Sprite[3];
+    public StoreyManager storeyManager;
     GameObject healthbar;
     GameObject infoBubble;
     Mauzilla mauzilla;
@@ -198,9 +199,11 @@ public class Building : MonoBehaviour {
     public void UpdateSprite() {
         // this.GetComponent<SpriteRenderer>().sprite = sprites[state];
         switch (state) {
-            case 0:
             case 1:
+                storeyManager.DestroyBuilding();
+                break;
             case 2:
+                storeyManager.RepairBuilding();
                 break;
         }
     }
