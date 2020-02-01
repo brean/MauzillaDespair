@@ -39,7 +39,7 @@ public class PlayerCharacterSelection : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyUp(player.inputButton())) {
+        if (player.PressedActionKey()) {
             player.ready = !player.ready;
             setPlayer(player);
         }
@@ -48,8 +48,8 @@ public class PlayerCharacterSelection : MonoBehaviour
             // player is already ready, he should not be able to change the other stuff again!
             return;
         }
-        float moveHorizontal = Input.GetAxisRaw(player.inputName() + "Horizontal");
-        float moveVertical = Input.GetAxisRaw(player.inputName() + "Vertical");
+        float moveHorizontal = player.HorizontalAxis();
+        float moveVertical = player.VerticalAxis();  
         if (moveVertical > .7 && !nextPlayer)
         {
             nextPlayer = true;
