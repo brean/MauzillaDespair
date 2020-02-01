@@ -16,13 +16,6 @@ public class Mauzilla : MonoBehaviour {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
         if (colliding && Input.GetKeyDown("space") && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
-
-            // If Building Health is zero, Building state changes to destroyed
-            if (collidingBuilding.health == 0) {
-                Debug.Log("Building was destroyed by Mauzilla!");
-                collidingBuilding.ChangeState(1);
-                collidingBuilding.UpdateSprite();
-            }
         }
     }
 
