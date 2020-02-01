@@ -11,7 +11,7 @@ public class InputControl : MonoBehaviour
     [Tooltip("speed of the player")]
     public float speed = .01f;
 
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
 
     Animator animator;
 

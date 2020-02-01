@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
                     ready = true
                 },
                 new Player{
-                    character = Character.steinmetz,
+                    character = Character.maurer,
                     inputType = InputType.Joy,
                     number = 3,
                     color = Color.green,
