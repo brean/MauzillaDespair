@@ -14,17 +14,14 @@ public class Mauzilla : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (colliding && Input.GetKeyDown("space") && collidingBuilding.health > 0) {
-            // Reduce Building Health by 1 and adjust Healthbar
-            collidingBuilding.health -= 1;
-            Vector3 newHealthbar = collidingBuilding.healthbar.transform.localScale;
-            newHealthbar.x = collidingBuilding.healthbar.transform.localScale.x - 1;
-            collidingBuilding.healthbar.transform.localScale = newHealthbar;
-            Debug.Log("Building lost 1 HP. Remaining: " + collidingBuilding.health);
+        if (colliding && Input.GetKeyDown("space") && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+            collidingBuilding.adjustHealth(-1);
+
             // If Building Health is zero, Building state changes to destroyed
             if (collidingBuilding.health == 0) {
                 Debug.Log("Building was destroyed by Mauzilla!");
-                collidingBuilding.state = 1;
+                collidingBuilding.ChangeState(1);
+                collidingBuilding.UpdateSprite();
             }
         }
     }
