@@ -11,7 +11,7 @@ public class Building : MonoBehaviour {
     public int materialCount;
     public bool[] collidingArtisans = new bool[3]; // 0 = maurer 1 = schneider 2 = tischler
 
-    public Sprite[] sprites = new Sprite[3];
+    //public Sprite[] sprites = new Sprite[3];
     public Sprite[] infoBubbleSprites = new Sprite[3];
     public Sprite[] materialSprites = new Sprite[3];
     public StoreyManager storeyManager;
@@ -23,8 +23,9 @@ public class Building : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        sprites[0] = this.GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
+        //sprites[0] = GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
         mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
+        storeyManager = GetComponent<StoreyManager>();
 
         // Get Infobubble and Materials and hide them
         infoBubble = this.transform.GetChild(1).gameObject; 
@@ -223,7 +224,6 @@ public class Building : MonoBehaviour {
 
     // Check if all required Artisans are near the Building
     public bool RepairConditionsMet() {
-        Debug.Log("Executing repairconditions fucnt2");
         bool repairable = false;
         for (int i = 0; i < materials.Length; i++) {
             if (materials[i]) repairable = collidingArtisans[i];

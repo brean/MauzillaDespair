@@ -268,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277621231298179868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.298, y: 0.542, z: 0}
+  m_LocalPosition: {x: -0.1, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 2}
   m_Children: []
   m_Father: {fileID: 2277621232044658856}
@@ -312,9 +312,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 86ad13081de6f4734b5ecd1464ac30cb, type: 3}
-  m_Color: {r: 0.17572784, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.19339621, g: 1, b: 0.2083025, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 2277621232044658858}
   - component: {fileID: 2277621232044658853}
   - component: {fileID: 2277621232044658852}
+  - component: {fileID: 1769888856}
   m_Layer: 0
   m_Name: Building
   m_TagString: building
@@ -462,10 +463,6 @@ MonoBehaviour:
   materials: 000000
   materialCount: 0
   collidingArtisans: 000000
-  sprites:
-  - {fileID: 0}
-  - {fileID: 21300000, guid: 48f70c020e9bdee549ff3d12c8fb05d7, type: 3}
-  - {fileID: 21300000, guid: 870a88fbd5ff501b185345ff8762a809, type: 3}
   infoBubbleSprites:
   - {fileID: 21300000, guid: 2b3b087d1c1cc4a2584d3acb22721b75, type: 3}
   - {fileID: 21300000, guid: 9f7580bbe49d74c53805ac0e338edc20, type: 3}
@@ -474,6 +471,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5a5a153c9832240888857c6555a65031, type: 3}
   - {fileID: 21300000, guid: fc1bf303ad54547ffb208984df92d406, type: 3}
   - {fileID: 21300000, guid: b489acf512f6f471b9ea87fcbf18965c, type: 3}
+  storeyManager: {fileID: 0}
 --- !u!212 &2277621232044658858
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -571,3 +569,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1769888856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277621232044658855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e162316f38c473092ecb24f617f285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionInTileMap: {x: -2, y: 0, z: 0}
+  storeysAfterRepair:
+  - {fileID: 11400000, guid: de579fd052be737389c52763c2e31b29, type: 2}
+  - {fileID: 11400000, guid: acd3348bcc99514a5b831b72d43a2e9a, type: 2}
+  destroyed: {fileID: 11400000, guid: 0328e60948b93defbabf4540ad60ad86, type: 2}
+  buildingManager: {fileID: 0}
