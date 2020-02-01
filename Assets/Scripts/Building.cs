@@ -8,9 +8,11 @@ public class Building : MonoBehaviour {
     public int maxHealth;
     public int health;
     public bool[] materials = new bool[3]; // 0 = stone 1 = cloth 2 = wood
+    public int materialCount;
     public bool[] collidingArtisans = new bool[3]; // 0 = maurer 1 = schneider 2 = tischler
 
     public Sprite[] sprites = new Sprite[3];
+    public Sprite[] infoBubbleSprites = new Sprite[3];
     GameObject healthbar;
     GameObject infoBubble;
     Mauzilla mauzilla;
@@ -37,6 +39,16 @@ public class Building : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // nothing
+
+        // CHEATCODES
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { // press 1 to revert to normal
+            ChangeState(0);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
+            ChangeState(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
+            ChangeState(2);
+        }
     }
 
     public void ChangeState(int newState) {
@@ -48,6 +60,7 @@ public class Building : MonoBehaviour {
                 infoBubble.SetActive(false);
                 break;
             case 1: // destroyed
+                infoBubble.GetComponent<SpriteRenderer>().sprite = infoBubbleSprites[materialCount-1];
                 infoBubble.SetActive(true);
                 break;
             case 2: // repaired
@@ -73,9 +86,10 @@ public class Building : MonoBehaviour {
 
         // only show materials which are required in the infobubble
         for (int i = 0; i < materials.Length; i++) {
+            if (materials[i]) materialCount++;
             infoBubble.transform.GetChild(i).gameObject.SetActive(materials[i]);
         }
-        Debug.Log("Required materials are: Stone: " + materials[0] + ", Cloth: " + materials[1] + ", Wood: " + materials[2]);
+        Debug.Log(materialCount + " Materials arequired. Stone: " + materials[0] + ", Cloth: " + materials[1] + ", Wood: " + materials[2]);
     }
 
     // Set max health according to how many materials are required
