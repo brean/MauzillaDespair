@@ -17,7 +17,7 @@ public class Artisan : MonoBehaviour
     // Update is called once per frame
     void Update() {
         // Artisan is near a destroyed Building and pressing Action Key
-        if (colliding && Input.GetKeyDown("space") && collidingBuilding.state == 1) {
+        if (colliding && GetComponent<InputControl>().player.PressedActionKey() && collidingBuilding.state == 1) {
 
             // Check if all required Artisans are near the Building
             if (collidingBuilding.RepairConditionsMet()) {
