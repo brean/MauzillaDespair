@@ -22,12 +22,6 @@ public class Artisan : MonoBehaviour
             // Check if all required Artisans are near the Building
             if (collidingBuilding.RepairConditionsMet()) {
                 collidingBuilding.adjustHealth(1);
-
-                // If Building Health is zero, Building state changes to destroyed
-                if (collidingBuilding.health == collidingBuilding.maxHealth) {
-                    Debug.Log("Building was repaired by Artisan!");
-                    collidingBuilding.ChangeState(2);
-                }
             } else {
                 Debug.Log("You're missing the right skills to repair this building!");
             }
