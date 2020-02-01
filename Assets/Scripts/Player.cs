@@ -26,7 +26,7 @@ public class Player
     public bool active = false; // user pressed any key to activate himself
 
     public float abilityCooldown = 5;
-    public float abilityActive = -1;
+    public float abilityActiveDuration = -1;
 
     public KeyCode ActionKey()
     {
@@ -156,6 +156,11 @@ public class Player
         return "Player" + number + inputType.ToString();
     }
 
+    public bool isUsingAbility()
+    {
+        return abilityActiveDuration > 0;
+    }
+
     internal void controlAbility()
     {
         
@@ -164,7 +169,7 @@ public class Player
             //TODO: do something  
             Debug.Log("abilities");
             abilityCooldown = 5;
-            abilityActive = 3;
+            abilityActiveDuration = 3;
         }
         else
         {
@@ -172,16 +177,15 @@ public class Player
             {
                 abilityCooldown -= Time.deltaTime;
             }
-            if (abilityActive > -1)
+            if (abilityActiveDuration > -1)
             {
-                abilityActive -= Time.deltaTime;
+                abilityActiveDuration -= Time.deltaTime;
             }
 
             if (Input.GetKeyUp(this.AbilityKey()))
             {
-                abilityActive = -1;
-            } 
-
+                abilityActiveDuration = -1;
+            }
         }
     }
 }

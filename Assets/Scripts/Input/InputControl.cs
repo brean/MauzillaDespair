@@ -38,6 +38,11 @@ public class InputControl : MonoBehaviour
 
         initialScale = transform.localScale;
 
+        initLaser();
+    }
+
+    void initLaser()
+    {
         if (laser != null)
         {
             laserLine = laser.GetComponent<LineRenderer>();
@@ -49,65 +54,73 @@ public class InputControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        System.Array values = System.Enum.GetValues(typeof(KeyCode));
-        foreach (KeyCode code in values)
+        Vector2 movement = getMovementFromAxis(player.inputName());
+        if (player == null)
         {
-            if (Input.GetKeyDown(code)) { Debug.Log("butts: " + System.Enum.GetName(typeof(KeyCode), code)); }
+            return;
         }
-        */
-        if (player != null)
-        {
-            player.controlAbility();
-            move(player.inputName());
+
+        player.controlAbility();
+
+        if (player.character == Character.mauzilla) {
+            handleMauzillaMovement(movement);
+            return;
         }
+
+        // all other Players, move always. Erstmal!
+        movePlayer(movement);
     }
 
-    void move(string input)
+    Vector2 getMovementFromAxis(string playerName)
     {
-        float moveHorizontal = Input.GetAxis(input + "Horizontal");
-        float moveVertical = -Input.GetAxis(input + "Vertical");
+        float moveHorizontal = Input.GetAxis(playerName + "Horizontal");
+        float moveVertical = -Input.GetAxis(playerName + "Vertical");
 
         if (Mathf.Abs(moveHorizontal) + Mathf.Abs(moveVertical) < .1)
         {
-            return;
+            return new Vector2(0,0);
         }
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        Vector2 newpos = rb2d.position + (movement * speed);
-
-        if(player.abilityActive > 0 && player.character == Character.mauzilla && laserLine != null)
-        {
-            laserLine.gameObject.SetActive(true);
-            newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-            moveLaser(newpos);
-            return;
-        }
-
-        if (laserLine != null)
-        {
-            laserLine.gameObject.SetActive(false);
-        }
-        movePlayer(newpos);
-
+        return new Vector2(moveHorizontal, moveVertical);
     }
 
-    void movePlayer(Vector2 newpos)
+    void handleMauzillaMovement(Vector2 movement)
     {
+        if (player.isUsingAbility()) {
+            moveLaser(movement);
+        } else {
+            movePlayer(movement);
+        }
+    }
+
+    void movePlayer(Vector2 movement)
+    {
+        toggleLaserVisibility(false);
+        Vector2 newPlayerPosition = rb2d.position + (movement * speed);
         // Flip(moveHorizontal);
         // FrontBack(moveVertical);
-        rb2d.MovePosition(newpos);
+        rb2d.MovePosition(newPlayerPosition);
     }
 
-    void moveLaser(Vector2 newpos)
+    void moveLaser(Vector2 movement)
     {
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, rb2d.transform.position.z);
+        toggleLaserVisibility(true);
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        // Startpoint is always Player Position
+        startPoint = rb2d.transform;
+        laserLine.SetPosition(0, new Vector3(startPoint.position.x, startPoint.position.y, 100));
+
+        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
         laserLine.SetPosition(1, endPoint.position);
     }
 
-
+    void toggleLaserVisibility(bool visible)
+    {
+        if (laserLine != null) {
+            laserLine.gameObject.SetActive(visible);
+        }
+    }
 
         private void Flip(float moveHorizontal)
     {
