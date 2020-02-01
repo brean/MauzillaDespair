@@ -108,7 +108,7 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(true);
         Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 0);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
 
         RaycastHit2D[] hits;
 
@@ -129,7 +129,7 @@ public class InputControl : MonoBehaviour
             }
         }
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        laserLine.SetPosition(0, new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 100));
         laserLine.SetPosition(1, endPoint.position);
     }
 
