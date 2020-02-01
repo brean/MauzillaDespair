@@ -17,6 +17,7 @@ public class Building : MonoBehaviour {
     GameObject infoBubble;
     Mauzilla mauzilla;
 
+    GameObject firstMaterial, secondMaterial, thirdMaterial;
 
     // Start is called before the first frame update
     void Start() {
@@ -48,6 +49,21 @@ public class Building : MonoBehaviour {
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
             ChangeState(2);
+        }
+    }
+
+    void populateInfobubble() {
+        switch (materialCount) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                print("ERROR: Incorrect number of materialCount!");
+                break;
+
         }
     }
 
