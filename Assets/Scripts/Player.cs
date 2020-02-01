@@ -52,7 +52,8 @@ public class Player
                 case 4:
                     return KeyCode.U;
             }
-        } else
+        }
+        else
         {
             switch (number)
             {
@@ -69,6 +70,45 @@ public class Player
         return KeyCode.Return;
     }
 
+    public static KeyCode AbilityKey(InputType inputType, int number)
+    {
+        if (inputType == InputType.Key)
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.M;
+                case 2:
+                    return KeyCode.E;
+                case 3:
+                    return KeyCode.Z;
+                case 4:
+                    return KeyCode.O;
+            }
+        }
+        else
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.Joystick1Button1;
+                case 2:
+                    return KeyCode.Joystick2Button1;
+                case 3:
+                    return KeyCode.Joystick3Button1;
+                case 4:
+                    return KeyCode.Joystick4Button1;
+            }
+        }
+        return KeyCode.Return;
+    }
+
+
+    private KeyCode AbilityKey()
+    {
+        return AbilityKey(inputType, number);
+    }
+
     internal float HorizontalAxis()
     {
         return Input.GetAxisRaw(this.inputName() + "Horizontal");
@@ -76,7 +116,7 @@ public class Player
 
     public float VerticalAxis()
     {
-        return Input.GetAxisRaw(this.inputName() + "Vertical"); 
+        return Input.GetAxisRaw(this.inputName() + "Vertical");
     }
 
     public static Character nextCharacter(Character lastCharacter)
@@ -100,13 +140,13 @@ public class Player
 
     public string inputName()
     {
-        if(inputType == InputType.All)
+        if (inputType == InputType.All)
         {
             string[] controllers = Input.GetJoystickNames();
             if (number <= controllers.Length)
             {
                 inputType = InputType.Joy;
-            } 
+            }
             else
             {
                 inputType = InputType.Key;
@@ -117,12 +157,18 @@ public class Player
 
     internal void controlAbility()
     {
-        if (abilityCooldown <= 0 && Input.GetKeyDown(this.ActionKey()))
+        //Debug.Log("timer" + abilityCooldown);
+
+
+        if (abilityCooldown <= 0 && Input.GetKeyDown(this.AbilityKey()))
         {
-            //TODO: do something            
+            //TODO: do something  
+            Debug.Log("abilities");
             abilityCooldown = 5;
-        } else {
+        }
+        else
+        {
             abilityCooldown -= Time.deltaTime;
         }
     }
-    }
+}
