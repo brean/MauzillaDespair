@@ -20,6 +20,11 @@ public class InputControl : MonoBehaviour
 
     CharacterSpiteSettings spriteSettings;
 
+    public GameObject laser;
+    LineRenderer laserLine;
+    public Transform startPoint;
+    public Transform endPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,10 @@ public class InputControl : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         initialScale = transform.localScale;
+
+        laserLine = laser.GetComponent<LineRenderer>();
+        laserLine.startWidth = .1f;
+        laserLine.endWidth = .1f;
     }
 
     // Update is called once per frame
@@ -44,11 +53,12 @@ public class InputControl : MonoBehaviour
             if (Input.GetKeyDown(code)) { Debug.Log("butts: " + System.Enum.GetName(typeof(KeyCode), code)); }
         }
         */
-        movePlayer(player.inputName());
+
+        move(player.inputName());
         player.controlAbility();
     }
 
-    void movePlayer(string input)
+    void move(string input)
     {
         float moveHorizontal = Input.GetAxis(input + "Horizontal");
         float moveVertical = -Input.GetAxis(input + "Vertical");
@@ -60,10 +70,26 @@ public class InputControl : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         Vector2 newpos = rb2d.position + (movement * speed);
 
-       // Flip(moveHorizontal);
-       // FrontBack(moveVertical);
-        rb2d.MovePosition(newpos);
+        movePlayer(newpos);
+        moveLaser(newpos);
+    }
 
+    void movePlayer(Vector2 newpos)
+    {
+        // Flip(moveHorizontal);
+        // FrontBack(moveVertical);
+        rb2d.MovePosition(newpos);
+    }
+
+    void moveLaser(Vector2 newpos)
+    {
+        startPoint.transform.position = newpos;
+        startPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
+
+        endPoint.transform.position = new Vector3(newpos.x +5, newpos.y +5, 100);
+
+        laserLine.SetPosition(0, startPoint.position);
+        laserLine.SetPosition(1, endPoint.position);
     }
 
 
