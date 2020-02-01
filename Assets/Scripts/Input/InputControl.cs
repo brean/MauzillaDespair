@@ -97,8 +97,10 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
-        Flip(movement.x);
-        FrontBack(movement.y);
+        if (animator != null) { 
+            Flip(movement.x);
+            FrontBack(movement.y);
+        }
         rb2d.MovePosition(newPlayerPosition);
     }
 
@@ -144,7 +146,10 @@ public class InputControl : MonoBehaviour
         {
             //GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
             facingRight = moveHorizontal < -0.1;
-            animator.SetInteger("Direction", 2);
+            if(animator != null)
+            {
+                animator.SetInteger("Direction", 2);
+            }
             Vector3 theScale = transform.localScale;
 
             if (moveHorizontal > 0.1)
