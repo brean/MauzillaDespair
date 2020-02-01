@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             {
                 new Player{
                     character = Character.mauzilla,
-                    inputType = InputType.Joy,
+                    inputType = InputType.All,
                     number = 1,
                     color = Color.red,
                     team = 0,
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
                 },
                 new Player{
                     character = Character.schneider,
-                    inputType = InputType.Joy,
+                    inputType = InputType.All,
                     number = 2,
                     color = Color.blue,
                     team = 0,
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
                 },
                 new Player{
                     character = Character.maurer,
-                    inputType = InputType.Joy,
+                    inputType = InputType.All,
                     number = 3,
                     color = Color.green,
                     team = 1,
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 },
                 new Player{
                     character = Character.tischler,
-                    inputType = InputType.Joy,
+                    inputType = InputType.All,
                     number = 4,
                     color = Color.yellow,
                     team = 1,
