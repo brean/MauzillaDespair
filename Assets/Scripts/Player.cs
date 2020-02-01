@@ -25,8 +25,9 @@ public class Player
     public bool ready = false; // user pressed the input Button to start the game.
     public bool active = false; // user pressed any key to activate himself
 
-    public float abilityCooldown = 5;
+    public float abilityCooldown = -1;
     public float abilityActiveDuration = -1;
+    public bool usesLaser = false;
 
     public KeyCode ActionKey()
     {

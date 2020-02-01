@@ -8,6 +8,7 @@ TagManager:
   - mauzilla
   - artisan
   - healthbar
+  - laser
   layers:
   - Default
   - TransparentFX
