@@ -105,10 +105,13 @@ public class InputControl : MonoBehaviour
     void moveLaser(Vector2 movement)
     {
         toggleLaserVisibility(true);
-        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, rb2d.transform.position.z);
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        // Startpoint is always Player Position
+        startPoint = rb2d.transform;
+        laserLine.SetPosition(0, new Vector3(startPoint.position.x, startPoint.position.y, 100));
+
+        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
         laserLine.SetPosition(1, endPoint.position);
     }
 
