@@ -38,9 +38,12 @@ public class InputControl : MonoBehaviour
 
         initialScale = transform.localScale;
 
-        laserLine = laser.GetComponent<LineRenderer>();
-        laserLine.startWidth = .1f;
-        laserLine.endWidth = .1f;
+        if (laser != null)
+        {
+            laserLine = laser.GetComponent<LineRenderer>();
+            laserLine.startWidth = .1f;
+            laserLine.endWidth = .1f;
+        }
     }
 
     // Update is called once per frame
@@ -53,9 +56,11 @@ public class InputControl : MonoBehaviour
             if (Input.GetKeyDown(code)) { Debug.Log("butts: " + System.Enum.GetName(typeof(KeyCode), code)); }
         }
         */
-
-        move(player.inputName());
-        player.controlAbility();
+        if (player != null)
+        {
+            player.controlAbility();
+            move(player.inputName());
+        }
     }
 
     void move(string input)
@@ -67,11 +72,24 @@ public class InputControl : MonoBehaviour
         {
             return;
         }
+
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         Vector2 newpos = rb2d.position + (movement * speed);
 
+        if(player.abilityActive > 0 && player.character == Character.mauzilla && laserLine != null)
+        {
+            laserLine.gameObject.SetActive(true);
+            newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
+            moveLaser(newpos);
+            return;
+        }
+
+        if (laserLine != null)
+        {
+            laserLine.gameObject.SetActive(false);
+        }
         movePlayer(newpos);
-        moveLaser(newpos);
+
     }
 
     void movePlayer(Vector2 newpos)
@@ -83,12 +101,9 @@ public class InputControl : MonoBehaviour
 
     void moveLaser(Vector2 newpos)
     {
-        startPoint.transform.position = newpos;
-        startPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, rb2d.transform.position.z);
 
-        endPoint.transform.position = new Vector3(newpos.x +5, newpos.y +5, 100);
-
-        laserLine.SetPosition(0, startPoint.position);
+        laserLine.SetPosition(0, rb2d.transform.position);
         laserLine.SetPosition(1, endPoint.position);
     }
 

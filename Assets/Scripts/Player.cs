@@ -7,14 +7,14 @@ using UnityEngine;
 public class Player
 {
     [SerializeField]
-    public InputType inputType; // key or joy
+    public InputType inputType; // all, key or joy
 
     [SerializeField]
     [Range(1, 5)]
     public int number; // number of input (1-4)
 
     [SerializeField]
-    public Character character; //jock, nerd, princess or hipster
+    public Character character; //mauzilla, schneider, maurer or tischler
 
     [SerializeField]
     public Color color;
@@ -25,7 +25,8 @@ public class Player
     public bool ready = false; // user pressed the input Button to start the game.
     public bool active = false; // user pressed any key to activate himself
 
-    private float abilityCooldown = 5;
+    public float abilityCooldown = 5;
+    public float abilityActive = -1;
 
     public KeyCode ActionKey()
     {
@@ -157,18 +158,30 @@ public class Player
 
     internal void controlAbility()
     {
-        //Debug.Log("timer" + abilityCooldown);
-
-
+        
         if (abilityCooldown <= 0 && Input.GetKeyDown(this.AbilityKey()))
         {
             //TODO: do something  
             Debug.Log("abilities");
             abilityCooldown = 5;
+            abilityActive = 3;
         }
         else
         {
-            abilityCooldown -= Time.deltaTime;
+            if(abilityCooldown > -1)
+            {
+                abilityCooldown -= Time.deltaTime;
+            }
+            if (abilityActive > -1)
+            {
+                abilityActive -= Time.deltaTime;
+            }
+
+            if (Input.GetKeyUp(this.AbilityKey()))
+            {
+                abilityActive = -1;
+            } 
+
         }
     }
 }
