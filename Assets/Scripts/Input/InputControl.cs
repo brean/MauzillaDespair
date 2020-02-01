@@ -86,7 +86,7 @@ public class InputControl : MonoBehaviour
 
     void handleMauzillaMovement(Vector2 movement)
     {
-        if (player.usesLaser) {
+        if (player.isUsingAbility()) {
             moveLaser(movement);
         } else {
             movePlayer(movement);
@@ -127,8 +127,7 @@ public class InputControl : MonoBehaviour
             }
         }
 
-
-            laserLine.SetPosition(0, rb2d.transform.position);
+        laserLine.SetPosition(0, rb2d.transform.position);
         laserLine.SetPosition(1, endPoint.position);
     }
 
