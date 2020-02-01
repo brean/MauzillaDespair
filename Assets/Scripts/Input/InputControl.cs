@@ -86,7 +86,7 @@ public class InputControl : MonoBehaviour
 
     void handleMauzillaMovement(Vector2 movement)
     {
-        if (player.usesLaser) {
+        if (player.isUsingAbility()) {
             moveLaser(movement);
         } else {
             movePlayer(movement);
