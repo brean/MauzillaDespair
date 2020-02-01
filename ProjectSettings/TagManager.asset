@@ -7,6 +7,7 @@ TagManager:
   - building
   - mauzilla
   - artisan
+  - healthbar
   layers:
   - Default
   - TransparentFX
