@@ -11,12 +11,15 @@ public class Building : MonoBehaviour {
     public bool[] collidingArtisans = new bool[3]; // 0 = maurer 1 = schneider 2 = tischler
 
     public Sprite[] sprites = new Sprite[3];
-    public GameObject healthbar;
-    public GameObject infoBubble;
+    GameObject healthbar;
+    GameObject infoBubble;
+    Mauzilla mauzilla;
+
 
     // Start is called before the first frame update
     void Start() {
         sprites[0] = this.GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
+        mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
 
         infoBubble = this.transform.GetChild(1).gameObject; // Get Infobubble and hide
         infoBubble.SetActive(false);
@@ -49,6 +52,7 @@ public class Building : MonoBehaviour {
                 break;
             case 2: // repaired
                 infoBubble.SetActive(false);
+                mauzilla.TakeDamage(maxHealth);
                 break;
             default:
                 print("ERROR: Incorrect state given to ChangeState()!");
