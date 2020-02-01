@@ -27,12 +27,17 @@ public class Player
 
     private float abilityCooldown = 5;
 
-    public KeyCode inputButton()
+    public KeyCode ActionKey()
     {
-        return inputButton(inputType, number);
+        return ActionKey(inputType, number);
     }
 
-    public static KeyCode inputButton(InputType inputType, int number)
+    public bool PressedActionKey()
+    {
+        return Input.GetKeyDown(this.ActionKey());
+    }
+
+    public static KeyCode ActionKey(InputType inputType, int number)
     {
         if (inputType == InputType.Key)
         {
@@ -64,6 +69,16 @@ public class Player
         return KeyCode.Return;
     }
 
+    internal float HorizontalAxis()
+    {
+        return Input.GetAxisRaw(this.inputName() + "Horizontal");
+    }
+
+    public float VerticalAxis()
+    {
+        return Input.GetAxisRaw(this.inputName() + "Vertical"); 
+    }
+
     public static Character nextCharacter(Character lastCharacter)
     {
         return (Character)(((int)lastCharacter + 1) % 4);
@@ -85,12 +100,24 @@ public class Player
 
     public string inputName()
     {
+        if(inputType == InputType.All)
+        {
+            string[] controllers = Input.GetJoystickNames();
+            if (number <= controllers.Length)
+            {
+                inputType = InputType.Joy;
+            } 
+            else
+            {
+                inputType = InputType.Key;
+            }
+        }
         return "Player" + number + inputType.ToString();
     }
 
     internal void controlAbility()
     {
-        if (abilityCooldown <= 0 && Input.GetKeyDown(this.inputButton()))
+        if (abilityCooldown <= 0 && Input.GetKeyDown(this.ActionKey()))
         {
             //TODO: do something            
             abilityCooldown = 5;

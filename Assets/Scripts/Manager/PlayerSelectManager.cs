@@ -47,7 +47,7 @@ public class PlayerSelectManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(Player.inputButton(inputType, number)) || 
+        if (Input.GetKeyUp(Player.ActionKey(inputType, number)) || 
            (Mathf.Abs(Input.GetAxis("Player" + number + inputType + "Vertical")) > 0.3 || 
             Mathf.Abs(Input.GetAxis("Player" + number + inputType + "Horizontal")) > 0.3))
         {
