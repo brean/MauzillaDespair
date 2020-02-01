@@ -25,8 +25,8 @@ public class Player
     public bool ready = false; // user pressed the input Button to start the game.
     public bool active = false; // user pressed any key to activate himself
 
-    public float abilityCooldown = 5;
-    public float abilityActive = -1;
+    public float abilityCooldown = -1;
+    public float abilityActiveDuration = -1;
     public bool usesLaser = false;
 
     public KeyCode ActionKey()
@@ -157,6 +157,11 @@ public class Player
         return "Player" + number + inputType.ToString();
     }
 
+    public bool isUsingAbility()
+    {
+        return abilityActiveDuration > 0;
+    }
+
     internal void controlAbility()
     {
         
@@ -165,8 +170,7 @@ public class Player
             //TODO: do something  
             Debug.Log("abilities");
             abilityCooldown = 5;
-            abilityActive = 3;
-            usesLaser = true;
+            abilityActiveDuration = 3;
         }
         else
         {
@@ -174,18 +178,14 @@ public class Player
             {
                 abilityCooldown -= Time.deltaTime;
             }
-            if (abilityActive > -1)
+            if (abilityActiveDuration > -1)
             {
-                abilityActive -= Time.deltaTime;
+                abilityActiveDuration -= Time.deltaTime;
             }
 
             if (Input.GetKeyUp(this.AbilityKey()))
             {
-                abilityActive = -1;
-            }
-
-            if (abilityActive <= -1) {
-                usesLaser = false;
+                abilityActiveDuration = -1;
             }
         }
     }

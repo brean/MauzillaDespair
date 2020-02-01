@@ -13,7 +13,7 @@ public class InputControl : MonoBehaviour
 
     public Rigidbody2D rb2d;
 
-    Animator animator;
+    public Animator animator;
 
     private bool facingRight;
     private Vector3 initialScale;
@@ -86,7 +86,7 @@ public class InputControl : MonoBehaviour
 
     void handleMauzillaMovement(Vector2 movement)
     {
-        if (player.usesLaser) {
+        if (player.isUsingAbility()) {
             moveLaser(movement);
         } else {
             movePlayer(movement);
@@ -97,8 +97,10 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
-        // Flip(moveHorizontal);
-        // FrontBack(moveVertical);
+        if (animator != null) { 
+            Flip(movement.x);
+            FrontBack(movement.y);
+        }
         rb2d.MovePosition(newPlayerPosition);
     }
 
@@ -106,9 +108,28 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(true);
         Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, rb2d.transform.position.z);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        RaycastHit2D[] hits;
+
+        var heading = endPoint.position - rb2d.transform.position;
+        var distance = heading.magnitude;
+        var direction = heading / distance;
+
+        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, 100.0F);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit2D hit = hits[i];
+            Debug.Log(hit.collider.gameObject.tag);
+
+            if (hit.collider.gameObject.tag == "building")
+            {
+                hit.collider.gameObject.GetComponent<Building>().adjustHealth(-1);
+            }
+        }
+
+        laserLine.SetPosition(0, new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 100));
         laserLine.SetPosition(1, endPoint.position);
     }
 
@@ -119,13 +140,16 @@ public class InputControl : MonoBehaviour
         }
     }
 
-        private void Flip(float moveHorizontal)
+    public void Flip(float moveHorizontal)
     {
         if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
             facingRight = moveHorizontal < -0.1;
-            animator.SetInteger("Direction", 2);
+            if(animator != null)
+            {
+                animator.SetInteger("Direction", 2);
+            }
             Vector3 theScale = transform.localScale;
 
             if (moveHorizontal > 0.1)
@@ -146,15 +170,15 @@ public class InputControl : MonoBehaviour
     {
         if (moveVertical > 0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
-            transform.localScale = initialScale;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
+           //transform.localScale = initialScale;
             animator.SetInteger("Direction", 1);
         }
 
         if (moveVertical < -0.1)
         {
-            GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
-            transform.localScale = initialScale;
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
+            //transform.localScale = initialScale;
             animator.SetInteger("Direction", 3);
         }
     }
