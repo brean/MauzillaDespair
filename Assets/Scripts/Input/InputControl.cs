@@ -116,8 +116,6 @@ public class InputControl : MonoBehaviour
         var distance = heading.magnitude;
         var direction = heading / distance;
 
-        Debug.Log(distance);
-
         hits = Physics2D.RaycastAll(rb2d.transform.position, direction, distance);
 
         for (int i = 0; i < hits.Length; i++)
