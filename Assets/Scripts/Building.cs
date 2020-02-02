@@ -149,14 +149,17 @@ public class Building : MonoBehaviour {
         switch (state) {
             case 0: // normal 
                 infoBubble.SetActive(false);
+                GetComponent<BoxCollider2D>().isTrigger = false;
                 break;
             case 1: // destroyed
+                GetComponent<BoxCollider2D>().isTrigger = true;
                 infoBubble.GetComponent<SpriteRenderer>().sprite = infoBubbleSprites[materialCount-1];
                 infoBubble.SetActive(true);
                 populateInfobubble();
                 cityHealthbar.LoseBuilding();
                 break;
             case 2: // repaired
+                GetComponent<BoxCollider2D>().isTrigger = false;
                 infoBubble.SetActive(false);
                 health = maxHealth;
                 mauzilla.TakeDamage(maxHealth);
@@ -183,20 +186,23 @@ public class Building : MonoBehaviour {
             if (materials[i]) materialCount++;
             infoBubble.transform.GetChild(i).gameObject.SetActive(materials[i]);
         }
-        Debug.Log(materialCount + " Materials arequired. Stone: " + materials[0] + ", Cloth: " + materials[1] + ", Wood: " + materials[2]);
+        Debug.Log(materialCount + " Materials are required. " + 
+                  "Stone: " + materials[0] + ", Cloth: " + materials[1] + 
+                  ", Wood: " + materials[2]);
     }
 
     // Set max health according to how many materials are required
     void SetMaxHealth() {
         for (int i = 0; i < materials.Length; i++) {
             maxHealth = materials[i] ? maxHealth + 10 : maxHealth;
-            Debug.Log("Setting building's maxHealth as " + maxHealth);
         }
+        Debug.Log("Setting building's maxHealth as " + maxHealth);
     }
 
     public void adjustHealth(int value) {
         health += value;
-        Debug.Log("Building " + (value > 0 ? "gained" : "lost") + Mathf.Abs(value) + "HP. Current HP: " + health);
+        Debug.Log("Building " + (value > 0 ? "gained" : "lost") + Mathf.Abs(value) + 
+                  "HP. Current HP: " + health + " HP. max: " + maxHealth);
         
         // adjust healthbar
         Vector3 newHealthbar = healthbar.transform.localScale;
@@ -204,10 +210,12 @@ public class Building : MonoBehaviour {
         healthbar.transform.localScale = newHealthbar;
 
         // check if health reaches zero or max
-        if(health == maxHealth) {
+        if(health >= maxHealth) {
+            health = maxHealth;
             ChangeState(2);
             Debug.Log("Building was repaired by Artisan!");
-        } else if (health == 0) {
+        } else if (health <= 0) {
+            health = 0;
             ChangeState(1);
             Debug.Log("Building was destroyed by Mauzilla!");
         }
@@ -227,13 +235,13 @@ public class Building : MonoBehaviour {
     }
 
     // Store all Artisans near the Building in Array
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.name == "Maurer") collidingArtisans[0] = true;
         if (col.gameObject.name == "Schneider") collidingArtisans[1] = true;
         if (col.gameObject.name == "Tischler") collidingArtisans[2] = true;
     }
 
-    void OnCollisionExit2D(Collision2D col) {
+    void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.name == "Maurer") collidingArtisans[0] = false;
         if (col.gameObject.name == "Schneider") collidingArtisans[1] = false;
         if (col.gameObject.name == "Tischler") collidingArtisans[2] = false;

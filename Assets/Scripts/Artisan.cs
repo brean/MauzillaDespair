@@ -28,7 +28,7 @@ public class Artisan : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan collided with " + col.gameObject.name);
             colliding = true;
@@ -36,7 +36,7 @@ public class Artisan : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D col) {
+    void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan stopped colliding with " + col.gameObject.name);
             colliding = false;
