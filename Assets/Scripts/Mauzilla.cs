@@ -29,6 +29,7 @@ public class Mauzilla : MonoBehaviour {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
         if (colliding && GetComponent<InputControl>().player.PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
+            gameObject.GetComponent<AudioSource>().Play(0);
         }
     }
 
