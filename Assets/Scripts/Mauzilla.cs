@@ -11,6 +11,7 @@ public class Mauzilla : MonoBehaviour {
     public int maxHealth;
     public int health;
     public Image healthbar;
+    GameObject damageEffect;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,6 +19,9 @@ public class Mauzilla : MonoBehaviour {
         health = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
+
+        damageEffect = transform.GetChild(1).gameObject;
+        damageEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,9 +38,18 @@ public class Mauzilla : MonoBehaviour {
             Debug.Log("Mauzilla took " + value + " damage!");
             float newHealthbarPercentage = (float)health / (float)(maxHealth - 0);
             healthbar.fillAmount = newHealthbarPercentage;
+
+            StartCoroutine(MauzillaTakesDamageEffect());
+
         } else if (health == 10) {
             Debug.Log("Mauzilla retreats!");
         }
+    }
+
+    IEnumerator MauzillaTakesDamageEffect() {
+        damageEffect.SetActive(true);
+        yield return new WaitForSeconds(1);
+        damageEffect.SetActive(false);
     }
 
     void OnCollisionEnter2D(Collision2D col) {
