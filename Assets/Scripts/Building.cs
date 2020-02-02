@@ -41,11 +41,15 @@ public class Building : MonoBehaviour {
 
         RandomizeMaterials(); // Randomly decide how many materials are required
 
+
         SetMaxHealth(); // set maxHealth to 10, 20 or 30 depending on how many materials are required
         health = maxHealth;
         healthbar = this.transform.GetChild(0).gameObject; // Get Healthbar and multiply width by maxHealth
+        //reset any editor changes to healthbar, before calculating size according to maxhealth
+        healthbar.transform.localScale = new Vector3(1, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
         healthbar.transform.localScale = new Vector3(healthbar.transform.localScale.x * maxHealth, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
-    }
+        SetXPos(healthbar, maxHealth * -0.01f);
+   }
 
     // Update is called once per frame
     void Update() {
