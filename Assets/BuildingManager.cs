@@ -24,9 +24,10 @@ public class BuildingManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        GameObject grid = GameObject.Find("Grid - Level");
         storeysLevel = new List<Tilemap>();
         tileMaps = new List<Tilemap>();
-        foreach(Transform child in transform)
+        foreach(Transform child in grid.transform)
         {
             Tilemap tm = child.gameObject.GetComponent<Tilemap>();
             if (tm == null) {
@@ -56,6 +57,11 @@ public class BuildingManager : MonoBehaviour
     }
 
     public void DestroyBuilding(Vector3Int tilePosition) {
+        CleanStoreys(tilePosition);
+        buildingsLevel0.SetTile(tilePosition, destroyed);
+    }
+
+    public void CleanStoreys(Vector3Int tilePosition) {
         foreach (Tilemap tm in tileMaps) 
         {
             if (ignoreMaps.Contains(tm)) {
@@ -63,10 +69,10 @@ public class BuildingManager : MonoBehaviour
             }
             tm.SetTile(tilePosition, null);
         }
-        buildingsLevel0.SetTile(tilePosition, destroyed);
     }
 
     public void RepairBuilding(Vector3Int tilePosition) {
+        CleanStoreys(tilePosition);
         TileBase tile;
         tile = fixedGroundFloors[Random.Range(0, fixedGroundFloors.Count)];
         buildingsLevel0.SetTile(tilePosition, tile);
