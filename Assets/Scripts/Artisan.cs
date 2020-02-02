@@ -22,6 +22,7 @@ public class Artisan : MonoBehaviour
             // Check if all required Artisans are near the Building
             if (collidingBuilding.RepairConditionsMet()) {
                 collidingBuilding.adjustHealth(1);
+                gameObject.GetComponent<AudioSource>().Play(0);
             } else {
                 Debug.Log("You're missing the right skills to repair this building!");
             }
