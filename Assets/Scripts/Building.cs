@@ -22,6 +22,8 @@ public class Building : MonoBehaviour {
 
     GameObject repairEffect;
     bool repairEffectActive;
+    public GameObject explosion;
+    public int explosionTimer = 0;
     GameObject firstMaterial, secondMaterial, thirdMaterial;
 
     // Start is called before the first frame update
@@ -74,6 +76,16 @@ public class Building : MonoBehaviour {
             ChangeState(2);
             Debug.Log("CHEAT: Changing all Buildings state to repaired.");
         }
+
+        if (explosionTimer >= 0)
+        {
+            explosionTimer -= 1;
+        }
+        else
+        {
+            explosion.SetActive(false);
+        }
+
     }
 
     void populateInfobubble() {
@@ -167,6 +179,8 @@ public class Building : MonoBehaviour {
                 infoBubble.SetActive(true);
                 populateInfobubble();
                 cityHealthbar.LoseBuilding();
+                explosion.SetActive(true);
+                explosionTimer = 30;
                 break;
             case 2: // repaired
                 GetComponent<BoxCollider2D>().isTrigger = false;
