@@ -21,7 +21,7 @@ public class Mauzilla : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        maxHealth = 100;
+        maxHealth = 80;
         health = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
