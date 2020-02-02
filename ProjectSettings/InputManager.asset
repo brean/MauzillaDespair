@@ -137,7 +137,7 @@ InputManager:
     m_Name: Player4KeyVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: j
+    negativeButton: i
     positiveButton: k
     altNegativeButton: 
     altPositiveButton: 
