@@ -8,8 +8,6 @@ public class Mauzilla : MonoBehaviour {
     public bool colliding = false; // Is Mauzilla currently near a Building?
     public Building collidingBuilding; // The Building Mauzilla is near
 
-
-
     public int maxHealth;
     public int health;
     public Image healthbar;
@@ -21,7 +19,7 @@ public class Mauzilla : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        maxHealth = 80;
+        maxHealth = 300;
         health = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
