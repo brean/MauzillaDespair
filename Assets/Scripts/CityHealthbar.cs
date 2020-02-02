@@ -15,7 +15,15 @@ public class CityHealthbar : MonoBehaviour
         buildings = GameObject.FindGameObjectsWithTag("building");
         maxHealth = buildings.Length;
         healthbar = transform.GetChild(1).gameObject.GetComponent<Image>();
-        // Start is called before the first frame update
+        healthbar.fillAmount = 1.0f;
+        health = maxHealth;
+    }
+
+   public void LoseBuilding() {
+        health = health - 1;
+        Debug.Log("City lost a building to Mauzilla's Wrath!");
+        float newHealthbarPercentage = (float)health / (float)(maxHealth);
+        healthbar.fillAmount = newHealthbarPercentage;
     }
 
 }

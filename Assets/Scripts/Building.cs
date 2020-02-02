@@ -16,6 +16,7 @@ public class Building : MonoBehaviour {
     public Sprite[] materialSprites = new Sprite[3];
     public StoreyManager storeyManager;
     GameObject healthbar;
+    CityHealthbar cityHealthbar;
     GameObject infoBubble;
     Mauzilla mauzilla;
 
@@ -49,6 +50,8 @@ public class Building : MonoBehaviour {
         healthbar.transform.localScale = new Vector3(1, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
         healthbar.transform.localScale = new Vector3(healthbar.transform.localScale.x * maxHealth, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
         SetXPos(healthbar, maxHealth * -0.01f);
+
+        cityHealthbar = GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>();
    }
 
     // Update is called once per frame
@@ -151,6 +154,7 @@ public class Building : MonoBehaviour {
                 infoBubble.GetComponent<SpriteRenderer>().sprite = infoBubbleSprites[materialCount-1];
                 infoBubble.SetActive(true);
                 populateInfobubble();
+                cityHealthbar.LoseBuilding();
                 break;
             case 2: // repaired
                 infoBubble.SetActive(false);
