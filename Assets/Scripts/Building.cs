@@ -61,14 +61,14 @@ public class Building : MonoBehaviour {
         // CHEATCODES
         if (Input.GetKeyDown(KeyCode.Alpha1)) { // press 1 to revert to normal
             ChangeState(0);
-            Debug.Log("Changing Building state to normal.");        }
+            Debug.Log("CHEAT: Changing all Buildings state to normal.");        }
         else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
             ChangeState(1);
-            Debug.Log("Changing Building state to destroyed.");
+            Debug.Log("CHEAT: Changing all Buildings state to destroyed.");
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
             ChangeState(2);
-            Debug.Log("Changing Building state to repaired.");
+            Debug.Log("CHEAT: Changing all Buildings state to repaired.");
         }
     }
 
@@ -83,7 +83,7 @@ public class Building : MonoBehaviour {
 
                 firstMaterial.GetComponent<SpriteRenderer>().sprite =
                     materials[0] ? materialSprites[0] : (materials[1] ? materialSprites[1] : materialSprites[2]);
-                Debug.Log("Selected Material 1/1: " + firstMaterial.GetComponent<SpriteRenderer>().sprite);
+                //Debug.Log("Selected Material 1/1: " + firstMaterial.GetComponent<SpriteRenderer>().sprite);
                 break;
             case 2:
                 firstMaterial.name = "Material 1/2";
@@ -98,11 +98,11 @@ public class Building : MonoBehaviour {
 
                 int taken = 9; //random
                 for (int i = 0; i < materials.Length; i++) {
-                    Debug.Log("MC = " + materialCount + ". Selecting Material 1/2");
+                    //Debug.Log("MC = " + materialCount + ". Selecting Material 1/2");
                     if (materials[i]) {
                         firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
                         taken = i;
-                        Debug.Log("Selected Material 1/2: " + i);
+                        //Debug.Log("Selected Material 1/2: " + i);
                         break;
                     }
                 }
@@ -110,7 +110,7 @@ public class Building : MonoBehaviour {
                     Debug.Log("MC = " + materialCount + ". Selecting Material 2/2");
                     if (materials[i] && taken != i) {
                         secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
-                        Debug.Log("Selected Material 2/2: " + i);
+                        //Debug.Log("Selected Material 2/2: " + i);
                     }
                 }
                 break;
@@ -126,7 +126,7 @@ public class Building : MonoBehaviour {
                 firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[0];
                 secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[1];
                 thirdMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[2];
-                Debug.Log("Selected all Materias 1+2+3");
+                //Debug.Log("Selected all Materias 1+2+3");
 
                 break;
             default:
@@ -252,7 +252,7 @@ public class Building : MonoBehaviour {
         bool repairable = false;
         for (int i = 0; i < materials.Length; i++) {
             if (materials[i]) repairable = collidingArtisans[i];
-            Debug.Log("Artisan " + i + " is required and present: " + repairable);
+            //Debug.Log("Artisan " + i + " is required and present: " + repairable);
         }
         return repairable;
     }
