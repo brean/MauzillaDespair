@@ -21,8 +21,8 @@ You can use Joysticks or a keyboard (or both).
  - Lena – Weird Cat Lady (Character Art)
  - Luka – Project Destruction Manager (Programming)
  - Malte – Lazer Expert (Programming, Particles)
- - Kim – Logic Builder (Programming)
- - Filiz – Running Picture Expert (Animation, Sound)
+ - Kim – Home Improvement Expert (Programming)
+ - Filiz – Running Picture Senior Expert (Animation, Sound)
 
 ### External Assets
  - Isometric Buildings: https://kenney.nl/assets/isometric-buildings
