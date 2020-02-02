@@ -45,6 +45,13 @@ public class Mauzilla : MonoBehaviour {
         }
 
         laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
+        if(laserbar.fillAmount == 1)
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(true);
+        } else
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     public void TakeDamage(int value) {

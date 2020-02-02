@@ -50,6 +50,9 @@ public class InputControl : MonoBehaviour
             laserLine = laser.GetComponent<LineRenderer>();
             laserLine.startWidth = .1f;
             laserLine.endWidth = .1f;
+
+            //set lasers to discharged on start
+            player.abilityCooldown = player.cooldownTime;
         }
     }
 
