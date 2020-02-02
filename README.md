@@ -26,7 +26,13 @@ Player|go left|go right|go up|go down|action 1 (attack/repair)|Lazer (Mauzilla o
 |carpenter (brown)|J|L|I|K|U||
 
 ### Joystick
-We use the first left/right axis as well as "Button 0" (this is 'A') on the default XBox Controller
+Use the normal directional pad to move your character up/down left/right.
+
+Controllers:
+|Controller type|Action 1 (attack/repair)|Lazer (Mauzilla only)
+|XBox|A|B|
+|Playstation Controller|Circle|Cross|
+|Nintendo|B|A|
 
 
 ## Credits
