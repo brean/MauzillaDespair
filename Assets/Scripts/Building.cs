@@ -20,6 +20,8 @@ public class Building : MonoBehaviour {
     GameObject infoBubble;
     Mauzilla mauzilla;
 
+    GameObject repairEffect;
+    bool repairEffectActive;
     GameObject firstMaterial, secondMaterial, thirdMaterial;
 
     // Start is called before the first frame update
@@ -49,7 +51,10 @@ public class Building : MonoBehaviour {
         SetXPos(healthbar, maxHealth * -0.01f);
 
         cityHealthbar = GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>();
-   }
+
+        repairEffect = transform.GetChild(2).gameObject;
+        repairEffect.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update() {
@@ -168,6 +173,7 @@ public class Building : MonoBehaviour {
                 infoBubble.SetActive(false);
                 health = maxHealth;
                 mauzilla.TakeDamage(maxHealth);
+                repairEffect.SetActive(false);
                 break;
             default:
                 print("ERROR: Incorrect state given to ChangeState()!");
@@ -208,7 +214,11 @@ public class Building : MonoBehaviour {
         health += value;
         Debug.Log("Building " + (value > 0 ? "gained" : "lost") + Mathf.Abs(value) + 
                   "HP. Current HP: " + health + " HP. max: " + maxHealth);
-        
+
+        if(value > 0 && !repairEffectActive) {
+            repairEffect.SetActive(true);
+        }
+
         // adjust healthbar
         Vector3 newHealthbar = healthbar.transform.localScale;
         newHealthbar.x = healthbar.transform.localScale.x + value;
