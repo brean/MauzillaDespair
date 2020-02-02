@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
         if (currentSceneName == "Start" && Input.GetKeyDown("space")) SceneManager.LoadScene("MainCity");
         if (currentSceneName == "MainCity") {
             if (GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>().health <= 10) SceneManager.LoadScene("MauzillaWins");
-            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) SceneManager.LoadScene("ArtisansWins");
+            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) SceneManager.LoadScene("ArtisansWin");
         }
         if (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins" && Input.GetKeyDown("space")) SceneManager.LoadScene("Start");
     }
