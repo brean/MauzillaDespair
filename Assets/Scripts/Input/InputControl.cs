@@ -11,6 +11,8 @@ public class InputControl : MonoBehaviour
     [Tooltip("speed of the player")]
     public float speed = .01f;
 
+    public float attackAnim = 0;
+
     public Rigidbody2D rb2d;
 
     public Animator animator;
@@ -61,6 +63,20 @@ public class InputControl : MonoBehaviour
         }
 
         player.controlAbility();
+        if (player.PressedActionKey()){
+            animator.SetBool("AttackActive", true);
+            attackAnim = 30;
+        } else
+        {
+            if (attackAnim <= 0)
+            {
+                animator.SetBool("AttackActive", false);
+            }else
+            {
+                attackAnim -= 1;
+            }
+            }
+        //animator.SetBool("AttackActive", true);
 
         if (player.character == Character.mauzilla) {
             handleMauzillaMovement(movement);
@@ -69,6 +85,10 @@ public class InputControl : MonoBehaviour
 
         // all other Players, move always. Erstmal!
         movePlayer(movement);
+
+        
+       
+        
     }
 
     Vector2 getMovementFromAxis(string playerName)
@@ -91,13 +111,25 @@ public class InputControl : MonoBehaviour
         } else {
             movePlayer(movement);
         }
+        updateLaserSound();
+    }
+
+    void updateLaserSound() {
+        AudioSource audio = GameObject.Find("laser").GetComponent<AudioSource>();
+        if (!audio.isPlaying) {
+            audio.Play(0);
+        }
+    }
+
+    bool laserActive() {
+        return laserLine.gameObject.active == true;
     }
 
     void movePlayer(Vector2 movement)
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
-        if (animator != null) { 
+        if (animator != null && attackAnim <= 0) { 
             Flip(movement.x);
             FrontBack(movement.y);
         }

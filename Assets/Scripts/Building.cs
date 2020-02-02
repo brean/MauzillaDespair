@@ -156,6 +156,7 @@ public class Building : MonoBehaviour {
                 GetComponent<BoxCollider2D>().isTrigger = false;
                 break;
             case 1: // destroyed
+                gameObject.GetComponent<AudioSource>().Play(0);
                 GetComponent<BoxCollider2D>().isTrigger = true;
                 infoBubble.GetComponent<SpriteRenderer>().sprite = infoBubbleSprites[materialCount-1];
                 infoBubble.SetActive(true);
