@@ -14235,6 +14235,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1416063382216305025, guid: 361c2fb0aac5c4be78f3e356bcb9504e,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416063382216305025, guid: 361c2fb0aac5c4be78f3e356bcb9504e,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416063382216305025, guid: 361c2fb0aac5c4be78f3e356bcb9504e,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1416063382216305028, guid: 361c2fb0aac5c4be78f3e356bcb9504e,
         type: 3}
       propertyPath: m_Color.r
@@ -14323,6 +14338,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630896681391010233, guid: 4e21bf17c2ae54311b0e2ebf6fe6cfb4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630896681391010233, guid: 4e21bf17c2ae54311b0e2ebf6fe6cfb4,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630896681391010233, guid: 4e21bf17c2ae54311b0e2ebf6fe6cfb4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4630896681391010236, guid: 4e21bf17c2ae54311b0e2ebf6fe6cfb4,
         type: 3}
@@ -14476,17 +14506,17 @@ PrefabInstance:
     - target: {fileID: 7296970448023110752, guid: 0ca6bb1bc8f23407aad8599a62869d16,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.6
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 7296970448023110752, guid: 0ca6bb1bc8f23407aad8599a62869d16,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.4
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 7296970448023110752, guid: 0ca6bb1bc8f23407aad8599a62869d16,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.4
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 7296970448023110755, guid: 0ca6bb1bc8f23407aad8599a62869d16,
         type: 3}
