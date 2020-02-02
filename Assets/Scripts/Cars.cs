@@ -20,6 +20,10 @@ public class Cars : MonoBehaviour
     void OnParticleTrigger()
     {
         // get the particles which matched the trigger conditions this frame
+        if(ps == null)
+        {
+            return;
+        }
         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
         int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
 

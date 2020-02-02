@@ -25,6 +25,8 @@ public class Player
     public bool ready = false; // user pressed the input Button to start the game.
     public bool active = false; // user pressed any key to activate himself
 
+    public float cooldownTime = 5;
+
     public float abilityCooldown = -1;
     public float abilityActiveDuration = -1;
     public bool usesLaser = false;
@@ -164,17 +166,14 @@ public class Player
 
     internal void controlAbility()
     {
-        
         if (abilityCooldown <= 0 && Input.GetKeyDown(this.AbilityKey()))
         {
-            //TODO: do something  
-            Debug.Log("abilities");
-            abilityCooldown = 5;
+            abilityCooldown = cooldownTime;
             abilityActiveDuration = 3;
         }
         else
         {
-            if(abilityCooldown > -1)
+            if (abilityCooldown > -1)
             {
                 abilityCooldown -= Time.deltaTime;
             }

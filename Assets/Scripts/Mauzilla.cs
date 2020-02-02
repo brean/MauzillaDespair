@@ -8,9 +8,15 @@ public class Mauzilla : MonoBehaviour {
     public bool colliding = false; // Is Mauzilla currently near a Building?
     public Building collidingBuilding; // The Building Mauzilla is near
 
+
+
     public int maxHealth;
     public int health;
     public Image healthbar;
+    public Image laserbar;
+
+    Player player;
+
     GameObject damageEffect;
 
     // Start is called before the first frame update
@@ -20,17 +26,25 @@ public class Mauzilla : MonoBehaviour {
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
 
+        laserbar = GameObject.Find("Laserbar").transform.GetChild(0).gameObject.GetComponent<Image>();
+        laserbar.fillAmount = 0f;
+
+
         damageEffect = transform.GetChild(1).gameObject;
         damageEffect.SetActive(false);
+
+        player = GetComponent<InputControl>().player;
     }
 
     // Update is called once per frame
     void Update() {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (colliding && GetComponent<InputControl>().player.PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+        if (colliding && player.PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
             gameObject.GetComponent<AudioSource>().Play(0);
         }
+
+        laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
     }
 
     public void TakeDamage(int value) {
@@ -42,17 +56,15 @@ public class Mauzilla : MonoBehaviour {
 
             StartCoroutine(MauzillaTakesDamageEffect());
 
-        } else if (health == 10) {
+        } else if (health <= 10) {
             Debug.Log("Mauzilla retreats!");
         }
     }
 
     IEnumerator MauzillaTakesDamageEffect() {
         damageEffect.SetActive(true);
-        Debug.Log("Mauzilla Damage Effect is playing for one second");
         yield return new WaitForSeconds(1.5f);
         damageEffect.SetActive(false);
-        Debug.Log("Mauzilla Damage Effect finished playing");
     }
 
     void OnCollisionEnter2D(Collision2D col) {

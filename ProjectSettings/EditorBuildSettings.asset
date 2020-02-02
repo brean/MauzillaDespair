@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Start.unity
+    guid: c08a86cd011b04386a6159191b4d2a18
+  - enabled: 1
+    path: Assets/Scenes/MainCity.unity
+    guid: 0bd9ddf4389e521fba19322907d244f1
+  - enabled: 1
+    path: Assets/Scenes/ArtisansWin.unity
+    guid: bb33c5a34b36a4e7dbea8f208fd588ad
+  - enabled: 1
+    path: Assets/Scenes/MauzillaWins.unity
+    guid: 13ff065e81b7f49a3bb92746720f7905
   m_configObjects: {}
