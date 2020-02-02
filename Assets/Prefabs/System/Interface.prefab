@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4760086079117086879}
   - component: {fileID: 7214795956299843454}
   m_Layer: 5
-  m_Name: Health
+  m_Name: laserpower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

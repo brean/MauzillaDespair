@@ -26,8 +26,8 @@ public class Mauzilla : MonoBehaviour {
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
 
-        laserbar = GameObject.Find("Laserbar").transform.GetChild(0).gameObject.GetComponent<Image>();
-        laserbar.fillAmount = 0f;
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        laserbar.fillAmount = 1f;
 
 
         damageEffect = transform.GetChild(1).gameObject;
@@ -43,6 +43,8 @@ public class Mauzilla : MonoBehaviour {
             collidingBuilding.adjustHealth(-1);
             gameObject.GetComponent<AudioSource>().Play(0);
         }
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        player = GetComponent<InputControl>().player;
 
         laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
         if(laserbar.fillAmount == 1)
