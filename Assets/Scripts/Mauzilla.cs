@@ -50,7 +50,7 @@ public class Mauzilla : MonoBehaviour {
     IEnumerator MauzillaTakesDamageEffect() {
         damageEffect.SetActive(true);
         Debug.Log("Mauzilla Damage Effect is playing for one second");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         damageEffect.SetActive(false);
         Debug.Log("Mauzilla Damage Effect finished playing");
     }

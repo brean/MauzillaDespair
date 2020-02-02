@@ -36,19 +36,16 @@ public class Building : MonoBehaviour {
         secondMaterial = infoBubble.transform.GetChild(1).gameObject;
         thirdMaterial = infoBubble.transform.GetChild(2).gameObject;
         infoBubble.SetActive(false);
-        
 
         state = 0; // Building starts in state normal
 
         RandomizeMaterials(); // Randomly decide how many materials are required
 
-
         SetMaxHealth(); // set maxHealth to 10, 20 or 30 depending on how many materials are required
         health = maxHealth;
-        healthbar = this.transform.GetChild(0).gameObject; // Get Healthbar and multiply width by maxHealth
-        //reset any editor changes to healthbar, before calculating size according to maxhealth
-        healthbar.transform.localScale = new Vector3(1, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
-        healthbar.transform.localScale = new Vector3(healthbar.transform.localScale.x * maxHealth, healthbar.transform.localScale.y, healthbar.transform.localScale.z);
+        healthbar = this.transform.GetChild(0).gameObject; // Get Healthbar
+        SetXScale(healthbar, 1); //reset any editor changes to healthbar
+        SetXScale(healthbar, healthbar.transform.localScale.x * maxHealth); //calculate size according to maxhealth
         SetXPos(healthbar, maxHealth * -0.01f);
 
         cityHealthbar = GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>();
@@ -64,7 +61,9 @@ public class Building : MonoBehaviour {
             Debug.Log("CHEAT: Changing all Buildings state to normal.");        }
         else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
             ChangeState(1);
-            Debug.Log("CHEAT: Changing all Buildings state to destroyed.");
+            health = 0;
+            SetXScale(healthbar, 0); //reduce healthbar to zero
+            Debug.Log("CHEAT: Changing all Buildings state to destroyed and health to zero.");
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
             ChangeState(2);
@@ -140,6 +139,11 @@ public class Building : MonoBehaviour {
         Vector3 tempPos = go.transform.localPosition;
         tempPos.x = newX;
         go.transform.localPosition = tempPos;
+    }
+    void SetXScale(GameObject go, float newX) {
+        Vector3 tempScale = go.transform.localScale;
+        tempScale.x = newX;
+        go.transform.localScale = tempScale;
     }
 
     public void ChangeState(int newState) {
