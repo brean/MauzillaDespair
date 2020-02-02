@@ -15,6 +15,20 @@ This game requires four players!
 You can use Joysticks or a keyboard (or both).
 
 
+### Keyboard mapping
+Possible Keyboard controls are:
+
+Player|go left|go right|go up|go down|action 1 (attack/repair)|Lazer (Mauzilla only)
+|--|--|--|--|--|--|--|
+|Mauzilla|left|right|up|down|space|M|
+|tailor (purple)|A|D|W|S|Q||
+|mason (black)|F|H|T|G|R||
+|carpenter (brown)|J|L|I|K|U||
+
+### Joystick
+We use the first left/right axis as well as "Button 0" (this is 'A') on the default XBox Controller
+
+
 ## Credits
 ### Team
 
@@ -34,39 +48,3 @@ You can use Joysticks or a keyboard (or both).
 * GIMP
 
 
-
-
-## Development Notes
-
-### Ansteuerung der Controller Eingaben
-
-Player 1 - 4 sind konfiguriert.
-
-Links / Rechts. Auf der Xbox Controller ist der linke Analogstick.
-
-Links = -1
-Rechts = 1
-```bash
-float direction = Input.getAxis("Player1JoyHorizontal");
-```
-Das gleiche für vertical:
-```bash
-float direction = Input.getAxis("Player1JoyVertical");
-```
-
-
-Buttons:
-
-SuperNintendo / Xbox / Names
-```
-    <X>     |     <Y>     |       Up       
-<Y>     <A> | <X>     <B> | Left      Right
-    <B>     |     <A>     |      Down      
-```
-
-Die Buttons über:
-Normal = False
-Gedrückt = True
-```bash
-bool pressed = Input.getButton("Player1ButtonUp");
-```
