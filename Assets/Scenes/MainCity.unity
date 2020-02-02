@@ -398,6 +398,28 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &238262981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 49058662, guid: 463044095291848a39bff8d48ec871b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1637998718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &238262983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238262981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55151cdc9b550459d9ca3431787a4be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings: []
+  maxHealth: 0
+  health: 0
+  healthbar: {fileID: 0}
 --- !u!1001 &344568086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3963,6 +3985,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 82036204, guid: 463044095291848a39bff8d48ec871b7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21.650002
+      objectReference: {fileID: 0}
+    - target: {fileID: 82036204, guid: 463044095291848a39bff8d48ec871b7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.8999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468535668, guid: 463044095291848a39bff8d48ec871b7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21.650002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468535668, guid: 463044095291848a39bff8d48ec871b7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.8999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468535669, guid: 463044095291848a39bff8d48ec871b7, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.64
+      objectReference: {fileID: 0}
     - target: {fileID: 4746622625984421122, guid: 463044095291848a39bff8d48ec871b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5509,6 +5551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef5d998d5c2497c799b2c10e8942307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyed: {fileID: 0}
+  fixedGroundFloors: []
+  fixedStoreys: []
+  fixedRoof: []
   tileMaps:
   - {fileID: 2077212942}
   - {fileID: 816513307}
@@ -5520,6 +5566,13 @@ MonoBehaviour:
   - {fileID: 725535454}
   ignoreMaps:
   - {fileID: 2077212942}
+  buildingsLevel0: {fileID: 1761494024}
+  storeysLevel:
+  - {fileID: 1794678792}
+  - {fileID: 824204966}
+  - {fileID: 152942960}
+  - {fileID: 935825339}
+  - {fileID: 725535454}
 --- !u!1001 &1845568659
 PrefabInstance:
   m_ObjectHideFlags: 0

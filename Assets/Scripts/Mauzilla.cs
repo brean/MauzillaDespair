@@ -17,6 +17,7 @@ public class Mauzilla : MonoBehaviour {
         maxHealth = 100;
         health = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
+        healthbar.fillAmount = 1.0f;
     }
 
     // Update is called once per frame
