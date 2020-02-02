@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 451903574116947661}
   - component: {fileID: 451903574116947658}
   - component: {fileID: 451903574116947659}
+  - component: {fileID: 6272519912618513277}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451903574116947657}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.0814865, y: 0.61353964, z: -2.5989733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -78,3 +79,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: []
+--- !u!114 &6272519912618513277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451903574116947657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef5d998d5c2497c799b2c10e8942307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyed: {fileID: 11400000, guid: 0328e60948b93defbabf4540ad60ad86, type: 2}
+  fixedGroundFloors:
+  - {fileID: 11400000, guid: fba41321e2dc3dacfbcb0048037c2411, type: 2}
+  - {fileID: 11400000, guid: de579fd052be737389c52763c2e31b29, type: 2}
+  - {fileID: 11400000, guid: c792a5e0db5403bf08740db10712d963, type: 2}
+  fixedStoreys:
+  - {fileID: 11400000, guid: 871e4a580854508898ed6f659741299c, type: 2}
+  - {fileID: 11400000, guid: d098cff189346b400b554f7e9fc3bfd3, type: 2}
+  - {fileID: 11400000, guid: d098cff189346b400b554f7e9fc3bfd3, type: 2}
+  - {fileID: 11400000, guid: 4f70ef3445a37aa4881c864fb40120c2, type: 2}
+  - {fileID: 11400000, guid: 2af1cc223e9b0ba5cb49c6fd992061cd, type: 2}
+  - {fileID: 11400000, guid: e91b4b2314d3f6b559a52c15f4b4510b, type: 2}
+  fixedRoof:
+  - {fileID: 11400000, guid: 10ffab11024739b37a74656f24491165, type: 2}
+  - {fileID: 11400000, guid: f8e8ad0d50e67dd2b9da89ced49eb775, type: 2}
+  tileMaps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ignoreMaps:
+  - {fileID: 0}
+  buildingsLevel0: {fileID: 0}
+  storeysLevel:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
