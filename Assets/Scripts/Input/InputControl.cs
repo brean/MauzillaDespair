@@ -112,20 +112,27 @@ public class InputControl : MonoBehaviour
 
         RaycastHit2D[] hits;
 
-        var heading = endPoint.position - rb2d.transform.position;
+        var heading = new Vector3(endPoint.position.x, endPoint.position.y, 0) - new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 0);
         var distance = heading.magnitude;
         var direction = heading / distance;
 
-        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, 100.0F);
+        Debug.Log(distance);
+
+        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, distance);
 
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit2D hit = hits[i];
-            Debug.Log(hit.collider.gameObject.tag);
 
             if (hit.collider.gameObject.tag == "building")
             {
-                hit.collider.gameObject.GetComponent<Building>().adjustHealth(-1);
+                Building building = hit.collider.gameObject.GetComponent<Building>();
+
+                if (building.state != 1)
+                {
+                    //building is not destroyed
+                    building.adjustHealth(-1);
+                }
             }
         }
 
