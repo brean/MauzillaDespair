@@ -13,7 +13,7 @@ public class CityHealthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         buildings = GameObject.FindGameObjectsWithTag("building");
-        maxHealth = buildings.Length;
+        maxHealth = buildings.Length * 2;
         healthbar = transform.GetChild(1).gameObject.GetComponent<Image>();
         healthbar.fillAmount = 1.0f;
         health = maxHealth;
