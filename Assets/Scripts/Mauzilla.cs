@@ -49,8 +49,10 @@ public class Mauzilla : MonoBehaviour {
 
     IEnumerator MauzillaTakesDamageEffect() {
         damageEffect.SetActive(true);
+        Debug.Log("Mauzilla Damage Effect is playing for one second");
         yield return new WaitForSeconds(1);
         damageEffect.SetActive(false);
+        Debug.Log("Mauzilla Damage Effect finished playing");
     }
 
     void OnCollisionEnter2D(Collision2D col) {
