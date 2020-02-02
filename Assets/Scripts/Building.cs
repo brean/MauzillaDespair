@@ -158,6 +158,7 @@ public class Building : MonoBehaviour {
                 break;
             case 2: // repaired
                 infoBubble.SetActive(false);
+                health = maxHealth;
                 mauzilla.TakeDamage(maxHealth);
                 break;
             default:
