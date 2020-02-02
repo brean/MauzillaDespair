@@ -7,7 +7,7 @@ Game for the Global Game Jam 2020, developed in Bremen (see https://globalgameja
 ## Description
 *Mauzilla Despair* is a Co-op strategy game where one player plays against the three others.
 
-One player plays as Mauzilla! His job is to destroy the city. The 3 other players are artisans (craftsman) who can rebuild the buildings that Mauzilla destroys.
+Mauzilla is attacking the city of DesPair. Three bold artisans are willing to rebuild everything that Mauzilla is destroying. Multiplayer game (requires 4 players). Playable characters: Mauzilla whose job is to destroy the city and the artisans who can rebuild the buildings Mauzilla destroys.
 
 ## How To Play
 This game requires four players!
