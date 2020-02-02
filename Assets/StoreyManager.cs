@@ -8,18 +8,15 @@ public class StoreyManager : MonoBehaviour
 {
 
     public Vector3Int positionInTileMap;
-    public List<TileBase> storeysAfterRepair;
-    public TileBase destroyed;
     public BuildingManager buildingManager;
     // Start is called before the first frame update
 
     public void DestroyBuilding() {
         buildingManager.DestroyBuilding(positionInTileMap);
-        buildingManager.tileMaps[1].SetTile(positionInTileMap, destroyed);
     }
 
     public void RepairBuilding() {
-        buildingManager.SetBuilding(positionInTileMap, storeysAfterRepair);
+        buildingManager.RepairBuilding(positionInTileMap);
     }
 
     void Start()
