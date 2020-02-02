@@ -29,7 +29,8 @@ Player|go left|go right|go up|go down|action 1 (attack/repair)|Lazer (Mauzilla o
 Use the normal directional pad to move your character up/down left/right.
 
 Controllers:
-|Controller type|Action 1 (attack/repair)|Lazer (Mauzilla only)
+|Controller type|Action 1 (attack/repair)|Lazer (Mauzilla only)|
+|--|--|--|
 |XBox|A|B|
 |Playstation Controller|Circle|Cross|
 |Nintendo|B|A|
