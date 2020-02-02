@@ -115,6 +115,9 @@ public class InputControl : MonoBehaviour
     }
 
     void updateLaserSound() {
+        if (GameObject.Find("laser") == null) {
+            return;
+        }
         AudioSource audio = GameObject.Find("laser").GetComponent<AudioSource>();
         if (!audio.isPlaying) {
             audio.Play(0);
