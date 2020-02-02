@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour {
                     character = Character.mauzilla,
                     inputType = InputType.All,
                     number = 1,
-                    color = Color.red,
                     active = true,
                     ready = true
                 },
@@ -58,7 +57,6 @@ public class GameManager : MonoBehaviour {
                     character = Character.schneider,
                     inputType = InputType.All,
                     number = 2,
-                    color = Color.blue,
                     active = true,
                     ready = true
                 },
@@ -66,15 +64,13 @@ public class GameManager : MonoBehaviour {
                     character = Character.maurer,
                     inputType = InputType.All,
                     number = 3,
-                    color = Color.green,
                     active = true,
                     ready = true
                 },
                 new Player{
                     character = Character.tischler,
                     inputType = InputType.All,
-                    color = Color.yellow,
-                    team = 1,
+                    number = 4,
                     active = true,
                     ready = true
                 }
