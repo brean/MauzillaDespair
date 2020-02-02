@@ -54,12 +54,14 @@ public class Building : MonoBehaviour {
         // CHEATCODES
         if (Input.GetKeyDown(KeyCode.Alpha1)) { // press 1 to revert to normal
             ChangeState(0);
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
+            Debug.Log("Changing Building state to normal.");        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) { // press 2 to destroy
             ChangeState(1);
-            populateInfobubble();
+            Debug.Log("Changing Building state to destroyed.");
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)) { // press 3 to repair
             ChangeState(2);
+            Debug.Log("Changing Building state to repaired.");
         }
     }
 
@@ -74,6 +76,7 @@ public class Building : MonoBehaviour {
 
                 firstMaterial.GetComponent<SpriteRenderer>().sprite =
                     materials[0] ? materialSprites[0] : (materials[1] ? materialSprites[1] : materialSprites[2]);
+                Debug.Log("Selected Material 1/1: " + firstMaterial.GetComponent<SpriteRenderer>().sprite);
                 break;
             case 2:
                 firstMaterial.name = "Material 1/2";
@@ -116,6 +119,8 @@ public class Building : MonoBehaviour {
                 firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[0];
                 secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[1];
                 thirdMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[2];
+                Debug.Log("Selected all Materias 1+2+3");
+
                 break;
             default:
                 print("ERROR: Incorrect number of materialCount!");
@@ -141,6 +146,7 @@ public class Building : MonoBehaviour {
             case 1: // destroyed
                 infoBubble.GetComponent<SpriteRenderer>().sprite = infoBubbleSprites[materialCount-1];
                 infoBubble.SetActive(true);
+                populateInfobubble();
                 break;
             case 2: // repaired
                 infoBubble.SetActive(false);
