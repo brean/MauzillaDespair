@@ -1,4 +1,5 @@
 # Mauzilla Despair
+<img src="/Assets/Images/TitleScreen_FHD.png?raw=true" alt="Hipser" />
 
 ## About
 Game for the Global Game Jam 2020, developed in Bremen (see https://globalgamejam.org/2020/games/mauzilla-despair-9)
