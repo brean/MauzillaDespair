@@ -173,11 +173,6 @@ public class Player
         }
         else
         {
-            if (Input.GetKeyDown(this.AbilityKey()))
-            {
-                abilityCooldown = cooldownTime;
-            }
-
             if (abilityCooldown > -1)
             {
                 abilityCooldown -= Time.deltaTime;

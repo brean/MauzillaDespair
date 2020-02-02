@@ -108,6 +108,7 @@ public class InputControl : MonoBehaviour
     {
         if (player.isUsingAbility()) {
             moveLaser(movement);
+            player.abilityCooldown = player.cooldownTime;
         } else {
             movePlayer(movement);
         }
