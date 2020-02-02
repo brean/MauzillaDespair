@@ -25,6 +25,9 @@ public class BuildingManager : MonoBehaviour
     void Awake()
     {
         GameObject grid = GameObject.Find("Grid - Level");
+        if (!grid) {
+            return;
+        }
         storeysLevel = new List<Tilemap>();
         tileMaps = new List<Tilemap>();
         foreach(Transform child in grid.transform)
