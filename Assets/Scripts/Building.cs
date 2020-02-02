@@ -186,15 +186,17 @@ public class Building : MonoBehaviour {
             if (materials[i]) materialCount++;
             infoBubble.transform.GetChild(i).gameObject.SetActive(materials[i]);
         }
-        Debug.Log(materialCount + " Materials arequired. Stone: " + materials[0] + ", Cloth: " + materials[1] + ", Wood: " + materials[2]);
+        Debug.Log(materialCount + " Materials are required. " + 
+                  "Stone: " + materials[0] + ", Cloth: " + materials[1] + 
+                  ", Wood: " + materials[2]);
     }
 
     // Set max health according to how many materials are required
     void SetMaxHealth() {
         for (int i = 0; i < materials.Length; i++) {
             maxHealth = materials[i] ? maxHealth + 10 : maxHealth;
-            Debug.Log("Setting building's maxHealth as " + maxHealth);
         }
+        Debug.Log("Setting building's maxHealth as " + maxHealth);
     }
 
     public void adjustHealth(int value) {
