@@ -126,7 +126,7 @@ public class InputControl : MonoBehaviour
             {
                 Building building = hit.collider.gameObject.GetComponent<Building>();
 
-                if (building.state != 1)
+                if (building.state != 1 && building.health >= 1)
                 {
                     //building is not destroyed
                     building.adjustHealth(-1);
