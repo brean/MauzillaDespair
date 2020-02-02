@@ -111,6 +111,18 @@ public class InputControl : MonoBehaviour
         } else {
             movePlayer(movement);
         }
+        updateLaserSound();
+    }
+
+    void updateLaserSound() {
+        AudioSource audio = GameObject.Find("laser").GetComponent<AudioSource>();
+        if (!audio.isPlaying) {
+            audio.Play(0);
+        }
+    }
+
+    bool laserActive() {
+        return laserLine.gameObject.active == true;
     }
 
     void movePlayer(Vector2 movement)
