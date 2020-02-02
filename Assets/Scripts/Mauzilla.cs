@@ -56,7 +56,7 @@ public class Mauzilla : MonoBehaviour {
 
             StartCoroutine(MauzillaTakesDamageEffect());
 
-        } else if (health == 10) {
+        } else if (health <= 10) {
             Debug.Log("Mauzilla retreats!");
         }
     }
