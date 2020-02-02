@@ -88,10 +88,6 @@ public class InputControl : MonoBehaviour
 
         // all other Players, move always. Erstmal!
         movePlayer(movement);
-
-        
-       
-        
     }
 
     Vector2 getMovementFromAxis(string playerName)
