@@ -22,13 +22,14 @@ public class Artisan : MonoBehaviour
             // Check if all required Artisans are near the Building
             if (collidingBuilding.RepairConditionsMet()) {
                 collidingBuilding.adjustHealth(1);
+                gameObject.GetComponent<AudioSource>().Play(0);
             } else {
                 Debug.Log("You're missing the right skills to repair this building!");
             }
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan collided with " + col.gameObject.name);
             colliding = true;
@@ -36,7 +37,7 @@ public class Artisan : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D col) {
+    void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan stopped colliding with " + col.gameObject.name);
             colliding = false;

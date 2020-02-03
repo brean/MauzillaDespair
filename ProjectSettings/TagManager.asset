@@ -9,6 +9,7 @@ TagManager:
   - artisan
   - healthbar
   - laser
+  - car
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3078433815
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 1949519691
     locked: 0

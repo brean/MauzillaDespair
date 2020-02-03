@@ -11,6 +11,8 @@ public class InputControl : MonoBehaviour
     [Tooltip("speed of the player")]
     public float speed = .01f;
 
+    public float attackAnim = 0;
+
     public Rigidbody2D rb2d;
 
     public Animator animator;
@@ -48,6 +50,9 @@ public class InputControl : MonoBehaviour
             laserLine = laser.GetComponent<LineRenderer>();
             laserLine.startWidth = .1f;
             laserLine.endWidth = .1f;
+
+            //set lasers to discharged on start
+            player.abilityCooldown = player.cooldownTime;
         }
     }
 
@@ -61,6 +66,20 @@ public class InputControl : MonoBehaviour
         }
 
         player.controlAbility();
+        if (player.PressedActionKey()){
+            animator.SetBool("AttackActive", true);
+            attackAnim = 30;
+        } else
+        {
+            if (attackAnim <= 0)
+            {
+                animator.SetBool("AttackActive", false);
+            }else
+            {
+                attackAnim -= 1;
+            }
+            }
+        //animator.SetBool("AttackActive", true);
 
         if (player.character == Character.mauzilla) {
             handleMauzillaMovement(movement);
@@ -88,17 +107,35 @@ public class InputControl : MonoBehaviour
     {
         if (player.isUsingAbility()) {
             moveLaser(movement);
+            player.abilityCooldown = player.cooldownTime;
         } else {
             movePlayer(movement);
         }
+        updateLaserSound();
+    }
+
+    void updateLaserSound() {
+        if (GameObject.Find("laser") == null) {
+            return;
+        }
+        AudioSource audio = GameObject.Find("laser").GetComponent<AudioSource>();
+        if (!audio.isPlaying) {
+            audio.Play(0);
+        }
+    }
+
+    bool laserActive() {
+        return laserLine.gameObject.active == true;
     }
 
     void movePlayer(Vector2 movement)
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
-        Flip(movement.x);
-        FrontBack(movement.y);
+        if (animator != null && attackAnim <= 0) { 
+            Flip(movement.x);
+            FrontBack(movement.y);
+        }
         rb2d.MovePosition(newPlayerPosition);
     }
 
@@ -106,28 +143,33 @@ public class InputControl : MonoBehaviour
     {
         toggleLaserVisibility(true);
         Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
-        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 0);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
 
         RaycastHit2D[] hits;
 
-        var heading = endPoint.position - rb2d.transform.position;
+        var heading = new Vector3(endPoint.position.x, endPoint.position.y, 0) - new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 0);
         var distance = heading.magnitude;
         var direction = heading / distance;
 
-        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, 100.0F);
+        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, distance);
 
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit2D hit = hits[i];
-            Debug.Log(hit.collider.gameObject.tag);
 
             if (hit.collider.gameObject.tag == "building")
             {
-                hit.collider.gameObject.GetComponent<Building>().adjustHealth(-1);
+                Building building = hit.collider.gameObject.GetComponent<Building>();
+
+                if (building.state != 1 && building.health >= 1)
+                {
+                    //building is not destroyed
+                    building.adjustHealth(-1);
+                }
             }
         }
 
-        laserLine.SetPosition(0, rb2d.transform.position);
+        laserLine.SetPosition(0, new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 100));
         laserLine.SetPosition(1, endPoint.position);
     }
 
@@ -144,7 +186,10 @@ public class InputControl : MonoBehaviour
         {
             //GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
             facingRight = moveHorizontal < -0.1;
-            animator.SetInteger("Direction", 2);
+            if(animator != null)
+            {
+                animator.SetInteger("Direction", 2);
+            }
             Vector3 theScale = transform.localScale;
 
             if (moveHorizontal > 0.1)

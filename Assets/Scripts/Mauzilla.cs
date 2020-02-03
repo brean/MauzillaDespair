@@ -11,19 +11,46 @@ public class Mauzilla : MonoBehaviour {
     public int maxHealth;
     public int health;
     public Image healthbar;
+    public Image laserbar;
+
+    Player player;
+
+    GameObject damageEffect;
 
     // Start is called before the first frame update
     void Start() {
-        maxHealth = 100;
+        maxHealth = 300;
         health = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
+        healthbar.fillAmount = 1.0f;
+
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        laserbar.fillAmount = 1f;
+
+
+        damageEffect = transform.GetChild(1).gameObject;
+        damageEffect.SetActive(false);
+
+        player = GetComponent<InputControl>().player;
     }
 
     // Update is called once per frame
     void Update() {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (colliding && GetComponent<InputControl>().player.PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+        if (colliding && player.PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
+            gameObject.GetComponent<AudioSource>().Play(0);
+        }
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        player = GetComponent<InputControl>().player;
+
+        laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
+        if(laserbar.fillAmount == 1)
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(true);
+        } else
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -33,9 +60,18 @@ public class Mauzilla : MonoBehaviour {
             Debug.Log("Mauzilla took " + value + " damage!");
             float newHealthbarPercentage = (float)health / (float)(maxHealth - 0);
             healthbar.fillAmount = newHealthbarPercentage;
-        } else if (health == 10) {
+
+            StartCoroutine(MauzillaTakesDamageEffect());
+
+        } else if (health <= 10) {
             Debug.Log("Mauzilla retreats!");
         }
+    }
+
+    IEnumerator MauzillaTakesDamageEffect() {
+        damageEffect.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        damageEffect.SetActive(false);
     }
 
     void OnCollisionEnter2D(Collision2D col) {

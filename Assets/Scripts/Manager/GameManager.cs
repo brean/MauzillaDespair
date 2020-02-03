@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
-{
-
+public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public List<Player> players = new List<Player>();
     public int winningTeam;
@@ -16,41 +14,35 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //Check if instance already exists
-        if (instance == null)
-
-            //if not, set instance to this
-            instance = this;
-
-        //If instance already exists and it's not this:
-        else if (instance != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-            Destroy(gameObject);
+        //If instance doesn't exist, set to this 
+        if (instance == null) { instance = this; }
+        //If instance already exists and it's not this, destroy this (enforces our singleton pattern, meaning there can only ever be one instance of a GameManager)
+        else if (instance != this) { Destroy(gameObject); }
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
+        //Manage Scenes
         currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.activeSceneChanged += gettingSceneInfo;
     }
 
-    void gettingSceneInfo(Scene previousScene, Scene newScene)
-    {
+    void gettingSceneInfo(Scene previousScene, Scene newScene) {
         previousSceneName = currentSceneName;
         currentSceneName = SceneManager.GetActiveScene().name;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    void Update() {
+        if (currentSceneName == "Start" && Input.GetKeyDown("space")) SceneManager.LoadScene("MainCity");
+        if (currentSceneName == "MainCity") {
+            if (GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>().health <= 10) SceneManager.LoadScene("MauzillaWins");
+            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) SceneManager.LoadScene("ArtisansWin");
+        }
+        if (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins" && Input.GetKeyDown("space")) SceneManager.LoadScene("Start");
     }
 
-    public static Player getPlayerForCharacter(Character character)
-    {
-        if (instance == null)
-        {
+    public static Player getPlayerForCharacter(Character character) {
+        if (instance == null) {
             instance = new GameManager();
         }
         return instance.playerForCharacter(character);
@@ -67,8 +59,6 @@ public class GameManager : MonoBehaviour
                     character = Character.mauzilla,
                     inputType = InputType.All,
                     number = 1,
-                    color = Color.red,
-                    team = 0,
                     active = true,
                     ready = true
                 },
@@ -76,8 +66,6 @@ public class GameManager : MonoBehaviour
                     character = Character.schneider,
                     inputType = InputType.All,
                     number = 2,
-                    color = Color.blue,
-                    team = 0,
                     active = true,
                     ready = true
                 },
@@ -85,8 +73,6 @@ public class GameManager : MonoBehaviour
                     character = Character.maurer,
                     inputType = InputType.All,
                     number = 3,
-                    color = Color.green,
-                    team = 1,
                     active = true,
                     ready = true
                 },
@@ -94,28 +80,20 @@ public class GameManager : MonoBehaviour
                     character = Character.tischler,
                     inputType = InputType.All,
                     number = 4,
-                    color = Color.yellow,
-                    team = 1,
                     active = true,
                     ready = true
                 }
             };
         }
-        foreach (Player p in players)
-        {
-            if (p.character == character)
-            {
+        foreach (Player p in players) {
+            if (p.character == character) {
                 return p;
             }
         }
         return null;
     }
 
-    public void loadScene(string scene)
-    {
+    public void loadScene(string scene) {
         SceneManager.LoadScene(scene);
     }
-
-
-
 }
