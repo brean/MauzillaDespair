@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 318815536}
   - component: {fileID: 1686628046}
   - component: {fileID: 617776940}
+  - component: {fileID: 1780151532060963818}
   m_Layer: 0
   m_Name: Mauzilla
   m_TagString: mauzilla
@@ -330,7 +331,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.6}
+  m_Offset: {x: 0, y: -0.8027886}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -341,7 +342,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.76, y: 0.46}
+  m_Size: {x: 0.76, y: 0.054422855}
   m_EdgeRadius: 0
 --- !u!50 &721915902624415498
 Rigidbody2D:
@@ -381,6 +382,7 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   healthbar: {fileID: 0}
+  laserbar: {fileID: 0}
 --- !u!114 &721915902624415502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,10 +403,12 @@ MonoBehaviour:
     team: 0
     ready: 0
     active: 0
+    cooldownTime: 5
     abilityCooldown: 5
     abilityActiveDuration: -1
     usesLaser: 0
   speed: 0.08
+  attackAnim: 0
   rb2d: {fileID: 721915902624415498}
   animator: {fileID: 1686628046}
   laser: {fileID: 422361703743140617}
@@ -538,6 +542,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &1780151532060963818
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721915902624415508}
+  m_Enabled: 1
+  m_SortingLayerID: 1949519691
+  m_SortingLayer: 1
+  m_SortingOrder: 1
 --- !u!1 &2181675628248251773
 GameObject:
   m_ObjectHideFlags: 0

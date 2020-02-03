@@ -43,7 +43,6 @@ public class Cars : MonoBehaviour
         int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
 
 
-        // iterate through the particles which entered the trigger and make them red
         for (int i = 0; i < numEnter; i++)
         {
             ParticleSystem.Particle p = enter[i];

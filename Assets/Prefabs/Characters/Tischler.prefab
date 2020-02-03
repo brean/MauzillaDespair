@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1416063382216305050}
   - component: {fileID: 249493908}
   - component: {fileID: -6645471220881166102}
+  - component: {fileID: 2831623502437987898}
   m_Layer: 0
   m_Name: Tischler
   m_TagString: artisan
@@ -170,10 +171,12 @@ MonoBehaviour:
     team: 0
     ready: 0
     active: 0
+    cooldownTime: 5
     abilityCooldown: -1
     abilityActiveDuration: -1
     usesLaser: 0
   speed: 0.08
+  attackAnim: 0
   rb2d: {fileID: 1416063382216305030}
   animator: {fileID: 249493908}
   laser: {fileID: 0}
@@ -224,7 +227,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b54f563fd80b07b23acf64548d4950ba, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: -2.25
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -307,3 +310,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &2831623502437987898
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416063382216305024}
+  m_Enabled: 1
+  m_SortingLayerID: 1949519691
+  m_SortingLayer: 1
+  m_SortingOrder: 1

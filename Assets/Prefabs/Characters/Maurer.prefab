@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8371728186666435230}
   - component: {fileID: 493866770}
   - component: {fileID: -2727593436401720281}
+  - component: {fileID: 7019556129507532451}
   m_Layer: 0
   m_Name: Maurer
   m_TagString: artisan
@@ -183,10 +184,12 @@ MonoBehaviour:
     team: 0
     ready: 0
     active: 1
+    cooldownTime: 5
     abilityCooldown: 5
     abilityActiveDuration: -1
     usesLaser: 0
   speed: 0.08
+  attackAnim: 0
   rb2d: {fileID: 7296970448023110753}
   animator: {fileID: 493866770}
   laser: {fileID: 0}
@@ -307,3 +310,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &7019556129507532451
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296970448023110755}
+  m_Enabled: 1
+  m_SortingLayerID: 1949519691
+  m_SortingLayer: 1
+  m_SortingOrder: 1
