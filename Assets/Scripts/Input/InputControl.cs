@@ -66,22 +66,22 @@ public class InputControl : MonoBehaviour
         }
 
         player.controlAbility();
-        if (player.PressedActionKey()){
-            animator.SetBool("AttackActive", true);
-            attackAnim = 30;
-        } else
-        {
-            if (attackAnim <= 0)
-            {
-                animator.SetBool("AttackActive", false);
-            }else
-            {
-                attackAnim -= 1;
-            }
-            }
         //animator.SetBool("AttackActive", true);
 
         if (player.character == Character.mauzilla) {
+            if (player.PressedActionKey()){
+                animator.SetBool("AttackActive", true);
+                attackAnim = 30;
+            } else
+            {
+                if (attackAnim <= 0)
+                {
+                    animator.SetBool("AttackActive", false);
+                }else
+                {
+                    attackAnim -= 1;
+                }
+            }
             handleMauzillaMovement(movement);
             return;
         }
