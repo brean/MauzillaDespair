@@ -1,14 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-/**
- * Adds new Player when a joystick gets connected or a key is pressed
- *
- * TODO: replace this with cinemachine!
- */
 
+/**
+ * Mit diesem Camera Manager kann man die Bewegung der Kamera steuen.
+ * Es ist gedacht diesen Manager an an ein 'Managers' Object in der
+ * Szene zu heften, Genauso wie den GameManager.
+ * Aktuell sorgt dieser Camera Manager für einen Box Collider, welcher
+ * die Spieler davon abhält aus dem Bild zu laufen.
+ * Dabei wird die Kamera immer mittig zwischen den beiden äußersten
+ * Spielern positioniert.
+ * Im Einsatz bei UltimateSuperSmashSibs
+ */
 public class PlayerManager : MonoBehaviour
 {
     [Tooltip("max x of players")]
@@ -20,18 +24,11 @@ public class PlayerManager : MonoBehaviour
     public float camHalfWidth = 0;
     public float mapBorderOffset = 0.5f;
 
-    public Dictionary<string, GameObject> PlayerDict = new Dictionary<string, GameObject>();
-    GameObject camera;
+    new GameObject camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        //hardcoded test players
-        PlayerDict.Add("moep1", GameObject.Find("Player1"));
-        PlayerDict.Add("moep2", GameObject.Find("Player2"));
-        PlayerDict.Add("moep3", GameObject.Find("Player3"));
-        PlayerDict.Add("moep4", GameObject.Find("Player4"));
-
         Camera cam = Camera.main;
         camera = Camera.main.gameObject;
         camHalfWidth = ((2f * cam.orthographicSize) * cam.aspect) / 2f;
@@ -55,6 +52,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // currently not working, because players do not have the tag Player
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         if(players.Length != 0)
