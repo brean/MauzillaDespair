@@ -17,18 +17,18 @@ public class InputControl : MonoBehaviour
 
     public Animator animator;
 
-    private bool facingRight;
-    private Vector3 initialScale;
+    public bool facingRight;
+    public Vector3 initialScale;
 
-    CharacterSpiteSettings spriteSettings;
+    public CharacterSpiteSettings spriteSettings;
 
     public GameObject laser;
-    LineRenderer laserLine;
+    public LineRenderer laserLine;
     public Transform startPoint;
     public Transform endPoint;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         player = GameManager.instance.playerForCharacter(GetComponent<CharacterSetting>().character);
       //  spriteSettings = GetComponent<CharacterSpriteManager>().SpritesForCharacter(player.character);
@@ -43,7 +43,7 @@ public class InputControl : MonoBehaviour
         initLaser();
     }
 
-    void initLaser()
+    public virtual void initLaser()
     {
         if (laser != null)
         {
@@ -57,7 +57,7 @@ public class InputControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         Vector2 movement = getMovementFromAxis(player.inputName());
         if (player == null)
@@ -90,10 +90,13 @@ public class InputControl : MonoBehaviour
         movePlayer(movement);
     }
 
-    Vector2 getMovementFromAxis(string playerName)
+    public virtual Vector2 getMovementFromAxis(string playerName)
     {
         float moveHorizontal = Input.GetAxis(playerName + "Horizontal");
         float moveVertical = -Input.GetAxis(playerName + "Vertical");
+        if (player.character == Character.mauzilla) {
+            Debug.Log("mauzilla: " + moveHorizontal + ", " + moveVertical);
+        }
 
         if (Mathf.Abs(moveHorizontal) + Mathf.Abs(moveVertical) < .1)
         {
@@ -103,7 +106,7 @@ public class InputControl : MonoBehaviour
         return new Vector2(moveHorizontal, moveVertical);
     }
 
-    void handleMauzillaMovement(Vector2 movement)
+    public virtual void handleMauzillaMovement(Vector2 movement)
     {
         if (player.isUsingAbility()) {
             moveLaser(movement);
@@ -114,7 +117,7 @@ public class InputControl : MonoBehaviour
         updateLaserSound();
     }
 
-    void updateLaserSound() {
+    public virtual void updateLaserSound() {
         if (GameObject.Find("laser") == null) {
             return;
         }
@@ -124,11 +127,11 @@ public class InputControl : MonoBehaviour
         }
     }
 
-    bool laserActive() {
+    public virtual bool laserActive() {
         return laserLine.gameObject.active == true;
     }
 
-    void movePlayer(Vector2 movement)
+    public virtual void movePlayer(Vector2 movement)
     {
         toggleLaserVisibility(false);
         Vector2 newPlayerPosition = rb2d.position + (movement * speed);
@@ -139,7 +142,7 @@ public class InputControl : MonoBehaviour
         rb2d.MovePosition(newPlayerPosition);
     }
 
-    void moveLaser(Vector2 movement)
+    public virtual void moveLaser(Vector2 movement)
     {
         toggleLaserVisibility(true);
         Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (movement * speed);
@@ -173,14 +176,14 @@ public class InputControl : MonoBehaviour
         laserLine.SetPosition(1, endPoint.position);
     }
 
-    void toggleLaserVisibility(bool visible)
+    public virtual void toggleLaserVisibility(bool visible)
     {
         if (laserLine != null) {
             laserLine.gameObject.SetActive(visible);
         }
     }
 
-    public void Flip(float moveHorizontal)
+    public virtual void Flip(float moveHorizontal)
     {
         if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
         {
@@ -206,7 +209,7 @@ public class InputControl : MonoBehaviour
         }
     }
 
-    public void FrontBack(float moveVertical)
+    public virtual void FrontBack(float moveVertical)
     {
         if (moveVertical > 0.1)
         {
