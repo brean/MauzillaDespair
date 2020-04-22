@@ -43,6 +43,7 @@ public class Player
 
     public static KeyCode ActionKey(InputType inputType, int number)
     {
+        // Debug.Log("InputType: " + inputType);
         if (inputType == InputType.Key)
         {
             switch (number)

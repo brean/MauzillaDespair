@@ -1,66 +1,117 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using UnityEngine;
 
 public class MauzillaControl : InputControl
 {
+    public GameObject laser;
+    public Transform endPoint;
+    LineRenderer laserLine;
+
     public override void Start()
     {
         base.Start();
+
+        initLaser();
     }
 
-    public override void initLaser()
+    void initLaser()
     {
-        base.initLaser();
+        if (laser != null)
+        {
+            laserLine = laser.GetComponent<LineRenderer>();
+            laserLine.startWidth = .1f;
+            laserLine.endWidth = .1f;
+
+            //set lasers to discharged on start
+            player.abilityCooldown = player.cooldownTime;
+        }
     }
 
-    // Update is called once per frame
-    public override void Update()
+    public override void movePlayer()
     {
-        base.Update();
+        if (player.PressedActionKey())
+        {
+            animator.SetBool("AttackActive", true);
+            attackAnim = 30;
+        }
+        else
+        {
+            if (attackAnim <= 0)
+            {
+                animator.SetBool("AttackActive", false);
+            }
+            else
+            {
+                attackAnim -= 1;
+            }
+        }
+        if (player.isUsingAbility())
+        {
+            moveLaser();
+            player.abilityCooldown = player.cooldownTime;
+        }
+        else
+        {
+            toggleLaserVisibility(false);
+            base.movePlayer();
+        }
+
+        updateLaserSound();
     }
 
-    public override Vector2 getMovementFromAxis(string playerName)
+    void moveLaser()
     {
-        return base.getMovementFromAxis(playerName);
+        toggleLaserVisibility(true);
+
+        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (currentMovement * speed);
+        endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
+
+        RaycastHit2D[] hits;
+
+        var heading = new Vector3(endPoint.position.x, endPoint.position.y, 0) - new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 0);
+        var distance = heading.magnitude;
+        var direction = heading / distance;
+
+        hits = Physics2D.RaycastAll(rb2d.transform.position, direction, distance);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit2D hit = hits[i];
+
+            if (hit.collider.gameObject.tag == "building")
+            {
+                Building building = hit.collider.gameObject.GetComponent<Building>();
+
+                if (building.state != 1 && building.health >= 1)
+                {
+                    //building is not destroyed
+                    building.adjustHealth(-1);
+                }
+            }
+        }
+
+        laserLine.SetPosition(0, new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 100));
+        laserLine.SetPosition(1, endPoint.position);
     }
 
-    public override void handleMauzillaMovement(Vector2 movement)
+    void toggleLaserVisibility(bool visible)
     {
-        base.handleMauzillaMovement(movement);
+        if (laserLine != null)
+        {
+            laserLine.gameObject.SetActive(visible);
+        }
     }
 
-    public override void updateLaserSound() {
-        base.updateLaserSound();
-    }
-
-    public override bool laserActive() {
-        return base.laserActive();
-    }
-
-    public override void movePlayer(Vector2 movement)
+    void updateLaserSound()
     {
-        base.movePlayer(movement);
-    }
+        if (laser == null)
+        {
+            return;
+        }
 
-    public override void moveLaser(Vector2 movement)
-    {
-        base.moveLaser(movement);
-    }
-
-    public override void toggleLaserVisibility(bool visible)
-    {
-        base.toggleLaserVisibility(visible);
-    }
-
-    public override void Flip(float moveHorizontal)
-    {
-        base.Flip(moveHorizontal);
-    }
-
-    public override void FrontBack(float moveVertical)
-    {
-        base.FrontBack(moveVertical);
+        AudioSource audio = laser.GetComponent<AudioSource>();
+        if (!audio.isPlaying)
+        {
+            audio.Play(0);
+        }
     }
 }
