@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,18 +38,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (currentSceneName == "Start" && Input.GetKeyDown("space")) SceneManager.LoadScene("MainCity");
-        if (currentSceneName == "MainCity")
-        {
-            if (GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>().health <= 10) SceneManager.LoadScene("MauzillaWins");
-            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) SceneManager.LoadScene("ArtisansWin");
-        }
-        if (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins" && Input.GetKeyDown("space")) SceneManager.LoadScene("Start");
+        checkSceneChange();
     }
 
     public void createPlayers()
     {
-        Debug.Log("createPlayer");
         players = new List<Player>
         {
             new Player{
@@ -82,6 +74,27 @@ public class GameManager : MonoBehaviour
                 ready = true
             }
         };
+    }
+
+    void checkSceneChange()
+    {
+        if (currentSceneName == "Start" && Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene("MainCity");
+        }
+        if (currentSceneName == "MainCity")
+        {
+            if (GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>().health <= 10) {
+                SceneManager.LoadScene("MauzillaWins");
+            }
+            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) {
+                SceneManager.LoadScene("ArtisansWin");
+            }
+        }
+        if (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins" && Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene("Start");
+        }
     }
 
     public Player playerForCharacter(Character character)
