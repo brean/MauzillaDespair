@@ -8,32 +8,34 @@ public class GameManager : MonoBehaviour
     // public List<PlayerNew> playersNew = new List<PlayerNew>();
 
     public List<Player> players = new List<Player>();
-    public int winningTeam;
-    public string previousSceneName;
     public string currentSceneName;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        //If instance doesn't exist, set to this 
+        // If instance doesn't exist, set to this 
         if (instance == null) { instance = this; }
-        //If instance already exists and it's not this, destroy this (enforces our singleton pattern, meaning there can only ever be one instance of a GameManager)
+        // If instance already exists and it's not this, destroy this (enforces
+        // our singleton pattern, meaning there can only ever be one instance of a GameManager)
         else if (instance != this) { Destroy(gameObject); }
 
         createPlayers();
 
-        //Sets this to not be destroyed when reloading scene
+        // Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        //Manage Scenes
+        // Sets initially currentScenename. Should be "Start"
         currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.activeSceneChanged += gettingSceneInfo;
+
+        // activeSceneChanged is a Event that is fired, when SceneManager.LoadScene()
+        // is called. Also fired multiple times on init.
+        // The operation += adds a method that will be called when the event happens
+        SceneManager.activeSceneChanged += changeCurrentSceneName;
     }
 
-    void gettingSceneInfo(Scene previousScene, Scene newScene)
+    void changeCurrentSceneName(Scene previousScene, Scene newScene)
     {
-        previousSceneName = currentSceneName;
-        currentSceneName = SceneManager.GetActiveScene().name;
+        // previousScene seems to be null all the time
+        currentSceneName = newScene.name;
     }
 
     void Update()
@@ -108,10 +110,5 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
-    }
-
-    public void loadScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
     }
 }

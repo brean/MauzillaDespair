@@ -14,7 +14,7 @@ public class Win : MonoBehaviour
             Debug.Log(other.gameObject.name + " from team " + winningPlayer.team + " won!");
             winningPlayer = GameManager.instance.playerForCharacter(
                             other.gameObject.GetComponent<CharacterSetting>().character);
-            GameManager.instance.winningTeam = winningPlayer.team;
+            // GameManager.instance.winningTeam = winningPlayer.team;
             GetComponent<AudioSource>().Play(0);
             StartCoroutine(goToWinScreen());
                         
@@ -23,6 +23,6 @@ public class Win : MonoBehaviour
 
     IEnumerator goToWinScreen() {
         yield return new WaitForSecondsRealtime(0.5f);
-        GameManager.instance.loadScene("Win");
+        // GameManager.instance.loadScene("Win");
     }
 }
