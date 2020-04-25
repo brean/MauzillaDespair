@@ -17,8 +17,8 @@ public class InputControl : MonoBehaviour
     Vector3 initialScale;
 
     public Vector2 currentMovement;
-    bool isAction1KeyPressed;
-    bool isAction2KeyPressed;
+    bool isAction1InputPressed;
+    bool isAction2InputPressed;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -45,7 +45,7 @@ public class InputControl : MonoBehaviour
         currentMovement = getMovementFromAxis(player.inputName());
 
         this.updateInputActionKeys();
-        player.controlAbility(this.isAction2KeyPressed);
+        player.controlAbility(this.isAction2InputPressed);
 
         movePlayer();
     }
@@ -67,20 +67,20 @@ public class InputControl : MonoBehaviour
     {
         if (Input.GetKeyDown(this.ActionKey(player.inputType, player.number)))
         {
-            this.isAction1KeyPressed = true;
+            this.isAction1InputPressed = true;
         }
         if (Input.GetKeyUp(this.ActionKey(player.inputType, player.number)))
         {
-            this.isAction1KeyPressed = false;
+            this.isAction1InputPressed = false;
         }
         
         if (Input.GetKeyDown(this.AbilityKey(player.inputType, player.number)))
         {
-            this.isAction2KeyPressed = true;
+            this.isAction2InputPressed = true;
         }
         if (Input.GetKeyUp(this.AbilityKey(player.inputType, player.number)))
         {
-            this.isAction2KeyPressed = false;
+            this.isAction2InputPressed = false;
         }
     }
 
