@@ -17,6 +17,8 @@ public class InputControl : MonoBehaviour
     Vector3 initialScale;
 
     public Vector2 currentMovement;
+    bool isAction1KeyPressed;
+    bool isAction2KeyPressed;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -42,7 +44,8 @@ public class InputControl : MonoBehaviour
 
         currentMovement = getMovementFromAxis(player.inputName());
 
-        player.controlAbility();
+        this.updateInputActionKeys();
+        player.controlAbility(this.isAction2KeyPressed);
 
         movePlayer();
     }
@@ -58,6 +61,99 @@ public class InputControl : MonoBehaviour
         }
 
         return new Vector2(moveHorizontal, moveVertical);
+    }
+
+    void updateInputActionKeys()
+    {
+        if (Input.GetKeyDown(this.ActionKey(player.inputType, player.number)))
+        {
+            this.isAction1KeyPressed = true;
+        }
+        if (Input.GetKeyUp(this.ActionKey(player.inputType, player.number)))
+        {
+            this.isAction1KeyPressed = false;
+        }
+        
+        if (Input.GetKeyDown(this.AbilityKey(player.inputType, player.number)))
+        {
+            this.isAction2KeyPressed = true;
+        }
+        if (Input.GetKeyUp(this.AbilityKey(player.inputType, player.number)))
+        {
+            this.isAction2KeyPressed = false;
+        }
+    }
+
+    public bool PressedActionKey()
+    {
+        return Input.GetKeyDown(this.ActionKey(player.inputType, player.number));
+    }
+
+    public KeyCode ActionKey(InputType inputType, int number)
+    {
+        // Debug.Log("InputType: " + inputType);
+        if (inputType == InputType.Key)
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.Space;
+                case 2:
+                    return KeyCode.Q;
+                case 3:
+                    return KeyCode.R;
+                case 4:
+                    return KeyCode.U;
+            }
+        }
+        else
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.Joystick1Button0;
+                case 2:
+                    return KeyCode.Joystick2Button0;
+                case 3:
+                    return KeyCode.Joystick3Button0;
+                case 4:
+                    return KeyCode.Joystick4Button0;
+            }
+        }
+        return KeyCode.Return;
+    }
+
+        public KeyCode AbilityKey(InputType inputType, int number)
+    {
+        if (inputType == InputType.Key)
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.M;
+                case 2:
+                    return KeyCode.E;
+                case 3:
+                    return KeyCode.Z;
+                case 4:
+                    return KeyCode.O;
+            }
+        }
+        else
+        {
+            switch (number)
+            {
+                case 1:
+                    return KeyCode.Joystick1Button1;
+                case 2:
+                    return KeyCode.Joystick2Button1;
+                case 3:
+                    return KeyCode.Joystick3Button1;
+                case 4:
+                    return KeyCode.Joystick4Button1;
+            }
+        }
+        return KeyCode.Return;
     }
 
     public virtual void movePlayer()

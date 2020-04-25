@@ -31,88 +31,13 @@ public class Player
     public float abilityActiveDuration = -1;
     public bool usesLaser = false;
 
-    public KeyCode ActionKey()
-    {
-        return ActionKey(inputType, number);
-    }
+    
 
-    public bool PressedActionKey()
-    {
-        return Input.GetKeyDown(this.ActionKey());
-    }
-
-    public static KeyCode ActionKey(InputType inputType, int number)
-    {
-        // Debug.Log("InputType: " + inputType);
-        if (inputType == InputType.Key)
-        {
-            switch (number)
-            {
-                case 1:
-                    return KeyCode.Space;
-                case 2:
-                    return KeyCode.Q;
-                case 3:
-                    return KeyCode.R;
-                case 4:
-                    return KeyCode.U;
-            }
-        }
-        else
-        {
-            switch (number)
-            {
-                case 1:
-                    return KeyCode.Joystick1Button0;
-                case 2:
-                    return KeyCode.Joystick2Button0;
-                case 3:
-                    return KeyCode.Joystick3Button0;
-                case 4:
-                    return KeyCode.Joystick4Button0;
-            }
-        }
-        return KeyCode.Return;
-    }
-
-    public static KeyCode AbilityKey(InputType inputType, int number)
-    {
-        if (inputType == InputType.Key)
-        {
-            switch (number)
-            {
-                case 1:
-                    return KeyCode.M;
-                case 2:
-                    return KeyCode.E;
-                case 3:
-                    return KeyCode.Z;
-                case 4:
-                    return KeyCode.O;
-            }
-        }
-        else
-        {
-            switch (number)
-            {
-                case 1:
-                    return KeyCode.Joystick1Button1;
-                case 2:
-                    return KeyCode.Joystick2Button1;
-                case 3:
-                    return KeyCode.Joystick3Button1;
-                case 4:
-                    return KeyCode.Joystick4Button1;
-            }
-        }
-        return KeyCode.Return;
-    }
+    
 
 
-    private KeyCode AbilityKey()
-    {
-        return AbilityKey(inputType, number);
-    }
+
+
 
     internal float HorizontalAxis()
     {
@@ -165,9 +90,9 @@ public class Player
         return abilityActiveDuration > 0;
     }
 
-    internal void controlAbility()
+    public void controlAbility(bool isKeyPressed)
     {
-        if (abilityCooldown <= 0 && Input.GetKeyDown(this.AbilityKey()))
+        if (abilityCooldown <= 0 && isKeyPressed)
         {
             abilityCooldown = cooldownTime;
             abilityActiveDuration = 3;
@@ -183,7 +108,7 @@ public class Player
                 abilityActiveDuration -= Time.deltaTime;
             }
 
-            if (Input.GetKeyUp(this.AbilityKey()))
+            if (!isKeyPressed)
             {
                 abilityActiveDuration = -1;
             }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
     public string currentSceneName;
+    public bool debugMode; // TODO
 
     void Awake()
     {

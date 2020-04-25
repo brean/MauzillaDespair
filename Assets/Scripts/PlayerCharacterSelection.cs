@@ -39,7 +39,9 @@ public class PlayerCharacterSelection : MonoBehaviour
         {
             return;
         }
-        if (player.PressedActionKey()) {
+        // TODO is PlayerCharacterSelection used?
+        // if (player.PressedActionKey()) {
+        if (false) {
             player.ready = !player.ready;
             setPlayer(player);
         }

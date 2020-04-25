@@ -28,7 +28,7 @@ public class MauzillaControl : InputControl
 
     public override void movePlayer()
     {
-        if (player.PressedActionKey())
+        if (this.PressedActionKey())
         {
             animator.SetBool("AttackActive", true);
             attackAnim = 30;

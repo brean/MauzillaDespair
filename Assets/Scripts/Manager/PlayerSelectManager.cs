@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO IS NOT USED
 public class PlayerSelectManager : MonoBehaviour
 {
 
@@ -47,7 +48,7 @@ public class PlayerSelectManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(Player.ActionKey(inputType, number)) || 
+        if (Input.GetKeyUp(KeyCode.A) || 
            (Mathf.Abs(Input.GetAxis("Player" + number + inputType + "Vertical")) > 0.3 || 
             Mathf.Abs(Input.GetAxis("Player" + number + inputType + "Horizontal")) > 0.3))
         {
