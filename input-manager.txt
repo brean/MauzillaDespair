@@ -1,0 +1,40 @@
+Player1JoyHorizontal  Axis: X axis, JoyNum: 1
+Player2JoyHorizontal  Axis: X axis, JoyNum: 2
+Player3JoyHorizontal  Axis: X axis, JoyNum: 3
+Player4JoyHorizontal  Axis: X axis, JoyNum: 4
+Player1JoyVertical    Axis: Y axis, JoyNum: 1
+Player2JoyVertical    Axis: Y axis, JoyNum: 2
+Player3JoyVertical    Axis: Y axis, JoyNum: 3
+Player4JoyVertical    Axis: Y axis, JoyNum: 4
+Buttons Pos/Neg/Alt.: keine
+Snap: true
+Type: Joystick Axis
+
+
+Player1KeyboardHorizontal  neg. Button: left, pos. Button: right
+Player2KeyboardHorizontal  neg. Button: a,    pos. Button: d
+Player3KeyboardHorizontal  neg. Button: f,    pos. Button: h
+Player4KeyboardHorizontal  neg. Button: j,    pos. Button: l
+Player1KeyboardVertical    neg. Button: up,   pos. Button: down
+Player2KeyboardVertical    neg. Button: w,    pos. Button: s
+Player3KeyboardVertical    neg. Button: t,    pos. Button: g
+Player4KeyboardVertical    neg. Button: i,    pos. Button: k
+Type: Key
+(defaults to: Axis x, joystick: all)
+
+Player1Action1  pos.Button: joystick button 0, alt: space
+Player2Action1  pos.Button: joystick button 0, alt: q
+Player3Action1  pos.Button: joystick button 0, alt: r
+Player4Action1  pos.Button: joystick button 0, alt: u
+Player1Action2  pos.Button: joystick button 1, alt: m
+Player2Action2  pos.Button: joystick button 1, alt: e
+Player3Action2  pos.Button: joystick button 1, alt: z
+Player4Action2  pos.Button: joystick button 1, alt: o
+Type: Key
+(defaults to: Axis x)
+
+nintendo Controller:
+Action Button up = joystick button 3
+Action Button right = joystick button 1
+Action Button down = joystick button 2
+Action Button left = joystick button 0
