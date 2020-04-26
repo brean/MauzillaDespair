@@ -1,6 +1,6 @@
 ﻿[System.Serializable]
 public enum InputType { 
-    Key, 
+    Keyboard, 
     Joy,
     All
 }

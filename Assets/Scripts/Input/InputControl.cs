@@ -92,7 +92,7 @@ public class InputControl : MonoBehaviour
     public KeyCode ActionKey(InputType inputType, int number)
     {
         // Debug.Log("InputType: " + inputType);
-        if (inputType == InputType.Key)
+        if (inputType == InputType.Keyboard)
         {
             switch (number)
             {
@@ -125,7 +125,7 @@ public class InputControl : MonoBehaviour
 
         public KeyCode AbilityKey(InputType inputType, int number)
     {
-        if (inputType == InputType.Key)
+        if (inputType == InputType.Keyboard)
         {
             switch (number)
             {

@@ -10,19 +10,24 @@ public class GameManager : MonoBehaviour
     public List<Player> players = new List<Player>();
     public string currentSceneName;
     public bool debugMode; // TODO
+    public InputType inputType;
 
     void Awake()
     {
         // If instance doesn't exist, set to this 
-        if (instance == null) { instance = this; }
+        if (instance == null) {
+            // Sets this to not be destroyed when reloading scene
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
         // If instance already exists and it's not this, destroy this (enforces
         // our singleton pattern, meaning there can only ever be one instance of a GameManager)
-        else if (instance != this) { Destroy(gameObject); }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
 
         createPlayers();
-
-        // Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
 
         // Sets initially currentScenename. Should be "Start"
         currentSceneName = SceneManager.GetActiveScene().name;
@@ -50,28 +55,28 @@ public class GameManager : MonoBehaviour
         {
             new Player{
                 character = Character.mauzilla,
-                inputType = InputType.All,
+                inputType = inputType,
                 number = 1,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.schneider,
-                inputType = InputType.All,
+                inputType = inputType,
                 number = 2,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.maurer,
-                inputType = InputType.All,
+                inputType = inputType,
                 number = 3,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.tischler,
-                inputType = InputType.All,
+                inputType = inputType,
                 number = 4,
                 active = true,
                 ready = true

@@ -79,9 +79,10 @@ public class Player
             }
             else
             {
-                inputType = InputType.Key;
+                inputType = InputType.Keyboard;
             }
         }
+        // z.B. Player1Keyboard oder Player2Joy
         return "Player" + number + inputType.ToString();
     }
 

@@ -79,7 +79,7 @@ public class PlayerSelectManager : MonoBehaviour
             for (int i = 0; i < characterSelect.Count; i++)
             {
                 checkAddPlayer(i + 1, InputType.Joy);
-                checkAddPlayer(i + 1, InputType.Key);
+                checkAddPlayer(i + 1, InputType.Keyboard);
             }
         }
         
