@@ -29,7 +29,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7137856489304235048}
   - {fileID: 5896263925672356226}
   m_Father: {fileID: 721915902624415503}
   m_RootOrder: 0
@@ -396,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
-    inputType: 1
     number: 1
     character: 0
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -411,17 +409,8 @@ MonoBehaviour:
   attackAnim: 0
   rb2d: {fileID: 721915902624415498}
   animator: {fileID: 1686628046}
-  facingRight: 0
-  initialScale: {x: 0, y: 0, z: 0}
-  spriteSettings:
-    character: 0
-    left: {fileID: 0}
-    front: {fileID: 0}
-    back: {fileID: 0}
-    winning: {fileID: 0}
+  currentMovement: {x: 0, y: 0}
   laser: {fileID: 422361703743140617}
-  laserLine: {fileID: 0}
-  startPoint: {fileID: 7137856489304235048}
   endPoint: {fileID: 5896263925672356226}
 --- !u!114 &318815536
 MonoBehaviour:
@@ -590,36 +579,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4492819738286749519}
-  m_Father: {fileID: 7184707452390261748}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5376268926169276792
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7137856489304235048}
-  m_Layer: 0
-  m_Name: startPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7137856489304235048
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5376268926169276792}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.589, y: -0.722, z: 100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
   m_Father: {fileID: 7184707452390261748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
