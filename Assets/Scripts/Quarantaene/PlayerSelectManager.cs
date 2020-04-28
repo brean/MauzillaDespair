@@ -42,10 +42,10 @@ public class PlayerSelectManager : MonoBehaviour
     {
         foreach (Player p in GameManager.instance.players)
         {
-            if (p.number == number && p.inputType == inputType)
-            {
+            // if (p.number == number && p.inputType == inputType)
+            // {
                 return;
-            }
+            // }
         }
 
         if (Input.GetKeyUp(KeyCode.A) || 
@@ -54,7 +54,6 @@ public class PlayerSelectManager : MonoBehaviour
         {
             Player p = new Player
             {
-                inputType = inputType,
                 active = true,
                 number = number,
                 color = colors[GameManager.instance.players.Count]

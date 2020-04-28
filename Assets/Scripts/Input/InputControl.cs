@@ -8,6 +8,7 @@ public class InputControl : MonoBehaviour
     [Tooltip("speed of the player")]
     public float speed = .08f;
 
+    [HideInInspector]
     public float attackAnim = 0;
 
     public Rigidbody2D rb2d;
@@ -19,10 +20,13 @@ public class InputControl : MonoBehaviour
     public Vector2 currentMovement;
     bool isAction1InputPressed;
     bool isAction2InputPressed;
+    InputType inputType;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
+        inputType = GameManager.instance.inputType;
+
         player = GameManager.instance.playerForCharacter(GetComponent<CharacterSetting>().character);
       //  spriteSettings = GetComponent<CharacterSpriteManager>().SpritesForCharacter(player.character);
 
@@ -52,9 +56,9 @@ public class InputControl : MonoBehaviour
 
     Vector2 getMovementFromAxis()
     {
-        string playerName = player.inputName();
-        float moveHorizontal = Input.GetAxis(playerName + "Horizontal");
-        float moveVertical = -Input.GetAxis(playerName + "Vertical");
+        string inputManagerName = this.inputManagerNameAxis();
+        float moveHorizontal = Input.GetAxis(inputManagerName + "Horizontal");
+        float moveVertical = -Input.GetAxis(inputManagerName + "Vertical");
 
         if (Mathf.Abs(moveHorizontal) + Mathf.Abs(moveVertical) < .1)
         {
@@ -66,15 +70,18 @@ public class InputControl : MonoBehaviour
 
     void updateInputActionKeys()
     {
-        string inputManagerName = "Player" + player.number + "Action";
-        
-        this.isAction1InputPressed = Input.GetButton(inputManagerName + "1");
-        this.isAction2InputPressed = Input.GetButton(inputManagerName + "2");
+        this.isAction1InputPressed = Input.GetButton(inputManagerNameAction(1));
+        this.isAction2InputPressed = Input.GetButton(inputManagerNameAction(2));
     }
 
     public bool PressedActionKey()
     {
-        return Input.GetButtonDown("Player" + player.number + "Action1");
+        return Input.GetButtonDown(inputManagerNameAction(1));
+    }
+
+    public bool PressedAbilityKey()
+    {
+        return Input.GetButtonDown(inputManagerNameAction(2));
     }
 
     public virtual void movePlayer()
@@ -86,6 +93,26 @@ public class InputControl : MonoBehaviour
         }
         rb2d.MovePosition(newPlayerPosition);
     }
+    
+    string inputManagerNameAxis()
+    {
+        // z.B. Player1Keyboard oder Player2Joy
+        return inputNamePlayer() + inputType.ToString();
+    }
+    string inputManagerNameAction(int action)
+    {
+        // z.B. Player1Action1 oder Player4Action2
+        return inputNamePlayer() + "Action" + action;
+    }
+
+    string inputNamePlayer()
+    {
+        return "Player" + player.number;
+    }
+
+
+
+
 
     public virtual void Flip(float moveHorizontal)
     {

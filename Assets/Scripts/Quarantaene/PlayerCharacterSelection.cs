@@ -50,8 +50,10 @@ public class PlayerCharacterSelection : MonoBehaviour
             // player is already ready, he should not be able to change the other stuff again!
             return;
         }
-        float moveHorizontal = player.HorizontalAxis();
-        float moveVertical = player.VerticalAxis();  
+        // float moveHorizontal = Input.GetAxisRaw(player.inputName() + "Horizontal");
+        // float moveVertical = Input.GetAxisRaw(player.inputName() + "Vertical");  
+        float moveHorizontal = 0;
+        float moveVertical = 0;
         if (moveVertical > .7 && !nextPlayer)
         {
             nextPlayer = true;

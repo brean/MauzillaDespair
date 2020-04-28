@@ -6,8 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Player
 {
-    [SerializeField]
-    public InputType inputType; // all, key or joy
+    
 
     [SerializeField]
     [Range(1, 5)]
@@ -37,18 +36,6 @@ public class Player
 
 
 
-
-
-    internal float HorizontalAxis()
-    {
-        return Input.GetAxisRaw(this.inputName() + "Horizontal");
-    }
-
-    public float VerticalAxis()
-    {
-        return Input.GetAxisRaw(this.inputName() + "Vertical");
-    }
-
     public static Character nextCharacter(Character lastCharacter)
     {
         return (Character)(((int)lastCharacter + 1) % 4);
@@ -68,23 +55,6 @@ public class Player
         return (int)character;
     }
 
-    public string inputName()
-    {
-        if (inputType == InputType.All)
-        {
-            string[] controllers = Input.GetJoystickNames();
-            if (number <= controllers.Length)
-            {
-                inputType = InputType.Joy;
-            }
-            else
-            {
-                inputType = InputType.Keyboard;
-            }
-        }
-        // z.B. Player1Keyboard oder Player2Joy
-        return "Player" + number + inputType.ToString();
-    }
 
     public bool isUsingAbility()
     {

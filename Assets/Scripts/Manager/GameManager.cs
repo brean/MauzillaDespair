@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
     public string currentSceneName;
-    public bool debugMode; // TODO
     public InputType inputType;
+
+    KeyCode nextLevelButton = KeyCode.Return;
 
     void Awake()
     {
@@ -55,28 +56,24 @@ public class GameManager : MonoBehaviour
         {
             new Player{
                 character = Character.mauzilla,
-                inputType = inputType,
                 number = 1,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.schneider,
-                inputType = inputType,
                 number = 2,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.maurer,
-                inputType = inputType,
                 number = 3,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.tischler,
-                inputType = inputType,
                 number = 4,
                 active = true,
                 ready = true
@@ -86,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     void checkSceneChange()
     {
-        if (currentSceneName == "Start" && Input.GetKeyDown("space"))
+        if (currentSceneName == "Start" && Input.GetKeyDown(nextLevelButton))
         {
             SceneManager.LoadScene("MainCity");
         }
@@ -99,8 +96,9 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("ArtisansWin");
             }
         }
-        if (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins" && Input.GetKeyDown("space"))
-        {
+        if (Input.GetKeyDown(nextLevelButton)
+            && (currentSceneName == "ArtisansWins" || currentSceneName == "MauzillaWins")
+        ) {
             SceneManager.LoadScene("Start");
         }
     }
