@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Player
+public class Player : MonoBehaviour
 {
     
 
     [SerializeField]
-    [Range(1, 5)]
+    [Range(1, 4)]
     public int number; // number of input (1-4)
 
     [SerializeField]
@@ -30,7 +30,11 @@ public class Player
     public float abilityActiveDuration = -1;
     public bool usesLaser = false;
 
-    
+    InputControl inputControl;
+
+    private void Start() {
+        
+    }
 
     
 

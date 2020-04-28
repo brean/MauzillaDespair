@@ -27,7 +27,9 @@ public class InputControl : MonoBehaviour
     {
         inputType = GameManager.instance.inputType;
 
-        player = GameManager.instance.playerForCharacter(GetComponent<CharacterSetting>().character);
+        player = GetComponent<Player>();
+
+        // player = GameManager.instance.playerForCharacter(GetComponent<CharacterSetting>().character);
       //  spriteSettings = GetComponent<CharacterSpriteManager>().SpritesForCharacter(player.character);
 
        // animator = GetComponent<Animator>();

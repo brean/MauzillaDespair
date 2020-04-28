@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     KeyCode nextLevelButton = KeyCode.Return;
 
+    public GameObject mauzilla;
+    public GameObject schneider;
+    public GameObject maurer;
+    public GameObject tischler;
+
     void Awake()
     {
         // If instance doesn't exist, set to this 
@@ -39,10 +44,25 @@ public class GameManager : MonoBehaviour
         SceneManager.activeSceneChanged += changeCurrentSceneName;
     }
 
+    private void Start() {
+        
+    }
+
     void changeCurrentSceneName(Scene previousScene, Scene newScene)
     {
         // previousScene seems to be null all the time
         currentSceneName = newScene.name;
+
+        if (currentSceneName == "MainCity") {
+            mauzilla = Instantiate(mauzilla, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+            mauzilla.name = "Mauzilla";
+            schneider = Instantiate(schneider, new Vector3(0.5f, -0.5f, 0), Quaternion.identity);
+            schneider.name = "Schneider";
+            maurer = Instantiate(maurer, new Vector3(-0.5f, 0.5f, 0), Quaternion.identity);
+            maurer.name = "Maurer";
+            tischler = Instantiate(tischler, new Vector3(-0.5f, -0.5f, 0), Quaternion.identity);
+            tischler.name = "Tischler";
+        }
     }
 
     void Update()

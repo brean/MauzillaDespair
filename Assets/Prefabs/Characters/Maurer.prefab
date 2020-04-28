@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7296970448023110752}
   - component: {fileID: 6300775404269446898}
   - component: {fileID: 8371728186666435230}
+  - component: {fileID: 23600465991756850}
   - component: {fileID: 493866770}
   - component: {fileID: -2727593436401720281}
   - component: {fileID: 7019556129507532451}
@@ -176,25 +177,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28709662207de84fa5103c8c712e0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    inputType: 0
-    number: 0
-    character: 2
-    color: {r: 0, g: 0, b: 0, a: 0}
-    team: 0
-    ready: 0
-    active: 1
-    cooldownTime: 5
-    abilityCooldown: 5
-    abilityActiveDuration: -1
-    usesLaser: 0
+  player: {fileID: 0}
   speed: 0.08
   attackAnim: 0
   rb2d: {fileID: 7296970448023110753}
   animator: {fileID: 493866770}
-  laser: {fileID: 0}
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
+  currentMovement: {x: 0, y: 0}
+--- !u!114 &23600465991756850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296970448023110755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c937eb3da4a4ab54bbd59e594df5d426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  number: 3
+  character: 2
+  color: {r: 0, g: 0, b: 0, a: 0}
+  team: 0
+  ready: 1
+  active: 1
+  cooldownTime: 5
+  abilityCooldown: -1
+  abilityActiveDuration: -1
+  usesLaser: 0
 --- !u!95 &493866770
 Animator:
   serializedVersion: 3
