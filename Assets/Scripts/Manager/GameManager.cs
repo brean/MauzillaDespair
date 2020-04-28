@@ -33,10 +33,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        createPlayers();
-
         // Sets initially currentScenename. Should be "Start"
         currentSceneName = SceneManager.GetActiveScene().name;
+
+        createPlayers();
 
         // activeSceneChanged is a Event that is fired, when SceneManager.LoadScene()
         // is called. Also fired multiple times on init.
@@ -44,15 +44,19 @@ public class GameManager : MonoBehaviour
         SceneManager.activeSceneChanged += changeCurrentSceneName;
     }
 
-    private void Start() {
-        
-    }
-
     void changeCurrentSceneName(Scene previousScene, Scene newScene)
     {
         // previousScene seems to be null all the time
         currentSceneName = newScene.name;
+    }
 
+    void Update()
+    {
+        checkSceneChange();
+    }
+
+    public void createPlayers()
+    {
         if (currentSceneName == "MainCity") {
             mauzilla = Instantiate(mauzilla, new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
             mauzilla.name = "Mauzilla";
@@ -63,15 +67,7 @@ public class GameManager : MonoBehaviour
             tischler = Instantiate(tischler, new Vector3(-0.5f, -0.5f, 0), Quaternion.identity);
             tischler.name = "Tischler";
         }
-    }
 
-    void Update()
-    {
-        checkSceneChange();
-    }
-
-    public void createPlayers()
-    {
         players = new List<Player>
         {
             new Player{

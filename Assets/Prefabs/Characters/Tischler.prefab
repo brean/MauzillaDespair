@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1416063382216305030}
   - component: {fileID: 1416063382216305025}
   - component: {fileID: 1416063382216305051}
-  - component: {fileID: 3731975359575191363}
   - component: {fileID: 1416063382216305050}
   - component: {fileID: 249493908}
   - component: {fileID: -6645471220881166102}
@@ -170,7 +169,7 @@ MonoBehaviour:
   rb2d: {fileID: 1416063382216305030}
   animator: {fileID: 249493908}
   currentMovement: {x: 0, y: 0}
---- !u!114 &3731975359575191363
+--- !u!114 &1416063382216305050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,7 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1416063382216305024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c937eb3da4a4ab54bbd59e594df5d426, type: 3}
+  m_Script: {fileID: 11500000, guid: 9611e96c42dc3074887b77255bb8e869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   number: 4
@@ -192,19 +191,6 @@ MonoBehaviour:
   abilityCooldown: -1
   abilityActiveDuration: -1
   usesLaser: 0
---- !u!114 &1416063382216305050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416063382216305024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ecefa8a76c18b40a47d4b944515c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: 3
 --- !u!95 &249493908
 Animator:
   serializedVersion: 3
