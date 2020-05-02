@@ -2,19 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour {
+public class Building : MonoBehaviour
+{
+
+    [HideInInspector]
     [Range(0, 2)]
     public int state; // 0 = normal 1 = destroyed 2 = repaired
+    [HideInInspector]
     public int maxHealth;
+    [HideInInspector]
     public int health;
+    [HideInInspector]
     public bool[] materials = new bool[3]; // 0 = stone 1 = cloth 2 = wood
+    [HideInInspector]
     public int materialCount;
+    [HideInInspector]
     public bool[] collidingArtisans = new bool[3]; // 0 = maurer 1 = schneider 2 = tischler
 
     //public Sprite[] sprites = new Sprite[3];
+    [HideInInspector]
     public Sprite[] infoBubbleSprites = new Sprite[3];
+    [HideInInspector]
     public Sprite[] materialSprites = new Sprite[3];
-    public StoreyManager storeyManager;
+    [HideInInspector]
+    public Vector3Int positionInTileMap;
+    BuildingManager buildingManager;
     GameObject healthbar;
     CityHealthbar cityHealthbar;
     GameObject infoBubble;
@@ -23,6 +35,7 @@ public class Building : MonoBehaviour {
     GameObject repairEffect;
     bool repairEffectActive;
     public GameObject explosion;
+    [HideInInspector]
     public int explosionTimer = 0;
     GameObject firstMaterial, secondMaterial, thirdMaterial;
 
@@ -32,7 +45,8 @@ public class Building : MonoBehaviour {
         if (GameObject.FindGameObjectsWithTag("mauzilla").Length > 0) {
             mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
         }
-        storeyManager = GetComponent<StoreyManager>();
+
+        buildingManager = GameObject.Find("Managers").GetComponent<BuildingManager>();
 
         // Get Infobubble and Materials and hide them
         infoBubble = this.transform.GetChild(1).gameObject; 
@@ -255,10 +269,10 @@ public class Building : MonoBehaviour {
         // this.GetComponent<SpriteRenderer>().sprite = sprites[state];
         switch (state) {
             case 1:
-                storeyManager.DestroyBuilding();
+                buildingManager.DestroyBuilding(positionInTileMap);
                 break;
             case 2:
-                storeyManager.RepairBuilding();
+                buildingManager.RepairBuilding(positionInTileMap);
                 break;
         }
     }

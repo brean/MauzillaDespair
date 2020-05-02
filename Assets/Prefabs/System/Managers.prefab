@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 451903574116947656}
   - component: {fileID: 451903574116947658}
-  - component: {fileID: 451903574116947659}
   - component: {fileID: 6272519912618513277}
   m_Layer: 0
   m_Name: Managers
@@ -54,19 +53,9 @@ MonoBehaviour:
   maurer: {fileID: 7296970448023110755, guid: 0ca6bb1bc8f23407aad8599a62869d16, type: 3}
   tischler: {fileID: 1416063382216305024, guid: 361c2fb0aac5c4be78f3e356bcb9504e,
     type: 3}
---- !u!114 &451903574116947659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451903574116947657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ea41906087acf4fb53ab6b5bfcaeba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: []
+  building: {fileID: 2277621232044658855, guid: 9a64a32c8b2fc468ea4ea2e2ecdc45aa,
+    type: 3}
+  buildingsContainer: {fileID: 0}
 --- !u!114 &6272519912618513277
 MonoBehaviour:
   m_ObjectHideFlags: 0
