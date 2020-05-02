@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class MauzillaControl : InputControl
+public class MauzillaPlayer : Player
 {
     public GameObject laser;
     public Transform endPoint;
@@ -22,13 +22,13 @@ public class MauzillaControl : InputControl
             laserLine.endWidth = .1f;
 
             //set lasers to discharged on start
-            player.abilityCooldown = player.cooldownTime;
+            abilityCooldown = cooldownTime;
         }
     }
 
     public override void movePlayer()
     {
-        if (this.PressedActionKey())
+        if (inputControl.isActionKeyPressedInFrame())
         {
             animator.SetBool("AttackActive", true);
             attackAnim = 30;
@@ -44,10 +44,10 @@ public class MauzillaControl : InputControl
                 attackAnim -= 1;
             }
         }
-        if (player.isUsingAbility())
+        if (isUsingAbility())
         {
             moveLaser();
-            player.abilityCooldown = player.cooldownTime;
+            abilityCooldown = cooldownTime;
         }
         else
         {
@@ -62,12 +62,14 @@ public class MauzillaControl : InputControl
     {
         toggleLaserVisibility(true);
 
-        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (currentMovement * speed);
+        Vector2 newpos = new Vector2(endPoint.position.x, endPoint.position.y) + (inputControl.getCurrentMovement() * speed);
         endPoint.transform.position = new Vector3(newpos.x, newpos.y, 100);
 
         RaycastHit2D[] hits;
 
-        var heading = new Vector3(endPoint.position.x, endPoint.position.y, 0) - new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 0);
+        Vector3 v1 = new Vector3(endPoint.position.x, endPoint.position.y, 0);
+        Vector3 v2 = new Vector3(rb2d.transform.position.x, rb2d.transform.position.y, 0);
+        var heading = v1 - v2;
         var distance = heading.magnitude;
         var direction = heading / distance;
 

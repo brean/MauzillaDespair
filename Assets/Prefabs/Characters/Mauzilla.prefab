@@ -239,8 +239,8 @@ GameObject:
   - component: {fileID: 721915902624415497}
   - component: {fileID: 721915902624415498}
   - component: {fileID: 721915902624415499}
-  - component: {fileID: 7942126611676712892}
-  - component: {fileID: 318815536}
+  - component: {fileID: 8866751066391050411}
+  - component: {fileID: 5553830872988901182}
   - component: {fileID: 1686628046}
   - component: {fileID: 617776940}
   - component: {fileID: 1780151532060963818}
@@ -382,7 +382,7 @@ MonoBehaviour:
   health: 0
   healthbar: {fileID: 0}
   laserbar: {fileID: 0}
---- !u!114 &7942126611676712892
+--- !u!114 &8866751066391050411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,18 +391,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 721915902624415508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f6d44ae1890504a971b00b4f0ee026, type: 3}
+  m_Script: {fileID: 11500000, guid: e28709662207de84fa5103c8c712e0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 0.08
-  attackAnim: 0
-  rb2d: {fileID: 721915902624415498}
-  animator: {fileID: 1686628046}
-  currentMovement: {x: 0, y: 0}
-  laser: {fileID: 422361703743140617}
-  endPoint: {fileID: 5896263925672356226}
---- !u!114 &318815536
+  controllerNumber: 1
+--- !u!114 &5553830872988901182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,19 +404,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 721915902624415508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9611e96c42dc3074887b77255bb8e869, type: 3}
+  m_Script: {fileID: 11500000, guid: 28960f9aa61be6a4e813953540de6bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number: 1
+  rb2d: {fileID: 0}
+  animator: {fileID: 0}
   character: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   team: 0
+  speed: 0.08
+  initialScale: {x: 0, y: 0, z: 0}
+  attackAnim: 0
   ready: 1
   active: 1
   cooldownTime: 5
   abilityCooldown: -1
   abilityActiveDuration: -1
   usesLaser: 0
+  inputControl: {fileID: 0}
+  laser: {fileID: 422361703743140617}
+  endPoint: {fileID: 5896263925672356226}
 --- !u!95 &1686628046
 Animator:
   serializedVersion: 3

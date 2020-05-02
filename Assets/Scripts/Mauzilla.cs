@@ -31,18 +31,18 @@ public class Mauzilla : MonoBehaviour {
         damageEffect = transform.GetChild(1).gameObject;
         damageEffect.SetActive(false);
 
-        player = GetComponent<InputControl>().player;
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update() {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (colliding && GetComponent<InputControl>().PressedActionKey() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+        if (colliding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
             gameObject.GetComponent<AudioSource>().Play(0);
         }
         laserbar = GameObject.Find("laserpower").GetComponent<Image>();
-        player = GetComponent<InputControl>().player;
+        player = GetComponent<Player>();
 
         laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
         if(laserbar.fillAmount == 1)

@@ -163,12 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28709662207de84fa5103c8c712e0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 0.08
-  attackAnim: 0
-  rb2d: {fileID: 4630896681391010238}
-  animator: {fileID: 1683526113}
-  currentMovement: {x: 0, y: 0}
+  controllerNumber: 4
 --- !u!114 &-408117547526707545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,16 +176,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9611e96c42dc3074887b77255bb8e869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number: 3
+  rb2d: {fileID: 0}
+  animator: {fileID: 0}
   character: 1
   color: {r: 0, g: 0, b: 0, a: 0}
   team: 0
+  speed: 0.08
+  initialScale: {x: 0, y: 0, z: 0}
+  attackAnim: 0
   ready: 1
   active: 1
   cooldownTime: 5
   abilityCooldown: -1
   abilityActiveDuration: -1
   usesLaser: 0
+  inputControl: {fileID: 0}
 --- !u!95 &1683526113
 Animator:
   serializedVersion: 3

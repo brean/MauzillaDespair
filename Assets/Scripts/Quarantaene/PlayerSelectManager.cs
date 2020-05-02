@@ -55,7 +55,6 @@ public class PlayerSelectManager : MonoBehaviour
             Player p = new Player
             {
                 active = true,
-                number = number,
                 color = colors[GameManager.instance.players.Count]
             };
             assignPlayerToCharacter(GameManager.instance.players.Count, p);

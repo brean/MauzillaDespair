@@ -72,25 +72,21 @@ public class GameManager : MonoBehaviour
         {
             new Player{
                 character = Character.mauzilla,
-                number = 1,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.schneider,
-                number = 2,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.maurer,
-                number = 3,
                 active = true,
                 ready = true
             },
             new Player{
                 character = Character.tischler,
-                number = 4,
                 active = true,
                 ready = true
             }
