@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class CityHealthbar : MonoBehaviour
 {
-    public GameObject[] buildings;
-    public int maxHealth;
+    GameObject[] buildings;
+    int maxHealth;
+    [HideInInspector]
     public int health;
-    public Image healthbar;
+    Image healthbar;
 
     void Start() {
         buildings = GameObject.FindGameObjectsWithTag("building");

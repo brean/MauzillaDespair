@@ -1,15 +1,11 @@
 - Create a SoundManager für die Hintergrundmusik, sodass die zwischen den Leveln nicht unterbrochen wird, oder
 nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den Titelbildschirm.
 
-- Move BuldingManager.cs to Scripts/Managers and readd all the correct tiles
+✓ Move BuldingManager.cs to Scripts/Managers and readd all the correct tiles
 
-- Move CityHeathbar.cs to Objects
+✓ Move CityHeathbar.cs to Objects
 
-- Move Cars.cs to Objects
-
-- Add cars with instantiate ?!
-
-- remove Explosion from Scene
+✓ Move Cars.cs to Objects
 
 - Copy Code from Mauzilla and Artisan to Player.cs
 
@@ -28,3 +24,7 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 
 - Warum ist der startet die Reperatur der Spieler immer erst beim dritten Player?
   Bzw.: Die Icons und die eigentlichen Spieler passen nicht zusammen.
+
+- Split Player into "Player Animation", "Player Movement", "Player Actions"
+
+- Spieler, Mauzilla und Haus auf richtiger Ebene plazieren
