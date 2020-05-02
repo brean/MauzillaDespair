@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    // public List<PlayerNew> playersNew = new List<PlayerNew>();
 
     public List<Player> players = new List<Player>();
     public string currentSceneName;
@@ -25,7 +24,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // If instance doesn't exist, set to this 
-        if (instance == null) {
+        if (instance == null)
+        {
             // Sets this to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
             instance = this;
