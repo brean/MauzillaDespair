@@ -2,8 +2,12 @@
 
 public class InputControl : MonoBehaviour
 {
-    [Tooltip("Player information")]
+    [HideInInspector]
     public Player player;
+    [HideInInspector]
+    public Rigidbody2D rb2d;
+    [HideInInspector]
+    public Animator animator;
 
     [Tooltip("speed of the player")]
     public float speed = .08f;
@@ -11,36 +15,25 @@ public class InputControl : MonoBehaviour
     [HideInInspector]
     public float attackAnim = 0;
 
-    public Rigidbody2D rb2d;
-    public Animator animator;
-
-    bool facingRight;
-    Vector3 initialScale;
+    [HideInInspector]
+    public Vector3 initialScale;
 
     public Vector2 currentMovement;
     bool isAction1InputPressed;
     bool isAction2InputPressed;
     InputType inputType;
 
-    // Start is called before the first frame update
     public virtual void Start()
     {
         inputType = GameManager.instance.inputType;
 
         player = GetComponent<Player>();
-
-        // player = GameManager.instance.playerForCharacter(GetComponent<CharacterSetting>().character);
-      //  spriteSettings = GetComponent<CharacterSpriteManager>().SpritesForCharacter(player.character);
-
-       // animator = GetComponent<Animator>();
-       // animator.speed = 1;
-        facingRight = true;
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         initialScale = transform.localScale;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player == null)
@@ -90,8 +83,8 @@ public class InputControl : MonoBehaviour
     {
         Vector2 newPlayerPosition = rb2d.position + (currentMovement * speed);
         if (animator != null && attackAnim <= 0) { 
-            Flip(currentMovement.x);
-            FrontBack(currentMovement.y);
+            player.Flip(currentMovement.x);
+            player.FrontBack(currentMovement.y);
         }
         rb2d.MovePosition(newPlayerPosition);
     }
@@ -116,46 +109,5 @@ public class InputControl : MonoBehaviour
 
 
 
-    public virtual void Flip(float moveHorizontal)
-    {
-        if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
-        {
-            //GetComponent<SpriteRenderer>().sprite = spriteSettings.left;
-            facingRight = moveHorizontal < -0.1;
-            if(animator != null)
-            {
-                animator.SetInteger("Direction", 2);
-            }
-            Vector3 theScale = transform.localScale;
 
-            if (moveHorizontal > 0.1)
-            {
-                theScale.x = -initialScale.x;
-            }
-            else
-            {
-                theScale.x = initialScale.x;
-            }
-
-
-            transform.localScale = theScale;
-        }
-    }
-
-    public virtual void FrontBack(float moveVertical)
-    {
-        if (moveVertical > 0.1)
-        {
-            //GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
-           //transform.localScale = initialScale;
-            animator.SetInteger("Direction", 1);
-        }
-
-        if (moveVertical < -0.1)
-        {
-            //GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
-            //transform.localScale = initialScale;
-            animator.SetInteger("Direction", 3);
-        }
-    }
 }

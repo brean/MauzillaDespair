@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     InputControl inputControl;
 
     private void Start() {
-        
+        inputControl = GetComponent<InputControl>();
     }
 
     
@@ -87,6 +87,47 @@ public class Player : MonoBehaviour
             {
                 abilityActiveDuration = -1;
             }
+        }
+    }
+
+    public void Flip(float moveHorizontal)
+    {
+        if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
+        {
+            if(inputControl.animator != null)
+            {
+                inputControl.animator.SetInteger("Direction", 2);
+            }
+            Vector3 theScale = transform.localScale;
+
+            if (moveHorizontal > 0.1)
+            {
+                theScale.x = -inputControl.initialScale.x;
+            }
+            else
+            {
+                theScale.x = inputControl.initialScale.x;
+            }
+
+
+            transform.localScale = theScale;
+        }
+    }
+
+    public void FrontBack(float moveVertical)
+    {
+        if (moveVertical > 0.1)
+        {
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
+           //transform.localScale = initialScale;
+            inputControl.animator.SetInteger("Direction", 1);
+        }
+
+        if (moveVertical < -0.1)
+        {
+            //GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
+            //transform.localScale = initialScale;
+            inputControl.animator.SetInteger("Direction", 3);
         }
     }
 }
