@@ -41,7 +41,7 @@ public class MauzillaPlayer : Player
     public override void Update()
     {
         // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (colliding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+        if (collidingBuilding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
             collidingBuilding.adjustHealth(-1);
             gameObject.GetComponent<AudioSource>().Play(0);
         }
@@ -103,6 +103,13 @@ public class MauzillaPlayer : Player
         }
 
         updateLaserSound();
+    }
+
+    public override void animatePlayer()
+    {
+        if (!inputControl.isAbilityKeyPressed()) {
+            base.animatePlayer();
+        }
     }
 
     void moveLaser()
@@ -189,7 +196,6 @@ public class MauzillaPlayer : Player
 
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Mauzilla collided with " + col.gameObject.name);
-            colliding = true;
             collidingBuilding = col.gameObject.GetComponent<Building>();
         }
     }
@@ -199,7 +205,6 @@ public class MauzillaPlayer : Player
 
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Mauzilla stopped colliding with " + col.gameObject.name);
-            colliding = false;
             collidingBuilding = null;
         }
     }

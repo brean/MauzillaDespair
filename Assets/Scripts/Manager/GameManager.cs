@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public List<Player> players = new List<Player>();
-    public string currentSceneName;
     public InputType inputType;
+    public float playerSpeed = 0.08f;
+    public string currentSceneName;
 
     KeyCode nextLevelButton = KeyCode.Return;
 
@@ -71,37 +72,13 @@ public class GameManager : MonoBehaviour
             tischler = Instantiate(tischler, new Vector3(-0.5f, -0.5f, 0), Quaternion.identity);
             tischler.name = "Tischler";
         }
-
-        players = new List<Player>
-        {
-            new Player{
-                character = Character.mauzilla,
-                active = true,
-                ready = true
-            },
-            new Player{
-                character = Character.schneider,
-                active = true,
-                ready = true
-            },
-            new Player{
-                character = Character.maurer,
-                active = true,
-                ready = true
-            },
-            new Player{
-                character = Character.tischler,
-                active = true,
-                ready = true
-            }
-        };
     }
 
     private void createbuildings()
     {
         // return;
         buildingsContainer = new GameObject();
-        buildingsContainer.name = "Buildingssss";
+        buildingsContainer.name = "Buildings";
 
         List<Vector3> buildingPositions = new List<Vector3>();
         buildingPositions.Add(new Vector3(1.01f, -1.1f, 0));
@@ -191,18 +168,5 @@ public class GameManager : MonoBehaviour
         ) {
             SceneManager.LoadScene("Start");
         }
-    }
-
-    public Player playerForCharacter(Character character)
-    {
-        foreach (Player p in players)
-        {
-            if (p.character == character)
-            {
-                return p;
-            }
-        }
-
-        return null;
     }
 }

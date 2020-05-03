@@ -6,48 +6,37 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
-    
+    // Unity Components
     [HideInInspector]
     public Rigidbody2D rb2d;
     [HideInInspector]
     public Animator animator;
-
-
-
-    [SerializeField]
-    public Character character; //mauzilla, schneider, maurer or tischler
-
-    [SerializeField]
-    public Color color;
-
-    [SerializeField]
-    public int team = 0;  // Team 0 or 1
-
-    [Tooltip("speed of the player")]
-    public float speed = .08f;
-    [HideInInspector]
-    public Vector3 initialScale;
-
-    [HideInInspector]
-    public float attackAnim = 0;
-
-    public bool ready = false; // user pressed the input Button to start the game.
-    public bool active = false; // user pressed any key to activate himself
-
-    public float cooldownTime = 5;
-
-    public float abilityCooldown = -1;
-    public float abilityActiveDuration = -1;
-    public bool usesLaser = false;
-
     [HideInInspector]
     public InputControl inputControl;
 
+
+    // Player Attributes
+    [SerializeField]
+    Character character; //mauzilla, schneider, maurer or tischler
+    [HideInInspector]
+    public float speed;
+    Vector3 initialScale;
+
+    // Action timer
+    [HideInInspector]
+    public float attackAnim = 0;
+    public float cooldownTime = 5;
+    public float abilityCooldown = -1;
+    public float abilityActiveDuration = -1;
+
     // colliding / triggering
-    public bool colliding = false; // Is Artisan currently near a Building?
     public Building collidingBuilding; // The Artisan Mauzilla is near
 
+    // 
+
     public virtual void Start() {
+        this.speed = GameManager.instance.playerSpeed;
+
         inputControl = GetComponent<InputControl>();
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -57,13 +46,15 @@ public class Player : MonoBehaviour
 
     public virtual void Update() {
         movePlayer();
+
+        animatePlayer();
         
         controlAbility(inputControl.isAbilityKeyPressed());
 
         if (character != Character.mauzilla)
         {
             // Artisan is near a destroyed Building and pressing Action Key
-            if (colliding && inputControl.isActionKeyPressedInFrame() && collidingBuilding.state == 1) {
+            if (collidingBuilding && inputControl.isActionKeyPressedInFrame() && collidingBuilding.state == 1) {
 
                 // Check if all required Artisans are near the Building
                 if (collidingBuilding.RepairConditionsMet()) {
@@ -79,7 +70,6 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan collided with " + col.gameObject.name);
-            colliding = true;
             collidingBuilding = col.gameObject.GetComponent<Building>();
         }
     }
@@ -87,43 +77,28 @@ public class Player : MonoBehaviour
     void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
             Debug.Log("Artisan stopped colliding with " + col.gameObject.name);
-            colliding = false;
             collidingBuilding = null;
         }
     }
+
     public virtual void movePlayer()
     {
-        Vector2 newPlayerPosition = rb2d.position + (inputControl.getCurrentMovement() * speed);
-        if (animator != null && attackAnim <= 0) { 
-            Flip(inputControl.getCurrentMovement().x);
-            FrontBack(inputControl.getCurrentMovement().y);
-        }
-        rb2d.MovePosition(newPlayerPosition);
+        Vector2 actualFrameMovement = inputControl.getCurrentMovement() * speed;
+        rb2d.MovePosition(rb2d.position + actualFrameMovement);
     }
 
-    
-
-
-
-    public static Character nextCharacter(Character lastCharacter)
+    public virtual void animatePlayer()
     {
-        return (Character)(((int)lastCharacter + 1) % 4);
-    }
+        float moveHorizontal = inputControl.getCurrentMovement().x;
+        float moveVertical = inputControl.getCurrentMovement().y;
 
-    public static Character prevCharacter(Character lastCharacter)
-    {
-        if (lastCharacter == 0)
+        if (Mathf.Abs(moveHorizontal) > Mathf.Abs(moveVertical))
         {
-            return (Character)3;
+            FlipLeftRight(moveHorizontal);
+        } else {
+            FlipUpDown(moveVertical);
         }
-        return (Character)(((int)lastCharacter - 1) % 4);
     }
-
-    public int characterNumber()
-    {
-        return (int)character;
-    }
-
 
     public bool isUsingAbility()
     {
@@ -155,43 +130,32 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Flip(float moveHorizontal)
+    public void FlipLeftRight(float moveHorizontal)
     {
-        if (moveHorizontal > 0.1 || moveHorizontal < -0.1)
+        animator.SetInteger("Direction", 2);
+        Vector3 theCurrentScale = transform.localScale;
+
+        if (moveHorizontal > 0.1)
         {
-            if(animator != null)
-            {
-                animator.SetInteger("Direction", 2);
-            }
-            Vector3 theScale = transform.localScale;
-
-            if (moveHorizontal > 0.1)
-            {
-                theScale.x = -initialScale.x;
-            }
-            else
-            {
-                theScale.x = initialScale.x;
-            }
-
-
-            transform.localScale = theScale;
+            theCurrentScale.x = -initialScale.x;
         }
+        else
+        {
+            theCurrentScale.x = initialScale.x;
+        }
+
+        transform.localScale = theCurrentScale;
     }
 
-    public void FrontBack(float moveVertical)
+    public void FlipUpDown(float moveVertical)
     {
         if (moveVertical > 0.1)
         {
-            //GetComponent<SpriteRenderer>().sprite = spriteSettings.back;
-           //transform.localScale = initialScale;
             animator.SetInteger("Direction", 1);
         }
 
         if (moveVertical < -0.1)
         {
-            //GetComponent<SpriteRenderer>().sprite = spriteSettings.front;
-            //transform.localScale = initialScale;
             animator.SetInteger("Direction", 3);
         }
     }
