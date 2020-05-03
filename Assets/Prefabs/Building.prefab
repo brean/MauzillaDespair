@@ -421,7 +421,6 @@ GameObject:
   - component: {fileID: 2277621232044658858}
   - component: {fileID: 2277621232044658853}
   - component: {fileID: 2277621232044658852}
-  - component: {fileID: 1769888856}
   - component: {fileID: 151721189586350961}
   m_Layer: 0
   m_Name: Building
@@ -474,7 +473,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5a5a153c9832240888857c6555a65031, type: 3}
   - {fileID: 21300000, guid: fc1bf303ad54547ffb208984df92d406, type: 3}
   - {fileID: 21300000, guid: b489acf512f6f471b9ea87fcbf18965c, type: 3}
-  storeyManager: {fileID: 0}
+  positionInTileMap: {x: 0, y: 0, z: 0}
   explosion: {fileID: 8498045604668646029}
   explosionTimer: 0
 --- !u!212 &2277621232044658858
@@ -574,19 +573,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &1769888856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277621232044658855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e162316f38c473092ecb24f617f285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positionInTileMap: {x: 2, y: 1, z: 0}
 --- !u!82 &151721189586350961
 AudioSource:
   m_ObjectHideFlags: 0

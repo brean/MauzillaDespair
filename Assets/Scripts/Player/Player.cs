@@ -43,6 +43,10 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public InputControl inputControl;
 
+    // colliding / triggering
+    public bool colliding = false; // Is Artisan currently near a Building?
+    public Building collidingBuilding; // The Artisan Mauzilla is near
+
     public virtual void Start() {
         inputControl = GetComponent<InputControl>();
         rb2d = GetComponent<Rigidbody2D>();
@@ -51,12 +55,42 @@ public class Player : MonoBehaviour
         initialScale = transform.localScale;
     }
 
-    void Update() {
+    public virtual void Update() {
         movePlayer();
         
         controlAbility(inputControl.isAbilityKeyPressed());
+
+        if (character != Character.mauzilla)
+        {
+            // Artisan is near a destroyed Building and pressing Action Key
+            if (colliding && inputControl.isActionKeyPressedInFrame() && collidingBuilding.state == 1) {
+
+                // Check if all required Artisans are near the Building
+                if (collidingBuilding.RepairConditionsMet()) {
+                    collidingBuilding.adjustHealth(1);
+                    gameObject.GetComponent<AudioSource>().Play(0);
+                } else {
+                    Debug.Log("You're missing the right skills to repair this building!");
+                }
+            }
+        }
     }
 
+    void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject.CompareTag("building")) {
+            Debug.Log("Artisan collided with " + col.gameObject.name);
+            colliding = true;
+            collidingBuilding = col.gameObject.GetComponent<Building>();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col) {
+        if (col.gameObject.CompareTag("building")) {
+            Debug.Log("Artisan stopped colliding with " + col.gameObject.name);
+            colliding = false;
+            collidingBuilding = null;
+        }
+    }
     public virtual void movePlayer()
     {
         Vector2 newPlayerPosition = rb2d.position + (inputControl.getCurrentMovement() * speed);

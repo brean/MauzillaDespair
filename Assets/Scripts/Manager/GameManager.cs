@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
             if (GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>().health <= 10) {
                 SceneManager.LoadScene("MauzillaWins");
             }
-            if (GameObject.Find("Mauzilla").GetComponent<Mauzilla>().health <= 10) {
+            if (GameObject.Find("Mauzilla").GetComponent<MauzillaPlayer>().health <= 10) {
                 SceneManager.LoadScene("ArtisansWin");
             }
         }

@@ -238,7 +238,6 @@ GameObject:
   - component: {fileID: 721915902624415496}
   - component: {fileID: 721915902624415497}
   - component: {fileID: 721915902624415498}
-  - component: {fileID: 721915902624415499}
   - component: {fileID: 8866751066391050411}
   - component: {fileID: 5553830872988901182}
   - component: {fileID: 1686628046}
@@ -364,24 +363,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &721915902624415499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721915902624415508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b55df5b5b8d4054bb9a8c80531a91e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliding: 0
-  collidingBuilding: {fileID: 0}
-  maxHealth: 0
-  health: 0
-  healthbar: {fileID: 0}
-  laserbar: {fileID: 0}
 --- !u!114 &8866751066391050411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +403,8 @@ MonoBehaviour:
   abilityActiveDuration: -1
   usesLaser: 0
   inputControl: {fileID: 0}
+  colliding: 0
+  collidingBuilding: {fileID: 0}
   laser: {fileID: 422361703743140617}
   endPoint: {fileID: 5896263925672356226}
 --- !u!95 &1686628046

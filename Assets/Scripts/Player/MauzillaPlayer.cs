@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MauzillaPlayer : Player
 {
@@ -6,11 +8,56 @@ public class MauzillaPlayer : Player
     public Transform endPoint;
     LineRenderer laserLine;
 
+    public int maxHealth;
+    public int health;
+    public Image healthbar;
+    public Image laserbar;
+
+    Player player;
+
+    GameObject damageEffect;
+
     public override void Start()
     {
         base.Start();
+        
+        maxHealth = 300;
+        health = maxHealth;
+        healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
+        healthbar.fillAmount = 1.0f;
+
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        laserbar.fillAmount = 1f;
+
+
+        damageEffect = transform.GetChild(1).gameObject;
+        damageEffect.SetActive(false);
+
+        player = GetComponent<Player>();
 
         initLaser();
+    }
+
+    public override void Update()
+    {
+        // Mauzilla is near a normal/repaired Building and pressing Action Key
+        if (colliding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+            collidingBuilding.adjustHealth(-1);
+            gameObject.GetComponent<AudioSource>().Play(0);
+        }
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+        player = GetComponent<Player>();
+
+        laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
+        if(laserbar.fillAmount == 1)
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(true);
+        } else
+        {
+            GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        base.Update();
     }
 
     void initLaser()
@@ -114,6 +161,46 @@ public class MauzillaPlayer : Player
         if (!audio.isPlaying)
         {
             audio.Play(0);
+        }
+    }
+
+    public void TakeDamage(int value) {
+        if (health > 10) {
+            health -= value;
+            Debug.Log("Mauzilla took " + value + " damage!");
+            float newHealthbarPercentage = (float)health / (float)(maxHealth - 0);
+            healthbar.fillAmount = newHealthbarPercentage;
+
+            StartCoroutine(MauzillaTakesDamageEffect());
+
+        } else if (health <= 10) {
+            Debug.Log("Mauzilla retreats!");
+        }
+    }
+
+    IEnumerator MauzillaTakesDamageEffect() {
+        damageEffect.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        damageEffect.SetActive(false);
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        Debug.Log("Mauzilla collide Enter");
+
+        if (col.gameObject.CompareTag("building")) {
+            Debug.Log("Mauzilla collided with " + col.gameObject.name);
+            colliding = true;
+            collidingBuilding = col.gameObject.GetComponent<Building>();
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col) {
+        Debug.Log("Mauzilla collide Exit");
+
+        if (col.gameObject.CompareTag("building")) {
+            Debug.Log("Mauzilla stopped colliding with " + col.gameObject.name);
+            colliding = false;
+            collidingBuilding = null;
         }
     }
 }

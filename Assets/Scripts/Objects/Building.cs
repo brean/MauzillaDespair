@@ -30,7 +30,7 @@ public class Building : MonoBehaviour
     GameObject healthbar;
     CityHealthbar cityHealthbar;
     GameObject infoBubble;
-    Mauzilla mauzilla;
+    MauzillaPlayer mauzilla;
 
     GameObject repairEffect;
     bool repairEffectActive;
@@ -43,7 +43,7 @@ public class Building : MonoBehaviour
     void Start() {
         //sprites[0] = GetComponent<SpriteRenderer>().sprite; // Set normal sprite as normal
         if (GameObject.FindGameObjectsWithTag("mauzilla").Length > 0) {
-            mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<Mauzilla>();
+            mauzilla = GameObject.FindWithTag("mauzilla").GetComponent<MauzillaPlayer>();
         }
 
         buildingManager = GameObject.Find("Managers").GetComponent<BuildingManager>();
