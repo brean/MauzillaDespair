@@ -1,4 +1,4 @@
-- Create a SoundManager für die Hintergrundmusik, sodass die zwischen den Leveln nicht unterbrochen wird, oder
+✓ Create a SoundManager für die Hintergrundmusik, sodass die zwischen den Leveln nicht unterbrochen wird, oder
 nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den Titelbildschirm.
 
 ✓ Move BuldingManager.cs to Scripts/Managers and readd all the correct tiles

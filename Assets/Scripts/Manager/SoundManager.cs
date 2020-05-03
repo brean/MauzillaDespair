@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
     // Benutze zwei AudioSources, damit es beim Umschalten auf ein anderes
-    // Lied keine Unterbrechung gibt.
+    // Lied keine allzugroße Unterbrechung gibt.
     public AudioSource introMusic;
     public AudioSource backgroundMusic;
 
@@ -31,12 +28,20 @@ public class SoundManager : MonoBehaviour
         changeToGamingMusic();
     }
 
+    // There is a introsong that loops and plays on Awake.
+    // When starting the game, wait for that loop to end, and play the
+    // gaming music afterwards (delayed). That makes a smooth transition.
     private void changeToGamingMusic()
     {
-        if (!backgroundMusic.isPlaying && GameManager.instance.currentSceneName == "MainCity")
+        if (hasNotAlreadySwitched() && GameManager.instance.currentSceneName == "MainCity")
         {
-            introMusic.Stop();
-            backgroundMusic.Play();
+            introMusic.loop = false;
+            backgroundMusic.PlayDelayed(introMusic.clip.length - introMusic.time);
         }
+    }
+
+    private bool hasNotAlreadySwitched()
+    {
+        return introMusic.loop;
     }
 }
