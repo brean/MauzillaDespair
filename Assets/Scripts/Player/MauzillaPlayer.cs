@@ -8,12 +8,10 @@ public class MauzillaPlayer : Player
     public Transform endPoint;
     LineRenderer laserLine;
 
-    public int maxHealth;
-    public int health;
+    int maxHealth = 300;
+    public int currentHealth;
     public Image healthbar;
     public Image laserbar;
-
-    Player player;
 
     GameObject damageEffect;
 
@@ -21,34 +19,37 @@ public class MauzillaPlayer : Player
     {
         base.Start();
         
-        maxHealth = 300;
-        health = maxHealth;
+        currentHealth = maxHealth;
         healthbar = GameObject.Find("MauzillaHealthbar").transform.GetChild(1).gameObject.GetComponent<Image>();
-        healthbar.fillAmount = 1.0f;
+        healthbar.fillAmount = 1f;
 
         laserbar = GameObject.Find("laserpower").GetComponent<Image>();
         laserbar.fillAmount = 1f;
 
-
         damageEffect = transform.GetChild(1).gameObject;
         damageEffect.SetActive(false);
 
-        player = GetComponent<Player>();
+        laserLine = laser.GetComponent<LineRenderer>();
+        laserLine.startWidth = .1f;
+        laserLine.endWidth = .1f;
 
-        initLaser();
+        //set lasers to discharged on start
+        currentAbilityCooldown = cooldownTime;
     }
 
     public override void Update()
     {
-        // Mauzilla is near a normal/repaired Building and pressing Action Key
-        if (collidingBuilding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
-            collidingBuilding.adjustHealth(-1);
-            gameObject.GetComponent<AudioSource>().Play(0);
-        }
-        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
-        player = GetComponent<Player>();
+        base.Update();
+        
+        updateLaserbar();
+        controlAbility();
+    }
 
-        laserbar.fillAmount = (player.cooldownTime - player.abilityCooldown) / player.cooldownTime;
+    void updateLaserbar()
+    {
+        laserbar = GameObject.Find("laserpower").GetComponent<Image>();
+
+        laserbar.fillAmount = (cooldownTime - currentAbilityCooldown) / cooldownTime;
         if(laserbar.fillAmount == 1)
         {
             GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(true);
@@ -56,20 +57,25 @@ public class MauzillaPlayer : Player
         {
             GameObject.Find("Laserbar").transform.GetChild(1).gameObject.SetActive(false);
         }
-
-        base.Update();
     }
 
-    void initLaser()
+    public void controlAbility()
     {
-        if (laser != null)
+        bool isKeyPressed = inputControl.isAbilityKeyPressed();
+        if (currentAbilityCooldown <= 0 && isKeyPressed)
         {
-            laserLine = laser.GetComponent<LineRenderer>();
-            laserLine.startWidth = .1f;
-            laserLine.endWidth = .1f;
+            currentAbilityCooldown = cooldownTime;
+            currentAbilityActiveDuration = 3;
+            return;
+        }
 
-            //set lasers to discharged on start
-            abilityCooldown = cooldownTime;
+        if (currentAbilityCooldown > -1)
+        {
+            currentAbilityCooldown -= Time.deltaTime;
+        }
+        if (currentAbilityActiveDuration >= 0)
+        {
+            currentAbilityActiveDuration -= Time.deltaTime;
         }
     }
 
@@ -91,10 +97,10 @@ public class MauzillaPlayer : Player
                 attackAnim -= 1;
             }
         }
-        if (isUsingAbility())
+        if (currentAbilityActiveDuration > 0)
         {
             moveLaser();
-            abilityCooldown = cooldownTime;
+            currentAbilityCooldown = cooldownTime;
         }
         else
         {
@@ -107,8 +113,25 @@ public class MauzillaPlayer : Player
 
     public override void animatePlayer()
     {
-        if (!inputControl.isAbilityKeyPressed()) {
+        if (currentlyNotUsingAbility()) {
             base.animatePlayer();
+        }
+    }
+
+    bool currentlyNotUsingAbility()
+    {
+        return currentAbilityActiveDuration <= 0;
+    }
+
+    public override void updateAction()
+    {
+        if(inputControl.isActionKeyPressedInFrame())
+        {
+            // Mauzilla is near a normal/repaired Building and pressing Action Key
+            if (collidingBuilding && GetComponent<InputControl>().isActionKeyPressedInFrame() && collidingBuilding.state != 1 && collidingBuilding.health > 0) {
+                collidingBuilding.adjustHealth(-1);
+                gameObject.GetComponent<AudioSource>().Play(0);
+            }
         }
     }
 
@@ -172,15 +195,15 @@ public class MauzillaPlayer : Player
     }
 
     public void TakeDamage(int value) {
-        if (health > 10) {
-            health -= value;
+        if (currentHealth > 10) {
+            currentHealth -= value;
             Debug.Log("Mauzilla took " + value + " damage!");
-            float newHealthbarPercentage = (float)health / (float)(maxHealth - 0);
+            float newHealthbarPercentage = (float)currentHealth / (float)(maxHealth - 0);
             healthbar.fillAmount = newHealthbarPercentage;
 
             StartCoroutine(MauzillaTakesDamageEffect());
 
-        } else if (health <= 10) {
+        } else if (currentHealth <= 10) {
             Debug.Log("Mauzilla retreats!");
         }
     }

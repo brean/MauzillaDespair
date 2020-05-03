@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public float attackAnim = 0;
     public float cooldownTime = 5;
-    public float abilityCooldown = -1;
-    public float abilityActiveDuration = -1;
+    public float currentAbilityCooldown = -0.1f;
+    public float currentAbilityActiveDuration = -1;
 
     // colliding / triggering
     public Building collidingBuilding; // The Artisan Mauzilla is near
@@ -46,25 +46,8 @@ public class Player : MonoBehaviour
 
     public virtual void Update() {
         movePlayer();
-
         animatePlayer();
-        
-        controlAbility(inputControl.isAbilityKeyPressed());
-
-        if (character != Character.mauzilla)
-        {
-            // Artisan is near a destroyed Building and pressing Action Key
-            if (collidingBuilding && inputControl.isActionKeyPressedInFrame() && collidingBuilding.state == 1) {
-
-                // Check if all required Artisans are near the Building
-                if (collidingBuilding.RepairConditionsMet()) {
-                    collidingBuilding.adjustHealth(1);
-                    gameObject.GetComponent<AudioSource>().Play(0);
-                } else {
-                    Debug.Log("You're missing the right skills to repair this building!");
-                }
-            }
-        }
+        updateAction();
     }
 
     void OnTriggerEnter2D(Collider2D col) {
@@ -100,37 +83,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool isUsingAbility()
-    {
-        return abilityActiveDuration > 0;
-    }
-
-    public void controlAbility(bool isKeyPressed)
-    {
-        if (abilityCooldown <= 0 && isKeyPressed)
-        {
-            abilityCooldown = cooldownTime;
-            abilityActiveDuration = 3;
-        }
-        else
-        {
-            if (abilityCooldown > -1)
-            {
-                abilityCooldown -= Time.deltaTime;
-            }
-            if (abilityActiveDuration > -1)
-            {
-                abilityActiveDuration -= Time.deltaTime;
-            }
-
-            if (!isKeyPressed)
-            {
-                abilityActiveDuration = -1;
-            }
-        }
-    }
-
-    public void FlipLeftRight(float moveHorizontal)
+    void FlipLeftRight(float moveHorizontal)
     {
         animator.SetInteger("Direction", 2);
         Vector3 theCurrentScale = transform.localScale;
@@ -147,7 +100,7 @@ public class Player : MonoBehaviour
         transform.localScale = theCurrentScale;
     }
 
-    public void FlipUpDown(float moveVertical)
+    void FlipUpDown(float moveVertical)
     {
         if (moveVertical > 0.1)
         {
@@ -157,6 +110,25 @@ public class Player : MonoBehaviour
         if (moveVertical < -0.1)
         {
             animator.SetInteger("Direction", 3);
+        }
+    }
+
+    public virtual void updateAction()
+    {
+
+        if(inputControl.isActionKeyPressedInFrame())
+        {
+            // Artisan is near a destroyed Building and pressing Action Key
+            if (collidingBuilding && collidingBuilding.state == 1) {
+
+                // Check if all required Artisans are near the Building
+                if (collidingBuilding.RepairConditionsMet()) {
+                    collidingBuilding.adjustHealth(1);
+                    gameObject.GetComponent<AudioSource>().Play(0);
+                } else {
+                    Debug.Log("You're missing the right skills to repair this building!");
+                }
+            }
         }
     }
 }
