@@ -100,6 +100,7 @@ public class MauzillaPlayer : Player
         if (currentAbilityActiveDuration > 0)
         {
             moveLaser();
+            playLaserSound();
             currentAbilityCooldown = cooldownTime;
         }
         else
@@ -107,8 +108,6 @@ public class MauzillaPlayer : Player
             toggleLaserVisibility(false);
             base.movePlayer();
         }
-
-        updateLaserSound();
     }
 
     public override void animatePlayer()
@@ -180,13 +179,8 @@ public class MauzillaPlayer : Player
         }
     }
 
-    void updateLaserSound()
+    void playLaserSound()
     {
-        if (laser == null)
-        {
-            return;
-        }
-
         AudioSource audio = laser.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
