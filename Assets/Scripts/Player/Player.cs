@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
         float moveHorizontal = inputControl.getCurrentMovement().x;
         float moveVertical = inputControl.getCurrentMovement().y;
 
+        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal) + Mathf.Abs(moveVertical));
+
         if (Mathf.Abs(moveHorizontal) > Mathf.Abs(moveVertical))
         {
             FlipLeftRight(moveHorizontal);
