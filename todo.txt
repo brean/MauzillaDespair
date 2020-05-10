@@ -9,14 +9,14 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 
 ✓ Copy Code from Mauzilla and Artisan to Player.cs
 
-- Extract Mauzilla and Artisan Scripts, that extends Player.cs
+✓ Extract Mauzilla and Artisan Scripts, that extends Player.cs
 
 - clean up some Code ?!
   remove Debug.Logs and so on. Make Warnings diapear.
 
 - Finally, make a template and push it to github
 
-- Die Smokeanimation soll auch wieder verschwinden, wenn man nicht weiter repariert.
+✓ Die Smokeanimation soll auch wieder verschwinden, wenn man nicht weiter repariert.
 
 - Alle Sounds müssen seperat abspielbar sein. (Artisan and Mauzilla)
 

@@ -32,8 +32,7 @@ public class Building : MonoBehaviour
     GameObject infoBubble;
     MauzillaPlayer mauzilla;
 
-    GameObject repairEffect;
-    bool repairEffectActive;
+    Animator repairSmokeAnimator;
     public GameObject explosion;
     [HideInInspector]
     public int explosionTimer = 0;
@@ -68,8 +67,10 @@ public class Building : MonoBehaviour
 
         cityHealthbar = GameObject.Find("CityHealthbar").GetComponent<CityHealthbar>();
 
-        repairEffect = transform.GetChild(2).gameObject;
-        repairEffect.SetActive(false);
+        // Find has advantages. A: you can search in code for the name of the GameObject
+        // B: The order of the children in the Prefab is irrelevant.
+        GameObject repairSmoke = transform.Find("RepairSmoke").gameObject;
+        repairSmokeAnimator = repairSmoke.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -201,7 +202,6 @@ public class Building : MonoBehaviour
                 infoBubble.SetActive(false);
                 health = maxHealth;
                 mauzilla.TakeDamage(maxHealth);
-                repairEffect.SetActive(false);
                 break;
             default:
                 print("ERROR: Incorrect state given to ChangeState()!");
@@ -243,8 +243,8 @@ public class Building : MonoBehaviour
         Debug.Log("Building " + (value > 0 ? "gained" : "lost") + Mathf.Abs(value) + 
                   "HP. Current HP: " + health + " HP. max: " + maxHealth);
 
-        if(value > 0 && !repairEffectActive) {
-            repairEffect.SetActive(true);
+        if(value > 0) {
+            repairSmokeAnimator.Play("RepairSmokeAnim");
         }
 
         // adjust healthbar
