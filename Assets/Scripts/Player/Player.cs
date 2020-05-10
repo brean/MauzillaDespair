@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
             if (collidingBuilding && collidingBuilding.state == 1) {
 
                 // Check if all required Artisans are near the Building
-                if (collidingBuilding.RepairConditionsMet()) {
+                if (collidingBuilding.RepairConditionsMet(character)) {
                     collidingBuilding.adjustHealth(1);
                     gameObject.GetComponent<AudioSource>().Play(0);
                 } else {

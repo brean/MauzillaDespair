@@ -12,12 +12,12 @@ public class Building : MonoBehaviour
     public int maxHealth;
     [HideInInspector]
     public int health;
+
+    // 0 = stone (Maurer) 1 = cloth (Schneider) 2 = wood (Tischeler)
     [HideInInspector]
-    public bool[] materials = new bool[3]; // 0 = stone 1 = cloth 2 = wood
+    public bool[] materials = new bool[3];
     [HideInInspector]
     public int materialCount;
-    [HideInInspector]
-    public bool[] collidingArtisans = new bool[3]; // 0 = maurer 1 = schneider 2 = tischler
 
     //public Sprite[] sprites = new Sprite[3];
     [HideInInspector]
@@ -221,8 +221,11 @@ public class Building : MonoBehaviour
         }
 
         // only show materials which are required in the infobubble
+        // and increase the counter for every positive m´needed material
         for (int i = 0; i < materials.Length; i++) {
-            if (materials[i]) materialCount++;
+            if (materials[i]) {
+                materialCount++;
+            }
             infoBubble.transform.GetChild(i).gameObject.SetActive(materials[i]);
         }
         Debug.Log(materialCount + " Materials are required. " + 
@@ -277,26 +280,19 @@ public class Building : MonoBehaviour
         }
     }
 
-    // Store all Artisans near the Building in Array
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.name == "Maurer") collidingArtisans[0] = true;
-        if (col.gameObject.name == "Schneider") collidingArtisans[1] = true;
-        if (col.gameObject.name == "Tischler") collidingArtisans[2] = true;
-    }
-
-    void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject.name == "Maurer") collidingArtisans[0] = false;
-        if (col.gameObject.name == "Schneider") collidingArtisans[1] = false;
-        if (col.gameObject.name == "Tischler") collidingArtisans[2] = false;
-    }
-
     // Check if all required Artisans are near the Building
-    public bool RepairConditionsMet() {
-        bool repairable = false;
-        for (int i = 0; i < materials.Length; i++) {
-            if (materials[i]) repairable = collidingArtisans[i];
-            //Debug.Log("Artisan " + i + " is required and present: " + repairable);
+    public bool RepairConditionsMet(Character character)
+    {
+        if (character == Character.maurer && materials[0] == true) {
+            return true;
         }
-        return repairable;
+        if (character == Character.schneider && materials[1] == true) {
+            return true;
+        }
+        if (character == Character.tischler && materials[2] == true) {
+            return true;
+        }
+
+        return false;
     }
 }
