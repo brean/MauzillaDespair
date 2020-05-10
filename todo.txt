@@ -18,12 +18,16 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 
 ✓ Die Smokeanimation soll auch wieder verschwinden, wenn man nicht weiter repariert.
 
-- Alle Sounds müssen seperat abspielbar sein. (Artisan and Mauzilla)
-
 ✓ Die Laufbewegungen müssen auch wieder anhalten, wenn keine Laufrichtung gedrückt wird.
 
 ✓ Warum ist der startet die Reperatur der Spieler immer erst beim dritten Player?
   Bzw.: Die Icons und die eigentlichen Spieler passen nicht zusammen.
+
+- Der Ton wird beim Tischler nicht abgespielt
+
+- Mauzilla muss die AbilityTaste nicht mehr drücken
+
+- Alle Sounds müssen seperat abspielbar sein. (Artisan and Mauzilla)
 
 - Split Player into "Player Animation", "Player Movement", "Player Actions"
 

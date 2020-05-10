@@ -197,7 +197,6 @@ public class MauzillaPlayer : Player
     public void TakeDamage(int value) {
         if (currentHealth > 10) {
             currentHealth -= value;
-            Debug.Log("Mauzilla took " + value + " damage!");
             float newHealthbarPercentage = (float)currentHealth / (float)(maxHealth - 0);
             healthbar.fillAmount = newHealthbarPercentage;
 
@@ -215,19 +214,13 @@ public class MauzillaPlayer : Player
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        Debug.Log("Mauzilla collide Enter");
-
         if (col.gameObject.CompareTag("building")) {
-            Debug.Log("Mauzilla collided with " + col.gameObject.name);
             collidingBuilding = col.gameObject.GetComponent<Building>();
         }
     }
 
     void OnCollisionExit2D(Collision2D col) {
-        Debug.Log("Mauzilla collide Exit");
-
         if (col.gameObject.CompareTag("building")) {
-            Debug.Log("Mauzilla stopped colliding with " + col.gameObject.name);
             collidingBuilding = null;
         }
     }

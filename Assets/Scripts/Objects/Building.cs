@@ -107,14 +107,10 @@ public class Building : MonoBehaviour
         switch (materialCount) {
             case 1:
                 firstMaterial.name = "Material 1/1";
-
+                
                 firstMaterial.SetActive(true);
                 secondMaterial.SetActive(false);
                 thirdMaterial.SetActive(false);
-
-                firstMaterial.GetComponent<SpriteRenderer>().sprite =
-                    materials[0] ? materialSprites[0] : (materials[1] ? materialSprites[1] : materialSprites[2]);
-                //Debug.Log("Selected Material 1/1: " + firstMaterial.GetComponent<SpriteRenderer>().sprite);
                 break;
             case 2:
                 firstMaterial.name = "Material 1/2";
@@ -126,24 +122,6 @@ public class Building : MonoBehaviour
 
                 SetXPos(firstMaterial, -0.15f);
                 SetXPos(secondMaterial, 0.15f);
-
-                int taken = 9; //random
-                for (int i = 0; i < materials.Length; i++) {
-                    //Debug.Log("MC = " + materialCount + ". Selecting Material 1/2");
-                    if (materials[i]) {
-                        firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
-                        taken = i;
-                        //Debug.Log("Selected Material 1/2: " + i);
-                        break;
-                    }
-                }
-                for (int i = 0; i < materials.Length; i++) {
-                    Debug.Log("MC = " + materialCount + ". Selecting Material 2/2");
-                    if (materials[i] && taken != i) {
-                        secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[i];
-                        //Debug.Log("Selected Material 2/2: " + i);
-                    }
-                }
                 break;
             case 3:
                 firstMaterial.name = "Material 1/3";
@@ -153,17 +131,29 @@ public class Building : MonoBehaviour
                 firstMaterial.SetActive(true);
                 secondMaterial.SetActive(true);
                 thirdMaterial.SetActive(true);
-
-                firstMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[0];
-                secondMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[1];
-                thirdMaterial.GetComponent<SpriteRenderer>().sprite = materialSprites[2];
-                //Debug.Log("Selected all Materias 1+2+3");
-
                 break;
             default:
                 print("ERROR: Incorrect number of materialCount!");
                 break;
 
+        }
+
+        List<GameObject> materialGameObjects = new List<GameObject>();
+        materialGameObjects.Add(firstMaterial);
+        materialGameObjects.Add(secondMaterial);
+        materialGameObjects.Add(thirdMaterial);
+
+        int spriteIndex = 0;
+        for (int index = 0; index < materials.Length; index++)
+        {
+            if (materials[index] == true)
+            {
+                GameObject nextMaterialSprite = materialGameObjects[spriteIndex];
+
+                nextMaterialSprite.GetComponent<SpriteRenderer>().sprite =
+                    materialSprites[index];
+                spriteIndex++;
+            }
         }
     }
 
@@ -228,9 +218,6 @@ public class Building : MonoBehaviour
             }
             infoBubble.transform.GetChild(i).gameObject.SetActive(materials[i]);
         }
-        Debug.Log(materialCount + " Materials are required. " + 
-                  "Stone: " + materials[0] + ", Cloth: " + materials[1] + 
-                  ", Wood: " + materials[2]);
     }
 
     // Set max health according to how many materials are required
@@ -238,13 +225,10 @@ public class Building : MonoBehaviour
         for (int i = 0; i < materials.Length; i++) {
             maxHealth = materials[i] ? maxHealth + 10 : maxHealth;
         }
-        Debug.Log("Setting building's maxHealth as " + maxHealth);
     }
 
     public void adjustHealth(int value) {
         health += value;
-        Debug.Log("Building " + (value > 0 ? "gained" : "lost") + Mathf.Abs(value) + 
-                  "HP. Current HP: " + health + " HP. max: " + maxHealth);
 
         if(value > 0) {
             repairSmokeAnimator.Play("RepairSmokeAnim");
@@ -259,11 +243,9 @@ public class Building : MonoBehaviour
         if(health >= maxHealth) {
             health = maxHealth;
             ChangeState(2);
-            Debug.Log("Building was repaired by Artisan!");
         } else if (health <= 0) {
             health = 0;
             ChangeState(1);
-            Debug.Log("Building was destroyed by Mauzilla!");
         }
     }
 

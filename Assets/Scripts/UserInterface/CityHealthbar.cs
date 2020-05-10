@@ -21,7 +21,6 @@ public class CityHealthbar : MonoBehaviour
 
    public void LoseBuilding() {
         health = health - 1;
-        Debug.Log("City lost a building to Mauzilla's Wrath!");
         float newHealthbarPercentage = (float)health / (float)(maxHealth);
         healthbar.fillAmount = newHealthbarPercentage;
     }

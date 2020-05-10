@@ -52,14 +52,12 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
-            Debug.Log("Artisan collided with " + col.gameObject.name);
             collidingBuilding = col.gameObject.GetComponent<Building>();
         }
     }
 
     void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("building")) {
-            Debug.Log("Artisan stopped colliding with " + col.gameObject.name);
             collidingBuilding = null;
         }
     }
