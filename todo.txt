@@ -20,7 +20,7 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 
 - Alle Sounds müssen seperat abspielbar sein. (Artisan and Mauzilla)
 
-- Die Laufbewegungen müssen auch wieder anhalten, wenn keine Laufrichtung gedrückt wird.
+✓ Die Laufbewegungen müssen auch wieder anhalten, wenn keine Laufrichtung gedrückt wird.
 
 - Warum ist der startet die Reperatur der Spieler immer erst beim dritten Player?
   Bzw.: Die Icons und die eigentlichen Spieler passen nicht zusammen.
