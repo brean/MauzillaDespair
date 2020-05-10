@@ -11,7 +11,7 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 
 ✓ Extract Mauzilla and Artisan Scripts, that extends Player.cs
 
-- clean up some Code ?!
+✓ clean up some Code ?!
   remove Debug.Logs and so on. Make Warnings diapear.
 
 - Finally, make a template and push it to github
@@ -23,9 +23,11 @@ nur auf "replay" gedrückt werden muss. Am besten ja sogar andere Musik für den
 ✓ Warum ist der startet die Reperatur der Spieler immer erst beim dritten Player?
   Bzw.: Die Icons und die eigentlichen Spieler passen nicht zusammen.
 
-- Der Ton wird beim Tischler nicht abgespielt
+✓ Der Ton wird beim Tischler nicht abgespielt
 
-- Mauzilla muss die AbilityTaste nicht mehr drücken
+✓ Mauzilla muss die AbilityTaste nicht mehr drücken
+
+✓ Ton beim Katzenschaden ist weg
 
 - Alle Sounds müssen seperat abspielbar sein. (Artisan and Mauzilla)
 

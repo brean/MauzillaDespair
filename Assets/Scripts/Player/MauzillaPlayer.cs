@@ -97,7 +97,7 @@ public class MauzillaPlayer : Player
                 attackAnim -= 1;
             }
         }
-        if (currentAbilityActiveDuration > 0)
+        if (currentAbilityActiveDuration > 0 && inputControl.isAbilityKeyPressed())
         {
             moveLaser();
             playLaserSound();
@@ -195,6 +195,9 @@ public class MauzillaPlayer : Player
             healthbar.fillAmount = newHealthbarPercentage;
 
             StartCoroutine(MauzillaTakesDamageEffect());
+
+            AudioSource damageSound = GetComponent<AudioSource>();
+            damageSound.Play();
 
         } else if (currentHealth <= 10) {
             Debug.Log("Mauzilla retreats!");

@@ -162,20 +162,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
   animator: {fileID: 0}
-  character: 3
-  color: {r: 0, g: 0, b: 0, a: 0}
-  team: 0
-  speed: 0.08
-  initialScale: {x: 0, y: 0, z: 0}
-  attackAnim: 0
-  ready: 1
-  active: 1
-  cooldownTime: 5
-  abilityCooldown: -1
-  abilityActiveDuration: -1
-  usesLaser: 0
   inputControl: {fileID: 0}
-  colliding: 0
+  character: 3
+  speed: 0.08
+  attackAnim: 0
+  cooldownTime: 5
+  currentAbilityCooldown: -0.1
+  currentAbilityActiveDuration: -1
   collidingBuilding: {fileID: 0}
 --- !u!95 &249493908
 Animator:
@@ -209,7 +202,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b54f563fd80b07b23acf64548d4950ba, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: -2.25
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
